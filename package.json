@@ -4,8 +4,12 @@
       "baseURL": "src"
     },
     "dependencies": {
+      "autoprefixer": "npm:autoprefixer@^5.1.0",
+      "autoprefixer-core": "npm:autoprefixer-core@^5.1.8",
+      "caniuse-db": "npm:caniuse-db@^1.0.30000111",
       "insert-css": "npm:insert-css@^0.2.0",
       "isomorphic-fetch": "npm:isomorphic-fetch@^2.0.0",
+      "json": "github:systemjs/plugin-json@^0.1.0",
       "whatwg-fetch": "npm:whatwg-fetch@^0.7.0"
     },
     "devDependencies": {
