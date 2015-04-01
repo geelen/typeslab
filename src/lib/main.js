@@ -1,1 +1,2 @@
-console.log("WE GOOD YO")
+
+export default {}

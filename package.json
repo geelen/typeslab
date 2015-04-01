@@ -3,6 +3,10 @@
     "directories": {
       "baseURL": "src"
     },
+    "dependencies": {
+      "isomorphic-fetch": "npm:isomorphic-fetch@^2.0.0",
+      "whatwg-fetch": "npm:whatwg-fetch@^0.7.0"
+    },
     "devDependencies": {
       "babel": "npm:babel@^4.7.16",
       "babel-runtime": "npm:babel-runtime@^4.7.16"
