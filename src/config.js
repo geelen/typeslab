@@ -17,6 +17,7 @@ System.config({
   "map": {
     "babel": "npm:babel@4.7.16",
     "babel-runtime": "npm:babel-runtime@4.7.16",
+    "insert-css": "npm:insert-css@0.2.0",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.0.0",
     "whatwg-fetch": "npm:whatwg-fetch@0.7.0",
     "github:jspm/nodelibs-assert@0.1.0": {

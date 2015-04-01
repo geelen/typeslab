@@ -1,11 +1,6 @@
-import 'whatwg-fetch'
+import insertCss from 'insert-css'
 
-console.log(fetch)
-
-let _fetch = (load) => {
-  console.log(load.address)
-  return fetch(load.address).then(response => response.text())
-  .then(_ => "console.log('umwat')")
+export var translate = (load) => {
+  insertCss(load.source)
+  load.source = ''
 }
-
-export { _fetch as fetch }

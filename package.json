@@ -4,6 +4,7 @@
       "baseURL": "src"
     },
     "dependencies": {
+      "insert-css": "npm:insert-css@^0.2.0",
       "isomorphic-fetch": "npm:isomorphic-fetch@^2.0.0",
       "whatwg-fetch": "npm:whatwg-fetch@^0.7.0"
     },
