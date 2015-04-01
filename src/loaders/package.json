@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "postcss-nested": "~0.2.2",
+    "insert-css": "~0.2.0",
+    "postcss": "~4.0.6",
+    "autoprefixer-core": "~5.1.8",
+    "babelify": "~5.0.4"
+  }
+}
