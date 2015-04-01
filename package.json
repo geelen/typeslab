@@ -1,0 +1,11 @@
+{
+  "jspm": {
+    "directories": {
+      "baseURL": "src"
+    },
+    "devDependencies": {
+      "babel": "npm:babel@^4.7.16",
+      "babel-runtime": "npm:babel-runtime@^4.7.16"
+    }
+  }
+}
