@@ -10,6 +10,8 @@
       "insert-css": "npm:insert-css@^0.2.0",
       "isomorphic-fetch": "npm:isomorphic-fetch@^2.0.0",
       "json": "github:systemjs/plugin-json@^0.1.0",
+      "postcss": "npm:postcss@^4.0.6",
+      "postcss-nested": "npm:postcss-nested@^0.2.2",
       "whatwg-fetch": "npm:whatwg-fetch@^0.7.0"
     },
     "devDependencies": {

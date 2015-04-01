@@ -23,6 +23,8 @@ System.config({
     "insert-css": "npm:insert-css@0.2.0",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.0.0",
     "json": "github:systemjs/plugin-json@0.1.0",
+    "postcss": "npm:postcss@4.0.6",
+    "postcss-nested": "npm:postcss-nested@0.2.2",
     "whatwg-fetch": "npm:whatwg-fetch@0.7.0",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -210,6 +212,10 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:path-browserify@0.0.0": {
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:postcss-nested@0.2.2": {
+      "postcss": "npm:postcss@4.0.6",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:postcss@4.0.6": {
