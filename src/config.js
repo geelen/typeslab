@@ -184,6 +184,7 @@ System.config({
     "postcss": "npm:postcss@4.0.6",
     "postcss-nested": "npm:postcss-nested@0.2.2",
     "react": "npm:react@0.13.1",
+    "react-canvas": "npm:react-canvas@0.0.1",
     "traceur": "github:jmcriffey/bower-traceur@0.0.87",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.87",
     "whatwg-fetch": "npm:whatwg-fetch@0.7.0",
@@ -628,6 +629,12 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:react-canvas@0.0.1": {
+      "events": "github:jspm/nodelibs-events@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "react": "npm:react@0.13.1",
+      "scroller": "github:mjohnston/scroller@1.2.2"
     },
     "npm:react-tools@0.13.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
