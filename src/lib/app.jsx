@@ -6,7 +6,7 @@ import Output from './components/output/output.jsx!'
 
 class Main extends React.Component {
   render() {
-    return <div className="flex">
+    return <div className="flex wrap">
       <Controls flux={this.props.flux}></Controls>
       <FluxComponent connectToStores='messages'>
         <Output width={500}></Output>

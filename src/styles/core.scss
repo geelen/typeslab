@@ -51,9 +51,12 @@ table {
 }
 
 body {
-  background: red;
+  background: #eee;
 }
 
 .flex {
   display: flex;
+}
+.flex.wrap {
+	flex-wrap: wrap;
 }

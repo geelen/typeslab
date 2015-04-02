@@ -7,8 +7,8 @@ import './output.scss!post-css'
 
 class Line extends React.Component {
   componentDidMount() {
-    console.log(this.props.ctx)
   }
+
   render() {
     return <Text style={this.props.line.style}>{this.props.line.line}</Text>
   }
@@ -18,6 +18,7 @@ export default class Output extends React.Component {
   constructor() {
     super()
     this.font = FontFace('Avenir Next Condensed, Helvetica, sans-serif', null, {weight: 900})
+    this.altFont = FontFace('Georgia, serif', null, {style: 'italic', weight: 100})
     this.state = {}
   }
 
@@ -28,11 +29,9 @@ export default class Output extends React.Component {
 
   render() {
     let lines = this.layoutLines(this.props.lines)
-    console.log(lines)
     return <div className='Output'>
-      <h1>Output</h1>
-      <Surface ref="surface" width={this.props.width} height={lines.totalHeight + 4} top={0} left={0}>
-        {this.state.ctx && lines.sizedLines.map((line) => {
+      <Surface ref="surface" width={this.props.width} height={lines.totalHeight + 50} top={0} left={0}>
+        {lines.sizedLines.map((line) => {
           return <Line line={line} ctx={this.state.ctx}/>
         })}
       </Surface>
@@ -40,17 +39,26 @@ export default class Output extends React.Component {
   }
 
   layoutLines(lines) {
-    let totalHeight = 0,
+    let ctx = this.state.ctx
+    if (!ctx) return {totalHeight: 0, sizedLines: []}
+
+    let totalHeight = 50,
       sizedLines = lines.map(line => {
-        console.log(line)
-        let measurements = measureText(line, 9999, this.font, 12, 15),
+        let text = line, font
+        if (text.match(/^!/)) {
+          text = text.replace(/^!/,'')
+          font = this.altFont
+        } else {
+          text = text.toUpperCase()
+          font = this.font
+        }
+        let measurements = measureText(text, 9999, font, 12, 15),
           factor = this.props.width / measurements.width,
-          fontSize = 12 * factor,
-          style = {fontSize, height: fontSize, lineHeight: fontSize, top: totalHeight, width: 9999, fontFace: this.font, left: 0}
-        totalHeight += fontSize - 2
-        console.log(measurements)
-        return {line, style}
+          fontSize = Math.min(300, 12 * factor),
+          style = {fontSize, height: fontSize, lineHeight: fontSize, top: totalHeight, width: 500, fontFace: font, left: 0, textAlign: 'center'}
+        totalHeight += fontSize * 1.05
+        return {line:text, style}
       })
-    return { totalHeight, sizedLines }
+    return {totalHeight, sizedLines}
   }
 }
