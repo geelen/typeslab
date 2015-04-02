@@ -16882,7 +16882,7 @@ System.register("lib/components/output/output.jsx!github:floatdrop/plugin-jsx@1.
                 var measurements = measureText(text, 9999, font, 12, 15),
                     factor = _this.props.width / measurements.width,
                     fontSize = Math.min(300, 12 * factor),
-                    style = { fontSize: fontSize, height: fontSize, lineHeight: fontSize, top: totalHeight, width: 500, fontFace: font, left: _this.spacing, textAlign: "center" };
+                    style = { fontSize: fontSize, height: fontSize, lineHeight: fontSize, top: totalHeight, width: 500 + 2 * _this.spacing, fontFace: font, left: 0, textAlign: "center" };
                 totalHeight += fontSize * lineHeightFactor;
                 return { line: text, style: style };
               });

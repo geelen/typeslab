@@ -58,7 +58,7 @@ export default class Output extends React.Component {
         let measurements = measureText(text, 9999, font, 12, 15),
           factor = this.props.width / measurements.width,
           fontSize = Math.min(300, 12 * factor),
-          style = {fontSize, height: fontSize, lineHeight: fontSize, top: totalHeight, width: 500, fontFace: font, left: this.spacing, textAlign: 'center'}
+          style = {fontSize, height: fontSize, lineHeight: fontSize, top: totalHeight, width: 500 + 2*this.spacing, fontFace: font, left: 0, textAlign: 'center'}
         totalHeight += fontSize * lineHeightFactor
         return {line:text, style}
       })
