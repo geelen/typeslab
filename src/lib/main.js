@@ -1,6 +1,7 @@
 // Inject the styles (async obvs)
 import '../styles/core.scss!post-css'
 
-import './app'
+import React from 'react'
+import App from './app.jsx!'
 
-export default {}
+React.render(App, document.querySelector('main'))
