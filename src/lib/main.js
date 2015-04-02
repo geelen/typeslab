@@ -4,4 +4,4 @@ import '../styles/core.scss!post-css'
 import React from 'react'
 import App from './app.jsx!'
 
-React.render(App, document.querySelector('main'))
+React.render(React.createElement(App, null), document.querySelector('main'))

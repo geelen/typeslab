@@ -66031,30 +66031,33 @@ System.register("npm:postcss@4.0.6", ["npm:postcss@4.0.6/lib/postcss"], true, fu
   return module.exports;
 });
 
-System.register("post-css", ["npm:insert-css@0.2.0", "npm:postcss@4.0.6", "npm:autoprefixer-core@5.1.8", "npm:postcss-nested@0.2.2"], function (_export) {
-  var insertCss, postcss, Autoprefixer, nested, processor, translate;
+System.register("post-css", ["npm:insert-css@0.2.0", "npm:postcss@4.0.6", "npm:autoprefixer-core@5.1.8", "npm:postcss-nested@0.2.2"], function($__export) {
+  "use strict";
+  var __moduleName = "post-css";
+  var insertCss,
+      postcss,
+      Autoprefixer,
+      nested,
+      processor,
+      translate;
   return {
-    setters: [function (_npmInsertCss020) {
-      insertCss = _npmInsertCss020["default"];
-    }, function (_npmPostcss406) {
-      postcss = _npmPostcss406["default"];
-    }, function (_npmAutoprefixerCore518) {
-      Autoprefixer = _npmAutoprefixerCore518["default"];
-    }, function (_npmPostcssNested022) {
-      nested = _npmPostcssNested022["default"];
+    setters: [function($__m) {
+      insertCss = $__m.default;
+    }, function($__m) {
+      postcss = $__m.default;
+    }, function($__m) {
+      Autoprefixer = $__m.default;
+    }, function($__m) {
+      nested = $__m.default;
     }],
-    execute: function () {
-      "use strict";
-
-      processor = postcss([nested, Autoprefixer("last 2 versions")]);
-
-      translate = function (load) {
+    execute: function() {
+      processor = postcss([nested, Autoprefixer('last 2 versions')]);
+      translate = $__export("translate", (function(load) {
         insertCss(processor.process(load.source).css);
-        load.source = "";
-      };
-
-      _export("translate", translate);
+        load.source = '';
+      }));
     }
   };
 });
+
 //# sourceMappingURL=post-css-built.js.map
