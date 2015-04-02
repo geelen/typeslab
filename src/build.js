@@ -16693,17 +16693,32 @@ System.register("lib/components/controls/controls.jsx!github:floatdrop/plugin-js
         _createClass(Controls, {
           componentWillMount: {
             value: function componentWillMount() {
+              var _this = this;
+
               this.messageActions = this.context.flux.getActions("messages");
+              this.setValue("Something over\ntwo lines");
+              setTimeout(function (_) {
+                return _this.setValue("Something over\nthree\nwhole lines");
+              }, 2000);
+              setTimeout(function (_) {
+                return _this.setValue("Something over\n!three lines\nthis time with italics");
+              }, 4000);
             }
           },
           handleChange: {
             value: function handleChange(event) {
-              this.messageActions.changeMessage(event.target.value);
+              this.setValue(event.target.value);
+            }
+          },
+          setValue: {
+            value: function setValue(value) {
+              this.messageActions.changeMessage(value);
+              this.setState({ value: value });
             }
           },
           render: {
             value: function render() {
-              return React.createElement("div", { className: "Controls" }, React.createElement("h1", null, "Controls"), React.createElement("textarea", { onChange: this.handleChange.bind(this) }));
+              return React.createElement("div", { className: "Controls" }, React.createElement("h1", null, "Type here:"), React.createElement("textarea", { value: this.state.value, onChange: this.handleChange.bind(this) }));
             }
           }
         });
@@ -16967,11 +16982,6 @@ System.register("lib/main", ["styles/core.scss!post-css", "npm:react@0.13.1", "l
       "use strict";
 
       flux = new Flux();
-
-      flux.getActions("messages").changeMessage("Something over\ntwo lines");
-      setTimeout(function (_) {
-        flux.getActions("messages").changeMessage("Something over\nthree\nwhole lines");
-      }, 2000);
 
       React.render(React.createElement(App, { flux: flux }), document.querySelector("main"));
     }
