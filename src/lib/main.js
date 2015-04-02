@@ -3,7 +3,7 @@ import '../styles/core.scss!post-css'
 
 import React from 'react'
 import App from './app.jsx!'
-import Flux from './stores/message'
+import Flux from './flux'
 
 const flux = new Flux()
 flux.getActions('messages').changeMessage("Something over\ntwo lines")
