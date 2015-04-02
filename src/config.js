@@ -634,7 +634,7 @@ System.config({
       "events": "github:jspm/nodelibs-events@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "react": "npm:react@0.13.1",
-      "scroller": "github:mjohnston/scroller@1.2.2/src/Scroller"
+      "scroller": "github:mjohnston/scroller@1.2.2"
     },
     "npm:react-tools@0.13.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

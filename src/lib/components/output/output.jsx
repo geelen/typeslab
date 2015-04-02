@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactCanvas from 'react-canvas'
+import Surface from 'react-canvas/lib/Surface'
 import './output.scss!post-css'
 
 export default class Output extends React.Component {
