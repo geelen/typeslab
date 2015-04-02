@@ -20,7 +20,7 @@ export default class Output extends React.Component {
     this.font = FontFace('Avenir Next Condensed, Helvetica, sans-serif', null, {weight: 900})
     this.altFont = FontFace('Georgia, serif', null, {style: 'italic', weight: 100})
     this.state = {}
-    this.spacing = 20
+    this.spacing = 32
   }
 
   componentDidMount() {
