@@ -175,6 +175,7 @@ System.config({
     "babel": "npm:babel@4.7.16",
     "babel-runtime": "npm:babel-runtime@4.7.16",
     "caniuse-db": "npm:caniuse-db@1.0.30000111",
+    "flummox": "npm:flummox@3.5.0",
     "insert-css": "npm:insert-css@0.2.0",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.0.0",
     "json": "github:systemjs/plugin-json@0.1.0",
@@ -433,8 +434,20 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
+    "npm:eventemitter3@0.1.6": {
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "util": "github:jspm/nodelibs-util@0.1.0"
+    },
     "npm:events-browserify@0.0.1": {
       "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:flummox@3.5.0": {
+      "eventemitter3": "npm:eventemitter3@0.1.6",
+      "flux": "npm:flux@2.0.1",
+      "object-assign": "npm:object-assign@2.0.0",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "uniqueid": "npm:uniqueid@0.1.0"
     },
     "npm:fs-extra@0.16.5": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -697,6 +710,9 @@ System.config({
     "npm:through@2.3.6": {
       "process": "github:jspm/nodelibs-process@0.1.1",
       "stream": "github:jspm/nodelibs-stream@0.1.0"
+    },
+    "npm:uniqueid@0.1.0": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0"
     },
     "npm:url@0.10.3": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
