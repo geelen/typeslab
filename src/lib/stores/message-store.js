@@ -7,13 +7,15 @@ export default class MessageStore extends Store {
     const messageActions = flux.getActions('messages')
     this.register(messageActions.changeMessage, this.handleChangedMessage)
     this.state = {
-      message: ""
+      message: "",
+      lines: []
     }
   }
 
   handleChangedMessage(content) {
     this.setState({
-      message: content
+      message: content,
+      lines: content.split("\n").filter(x => x)
     })
   }
 }

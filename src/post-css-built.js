@@ -66031,40 +66031,36 @@ System.register("npm:postcss@4.0.6", ["npm:postcss@4.0.6/lib/postcss"], true, fu
   return module.exports;
 });
 
-System.register("post-css", ["npm:insert-css@0.2.0", "npm:postcss@4.0.6", "npm:autoprefixer-core@5.1.8", "npm:postcss-nested@0.2.2"], function($__export) {
-  "use strict";
-  var __moduleName = "post-css";
-  var insertCss,
-      postcss,
-      Autoprefixer,
-      nested,
-      processor,
-      translate;
+System.register("post-css", ["npm:insert-css@0.2.0", "npm:postcss@4.0.6", "npm:autoprefixer-core@5.1.8", "npm:postcss-nested@0.2.2"], function (_export) {
+  var insertCss, postcss, Autoprefixer, nested, processor, translate;
+
+  function escape(source) {
+    return source.replace(/(["\\])/g, "\\$1").replace(/[\f]/g, "\\f").replace(/[\b]/g, "\\b").replace(/[\n]/g, "\\n").replace(/[\t]/g, "\\t").replace(/[\r]/g, "\\r").replace(/[\u2028]/g, "\\u2028").replace(/[\u2029]/g, "\\u2029");
+  }
+
   return {
-    setters: [function($__m) {
-      insertCss = $__m.default;
-    }, function($__m) {
-      postcss = $__m.default;
-    }, function($__m) {
-      Autoprefixer = $__m.default;
-    }, function($__m) {
-      nested = $__m.default;
+    setters: [function (_npmInsertCss020) {
+      insertCss = _npmInsertCss020["default"];
+    }, function (_npmPostcss406) {
+      postcss = _npmPostcss406["default"];
+    }, function (_npmAutoprefixerCore518) {
+      Autoprefixer = _npmAutoprefixerCore518["default"];
+    }, function (_npmPostcssNested022) {
+      nested = _npmPostcssNested022["default"];
     }],
-    execute: function() {
-      processor = postcss([nested, Autoprefixer('last 2 versions')]);
-      translate = $__export("translate", (function(load) {
-        var processed = processor.process(load.source).css,
-            blob = new Blob([processed], {type: 'text/css'}),
-            url = URL.createObjectURL(blob),
-            elem = document.createElement('link'),
-            head = document.getElementsByTagName('head')[0];
-        elem.setAttribute('href', url);
-        elem.setAttribute('rel', 'stylesheet');
-        head.appendChild(elem);
-        load.source = '';
-      }));
+    execute: function () {
+      "use strict";
+
+      processor = postcss([nested, Autoprefixer("last 2 versions")]);
+
+      translate = function (load) {
+        var processed = processor.process(load.source).css;
+
+        return "\n    (function(css) {\n      var blob = new Blob([css], {type: 'text/css'}),\n        url = URL.createObjectURL(blob),\n        elem = document.createElement('link'),\n        head = document.getElementsByTagName('head')[0];\n      elem.setAttribute('href', url)\n      elem.setAttribute('rel', 'stylesheet')\n      head.appendChild(elem)\n    })(\"" + escape(processed) + "\");\n  ";
+      };
+
+      _export("translate", translate);
     }
   };
 });
-
 //# sourceMappingURL=post-css-built.js.map
