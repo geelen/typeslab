@@ -4,6 +4,11 @@ import FluxComponent from 'flummox/component'
 import Controls from './components/controls/controls.jsx!'
 import Output from './components/output/output.jsx!'
 
+class CanvasImage extends React.Component {
+  render() {
+    return <img style={{backgroundColor: 'white', padding: '1rem'}} width={564} src={this.props.imageUrl}/>
+  }
+}
 class Main extends React.Component {
   render() {
     return <div className="flex wrap">

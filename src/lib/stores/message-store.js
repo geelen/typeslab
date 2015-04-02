@@ -6,6 +6,7 @@ export default class MessageStore extends Store {
 
     const messageActions = flux.getActions('messages')
     this.register(messageActions.changeMessage, this.handleChangedMessage)
+    this.register(messageActions.imageRendered, this.handleNewImage)
     this.state = {
       message: "",
       lines: []
@@ -16,6 +17,12 @@ export default class MessageStore extends Store {
     this.setState({
       message: content,
       lines: content.split("\n").filter(x => x)
+    })
+  }
+
+  handleNewImage(dataUrl) {
+    this.setState({
+      imageUrl: dataUrl
     })
   }
 }

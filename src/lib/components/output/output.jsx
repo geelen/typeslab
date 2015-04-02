@@ -24,25 +24,27 @@ export default class Output extends React.Component {
   }
 
   componentDidMount() {
-    let ctx = this.refs.surface.getDOMNode().getContext('2d')
-    this.setState({ctx})
+    this.canvas = this.refs.surface.getDOMNode()
   }
+
+  //componentDidUpdate() {
+  //  requestAnimationFrame(_ => {
+  //    this.context.flux.getActions('messages').imageRendered(this.canvas.toDataURL())
+  //  })
+  //}
 
   render() {
     let lines = this.layoutLines(this.props.lines)
     return <div className='Output'>
       <Surface ref="surface" width={this.props.width + this.spacing * 2} height={lines.totalHeight + this.spacing} top={0} left={0}>
         {lines.sizedLines.map((line) => {
-          return <Line line={line} ctx={this.state.ctx}/>
+          return <Line line={line}/>
         })}
       </Surface>
     </div>
   }
 
   layoutLines(lines) {
-    let ctx = this.state.ctx
-    if (!ctx) return {totalHeight: 0, sizedLines: []}
-
     let totalHeight = this.spacing,
       sizedLines = lines.map(line => {
         let text = line, font, lineHeightFactor
@@ -64,4 +66,8 @@ export default class Output extends React.Component {
       })
     return {totalHeight, sizedLines}
   }
+}
+
+Output.contextTypes = {
+  flux: React.PropTypes.object
 }
