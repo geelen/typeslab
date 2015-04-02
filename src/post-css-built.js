@@ -66053,7 +66053,14 @@ System.register("post-css", ["npm:insert-css@0.2.0", "npm:postcss@4.0.6", "npm:a
     execute: function() {
       processor = postcss([nested, Autoprefixer('last 2 versions')]);
       translate = $__export("translate", (function(load) {
-        insertCss(processor.process(load.source).css);
+        var processed = processor.process(load.source).css,
+            blob = new Blob([processed], {type: 'text/css'}),
+            url = URL.createObjectURL(blob),
+            elem = document.createElement('link'),
+            head = document.getElementsByTagName('head')[0];
+        elem.setAttribute('href', url);
+        elem.setAttribute('rel', 'stylesheet');
+        head.appendChild(elem);
         load.source = '';
       }));
     }
