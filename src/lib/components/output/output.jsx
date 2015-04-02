@@ -20,6 +20,7 @@ export default class Output extends React.Component {
     this.font = FontFace('Avenir Next Condensed, Helvetica, sans-serif', null, {weight: 900})
     this.altFont = FontFace('Georgia, serif', null, {style: 'italic', weight: 100})
     this.state = {}
+    this.spacing = 20
   }
 
   componentDidMount() {
@@ -30,7 +31,7 @@ export default class Output extends React.Component {
   render() {
     let lines = this.layoutLines(this.props.lines)
     return <div className='Output'>
-      <Surface ref="surface" width={this.props.width} height={lines.totalHeight + 50} top={0} left={0}>
+      <Surface ref="surface" width={this.props.width + this.spacing * 2} height={lines.totalHeight + this.spacing} top={0} left={0}>
         {lines.sizedLines.map((line) => {
           return <Line line={line} ctx={this.state.ctx}/>
         })}
@@ -42,21 +43,23 @@ export default class Output extends React.Component {
     let ctx = this.state.ctx
     if (!ctx) return {totalHeight: 0, sizedLines: []}
 
-    let totalHeight = 50,
+    let totalHeight = this.spacing,
       sizedLines = lines.map(line => {
-        let text = line, font
+        let text = line, font, lineHeightFactor
         if (text.match(/^!/)) {
           text = text.replace(/^!/,'')
           font = this.altFont
+          lineHeightFactor = 1.25
         } else {
           text = text.toUpperCase()
           font = this.font
+          lineHeightFactor = 1.05
         }
         let measurements = measureText(text, 9999, font, 12, 15),
           factor = this.props.width / measurements.width,
           fontSize = Math.min(300, 12 * factor),
-          style = {fontSize, height: fontSize, lineHeight: fontSize, top: totalHeight, width: 500, fontFace: font, left: 0, textAlign: 'center'}
-        totalHeight += fontSize * 1.05
+          style = {fontSize, height: fontSize, lineHeight: fontSize, top: totalHeight, width: 500, fontFace: font, left: this.spacing, textAlign: 'center'}
+        totalHeight += fontSize * lineHeightFactor
         return {line:text, style}
       })
     return {totalHeight, sizedLines}
