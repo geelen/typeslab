@@ -9,7 +9,7 @@ class Main extends React.Component {
     return <div className="flex">
       <Controls flux={this.props.flux}></Controls>
       <FluxComponent connectToStores='messages'>
-        <Output></Output>
+        <Output width={500}></Output>
       </FluxComponent>
     </div>
   }

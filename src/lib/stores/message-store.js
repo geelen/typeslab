@@ -15,7 +15,7 @@ export default class MessageStore extends Store {
   handleChangedMessage(content) {
     this.setState({
       message: content,
-      lines: content.split("\n").filter(x => x)
+      lines: content.split("\n").filter(x => x).map(x => x.toUpperCase())
     })
   }
 }
