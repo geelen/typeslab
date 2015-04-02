@@ -1,11 +1,12 @@
 import React from 'react'
 import './controls.scss!post-css'
 
-
-class Controls extends React.Component {
+export default class Controls extends React.Component {
+  componentWillMount() {
+    this.messageActions = this.context.flux.getActions('messages')
+  }
   handleChange(event) {
-    this.context.flux.getActions('messages')
-      .changeMessage(event.target.value)
+    this.messageActions.changeMessage(event.target.value)
   }
 
   render() {
@@ -20,4 +21,4 @@ Controls.contextTypes = {
   flux: React.PropTypes.object
 }
 
-export default Controls
+

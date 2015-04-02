@@ -1,5 +1,6 @@
 System.config({
   "baseURL": "/",
+  "transpiler": "babel",
   "babelOptions": {
     "optional": [
       "runtime"

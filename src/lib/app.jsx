@@ -15,8 +15,7 @@ class Main extends React.Component {
   }
 }
 
-export default
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
     return <FluxComponent flux={this.props.flux}>
       <Main/>
