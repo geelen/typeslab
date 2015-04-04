@@ -91,15 +91,16 @@ export default class Output extends React.Component {
 
   getByLineStyle(text, height) {
     let font = FontFace('Avenir Next Condensed, Helvetica, sans-serif', null, {weight: 400}),
-      width = measureText(text, 9999, font, 8, 15).width
+      size = 7,
+      width = measureText(text, 9999, font, size, 15).width
     return {
       fontFace: font,
-      fontSize: 8,
+      fontSize: size,
       backgroundColor: 'white',
       textAlign: 'center',
-      width: width + 4,
+      width: width + 6,
       left: (this.props.width + this.spacing) / 2,
-      top: height + 11,
+      top: height + 12,
       height: 16
     }
   }
