@@ -99,7 +99,7 @@ export default class Output extends React.Component {
       backgroundColor: 'white',
       textAlign: 'center',
       width: width + 6,
-      left: (this.props.width + this.spacing) / 2,
+      left: this.props.width / 2 + this.spacing / 4,
       top: height + 12,
       height: 16
     }
