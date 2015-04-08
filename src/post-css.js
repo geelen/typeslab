@@ -2,7 +2,8 @@ import insertCss from 'insert-css'
 import postcss from 'postcss'
 import Autoprefixer from 'autoprefixer-core'
 import nested from 'postcss-nested'
-let processor = postcss([nested, Autoprefixer('last 2 versions')])
+import vars from 'postcss-simple-vars'
+let processor = postcss([nested, vars, Autoprefixer('last 2 versions')])
 
 let sourceMap = new Map(),
   linkElement,

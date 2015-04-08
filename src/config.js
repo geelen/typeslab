@@ -27,6 +27,7 @@ System.config({
     "jsx": "github:floatdrop/plugin-jsx@1.1.0",
     "postcss": "npm:postcss@4.0.6",
     "postcss-nested": "npm:postcss-nested@0.2.2",
+    "postcss-simple-vars": "npm:postcss-simple-vars@0.2.4",
     "react": "npm:react@0.13.1",
     "react-canvas": "npm:react-canvas@0.0.1",
     "traceur": "github:jmcriffey/bower-traceur@0.0.87",
