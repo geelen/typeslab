@@ -24,5 +24,9 @@
       "traceur": "github:jmcriffey/bower-traceur@0.0.87",
       "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.87"
     }
+  },
+  "devDependencies": {
+    "live-server": "~0.7.1",
+    "http-server": "~0.8.0"
   }
 }
