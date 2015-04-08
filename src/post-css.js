@@ -4,16 +4,41 @@ import Autoprefixer from 'autoprefixer-core'
 import nested from 'postcss-nested'
 let processor = postcss([nested, Autoprefixer('last 2 versions')])
 
-export var translate = (load) => {
-  let processed = processor.process(load.source).css,
-    blob = new Blob([processed], {type: 'text/css'}),
-    url = URL.createObjectURL(blob),
-    elem = document.createElement('link'),
-    head = document.getElementsByTagName('head')[0]
+let sourceMap = new Map(),
+  linkElement,
+  removeElement = (prevElem) => {
+    let url = prevElem.getAttribute('href')
+    prevElem.parentNode.removeChild(prevElem)
+    URL.revokeObjectURL(url)
+    console.log(`CSS removed from URL ${url}`)
+  },
+  createElement = (source) => {
+    let processed = processor.process(source).css,
+        blob = new Blob([processed], {type: 'text/css'}),
+        url = URL.createObjectURL(blob),
+        head = document.getElementsByTagName('head')[0]
 
-  elem.setAttribute('href', url)
-  elem.setAttribute('rel', 'stylesheet')
-  head.appendChild(elem)
+    linkElement = document.createElement('link')
+    linkElement.setAttribute('href', url)
+    linkElement.setAttribute('rel', 'stylesheet')
+    head.appendChild(linkElement)
+    console.log(`CSS of ${processed.length} bytes added as URL ${url}`)
+  }
+
+export var translate = (load) => {
+  let filename = load.metadata.pluginArgument
+  sourceMap.set(filename, load.source)
+
+  let prevElem = linkElement,
+    fullSource = ""
+
+  for (let source of sourceMap.values()) {
+    fullSource += source
+  }
 
   load.source = ''
+  createElement(fullSource)
+  if (prevElem) removeElement(prevElem)
 }
+
+export var reloadable = true

@@ -7,9 +7,9 @@ System.register("styles/core.scss!post-css", [], false, function(__require, __ex
           url = URL.createObjectURL(blob),
           elem = document.createElement('link'),
           head = document.getElementsByTagName('head')[0];
-      elem.setAttribute('href', url);
-      elem.setAttribute('rel', 'stylesheet');
-      head.appendChild(elem);
+      linkElement.setAttribute('href', url);
+      linkElement.setAttribute('rel', 'stylesheet');
+      head.appendChild(linkElement);
     })("/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\n\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n\tdisplay: block;\n}\nbody {\n\tline-height: 1;\n}\nol, ul {\n\tlist-style: none;\n}\nblockquote, q {\n\tquotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n\tcontent: '';\n\tcontent: none;\n}\ntable {\n\tborder-collapse: collapse;\n\tborder-spacing: 0;\n}\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  background: #eee;\n}\n\n.flex {\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n}\n.flex.wrap {\n\t-webkit-flex-wrap: wrap;\n\t    -ms-flex-wrap: wrap;\n\t        flex-wrap: wrap;\n}\n");
   }).call(System.global);
   return System.get("@@global-helpers").retrieveGlobal(__module.id, false);
@@ -1764,7 +1764,7 @@ System.register("npm:react@0.13.1/lib/isTextInputElement", [], true, function(re
     'week': true
   };
   function isTextInputElement(elem) {
-    return elem && ((elem.nodeName === 'INPUT' && supportedInputTypes[elem.type] || elem.nodeName === 'TEXTAREA'));
+    return linkElement && ((linkElement.nodeName === 'INPUT' && supportedInputTypes[linkElement.type] || linkElement.nodeName === 'TEXTAREA'));
   }
   module.exports = isTextInputElement;
   global.define = __define;
@@ -4432,9 +4432,9 @@ System.register("lib/components/controls/controls.scss!post-css", [], false, fun
           url = URL.createObjectURL(blob),
           elem = document.createElement('link'),
           head = document.getElementsByTagName('head')[0];
-      elem.setAttribute('href', url);
-      elem.setAttribute('rel', 'stylesheet');
-      head.appendChild(elem);
+      linkElement.setAttribute('href', url);
+      linkElement.setAttribute('rel', 'stylesheet');
+      head.appendChild(linkElement);
     })(".Controls {\n  width: 320px;\n  padding: 1rem\n}\n.Controls > h1 {\n  font-size: 2rem;\n}\n.Controls > textarea {\n  width: 100%;\n  border: none;\n  height: 200px;\n}\n");
   }).call(System.global);
   return System.get("@@global-helpers").retrieveGlobal(__module.id, false);
@@ -7565,9 +7565,9 @@ System.register("lib/components/output/output.scss!post-css", [], false, functio
           url = URL.createObjectURL(blob),
           elem = document.createElement('link'),
           head = document.getElementsByTagName('head')[0];
-      elem.setAttribute('href', url);
-      elem.setAttribute('rel', 'stylesheet');
-      head.appendChild(elem);
+      linkElement.setAttribute('href', url);
+      linkElement.setAttribute('rel', 'stylesheet');
+      head.appendChild(linkElement);
     })(".Output {\n  padding: 1rem\n}\n.Output > p {\n  white-space: pre-line\n}\n.Output canvas {\n  background: white;\n}\n");
   }).call(System.global);
   return System.get("@@global-helpers").retrieveGlobal(__module.id, false);
@@ -9362,7 +9362,7 @@ System.register("npm:react@0.13.1/lib/ChangeEventPlugin", ["npm:react@0.13.1/lib
     var activeElementValue = null;
     var activeElementValueProp = null;
     function shouldUseChangeEvent(elem) {
-      return (elem.nodeName === 'SELECT' || (elem.nodeName === 'INPUT' && elem.type === 'file'));
+      return (linkElement.nodeName === 'SELECT' || (linkElement.nodeName === 'INPUT' && linkElement.type === 'file'));
     }
     var doesChangeEventBubble = false;
     if (ExecutionEnvironment.canUseDOM) {
@@ -9468,7 +9468,7 @@ System.register("npm:react@0.13.1/lib/ChangeEventPlugin", ["npm:react@0.13.1/lib
       }
     }
     function shouldUseClickEvent(elem) {
-      return (elem.nodeName === 'INPUT' && (elem.type === 'checkbox' || elem.type === 'radio'));
+      return (linkElement.nodeName === 'INPUT' && (linkElement.type === 'checkbox' || linkElement.type === 'radio'));
     }
     function getTargetIDForClickEvent(topLevelType, topLevelTarget, topLevelTargetID) {
       if (topLevelType === topLevelTypes.topClick) {
@@ -11218,7 +11218,7 @@ System.register("npm:react@0.13.1/lib/createNodesFromMarkup", ["npm:react@0.13.1
       }
       var scripts = node.getElementsByTagName('script');
       if (scripts.length) {
-        ("production" !== process.env.NODE_ENV ? invariant(handleScript, 'createNodesFromMarkup(...): Unexpected <script> element rendered.') : invariant(handleScript));
+        ("production" !== process.env.NODE_ENV ? invariant(handleScript, 'createNodesFromMarkup(...): Unexpected <script> linkElement rendered.') : invariant(handleScript));
         createArrayFromMixed(scripts).forEach(handleScript);
       }
       var nodes = createArrayFromMixed(node.childNodes);
@@ -11911,7 +11911,7 @@ System.register("npm:react@0.13.1/lib/ReactInputSelection", ["npm:react@0.13.1/l
   }
   var ReactInputSelection = {
     hasSelectionCapabilities: function(elem) {
-      return elem && (((elem.nodeName === 'INPUT' && elem.type === 'text') || elem.nodeName === 'TEXTAREA' || elem.contentEditable === 'true'));
+      return linkElement && (((linkElement.nodeName === 'INPUT' && linkElement.type === 'text') || linkElement.nodeName === 'TEXTAREA' || linkElement.contentEditable === 'true'));
     },
     getSelectionInformation: function() {
       var focusedElem = getActiveElement();
