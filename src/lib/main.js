@@ -1,6 +1,4 @@
-// Inject the styles (async obvs)
-import '../styles/core.scss!post-css'
-
+import '../styles/index'
 import React from 'react'
 import App from './app.jsx!'
 import Flux from './flux'

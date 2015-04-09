@@ -26,20 +26,26 @@ let sourceMap = new Map(),
     console.log(`CSS of ${processed.length} bytes added as URL ${url}`)
   }
 
-export var translate = (load) => {
+export var fetch = (load, fetch) => {
   let filename = load.metadata.pluginArgument.replace(/\?.*$/,'')
-  sourceMap.set(filename, load.source)
+  // Insert blanks into the Map so that load-order is preserved,
+  // no matter when the requests come back.
+  sourceMap.set(filename, "")
+  return fetch(load).then(newSource => {
+    sourceMap.set(filename, newSource)
 
-  let prevElem = linkElement,
-    fullSource = ""
+    let prevElem = linkElement,
+      allSources = ""
 
-  for (let source of sourceMap.values()) {
-    fullSource += source
-  }
+    for (let source of sourceMap.values()) {
+      allSources += source
+    }
 
-  load.source = ''
-  createElement(fullSource)
-  if (prevElem) removeElement(prevElem)
+    createElement(allSources)
+    if (prevElem) removeElement(prevElem)
+
+    return ""
+  })
 }
 
 export var reloadable = true
