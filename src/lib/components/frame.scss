@@ -3,9 +3,17 @@
   flex-wrap: wrap;
 
   > header {
+    @extend inverted;
+    @extend headings;
     width: 100%;
-    background-color: $dark-background;
-    color: $light-text;
-    padding: 1rem 2rem;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    span {
+      display: inline-block;
+      &::first-letter {
+        font-size: 1.2em;
+      }
+    }
   }
 }

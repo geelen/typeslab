@@ -27,6 +27,7 @@ System.config({
     "jsx": "github:floatdrop/plugin-jsx@1.1.0",
     "postcss": "npm:postcss@4.0.6",
     "postcss-nested": "npm:postcss-nested@0.2.2",
+    "postcss-simple-extend": "npm:postcss-simple-extend@0.3.0",
     "postcss-simple-vars": "npm:postcss-simple-vars@0.2.4",
     "react": "npm:react@0.13.1",
     "react-canvas": "npm:react-canvas@0.0.1",
@@ -273,6 +274,12 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1",
       "through": "npm:through@2.3.6"
     },
+    "npm:es6-promise@2.0.1": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
     "npm:esprima-fb@10001.1.0-dev-harmony-fb": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.1"
@@ -445,7 +452,11 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:postcss-nested@0.2.2": {
-      "postcss": "npm:postcss@4.0.6",
+      "postcss": "npm:postcss@4.1.4",
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:postcss-simple-extend@0.3.0": {
+      "postcss": "npm:postcss@4.1.4",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:postcss@4.0.6": {
@@ -454,6 +465,15 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "source-map": "npm:source-map@0.2.0"
+    },
+    "npm:postcss@4.1.4": {
+      "es6-promise": "npm:es6-promise@2.0.1",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "js-base64": "npm:js-base64@2.1.7",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "source-map": "npm:source-map@0.4.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:public-encrypt@2.0.0": {
       "bn.js": "npm:bn.js@1.3.0",
@@ -547,6 +567,12 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:source-map@0.2.0": {
+      "amdefine": "npm:amdefine@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:source-map@0.4.2": {
       "amdefine": "npm:amdefine@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",

@@ -3,9 +3,11 @@ import postcss from 'postcss'
 import Autoprefixer from 'autoprefixer-core'
 import nested from 'postcss-nested'
 import vars from 'postcss-simple-vars'
-let processor = postcss([nested, vars, Autoprefixer('last 2 versions')])
+import extend from 'postcss-simple-extend'
+let processor = postcss([vars, nested, extend])
 
 let sourceMap = new Map(),
+  notLoadedYet = Symbol(),
   linkElement,
   removeElement = (prevElem) => {
     let url = prevElem.getAttribute('href')
@@ -30,7 +32,7 @@ export var fetch = (load, fetch) => {
   let filename = load.metadata.pluginArgument.replace(/\?.*$/,'')
   // Insert blanks into the Map so that load-order is preserved,
   // no matter when the requests come back.
-  sourceMap.set(filename, "")
+  sourceMap.set(filename, notLoadedYet)
   return fetch(load).then(newSource => {
     sourceMap.set(filename, newSource)
 
@@ -38,6 +40,7 @@ export var fetch = (load, fetch) => {
       allSources = ""
 
     for (let source of sourceMap.values()) {
+      if (source == notLoadedYet) break;
       allSources += source
     }
 
