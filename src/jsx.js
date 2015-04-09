@@ -2,23 +2,32 @@ import reactTools from 'react-tools'
 import React from 'react'
 import ReactMount from 'react/lib/ReactMount'
 import reactHotApi from 'react-hot-api'
+import path from 'path'
+import pascalCase from 'pascal-case'
 
-export var fetch = (load, fetch) => {
-  console.log("=> " + load.address)
-  return fetch(load)
+let classNameFromFilename = (filename) => {
+  return pascalCase(path.basename(filename,path.extname(filename)))
 }
-export var translate = load => {
-  console.log("<= " + load.address)
-  var output = reactTools.transformWithDetails(load.source, {es6module: true});
+let reexportHotVersionSnippet = (className) => `
+  console.log("Hot reloading ${className}!")
+  import ReactMount from 'react/lib/ReactMount'
+  import reactHotApi from 'react-hot-api'
+  if (!window.__jsxHot) window.__jsxHot = {}
+  if (!__jsxHot.${className}) __jsxHot.${className} = reactHotApi(_ => ReactMount._instancesByReactRootID)
+  let hotted = __jsxHot.${className}(${className})
+  export {hotted as default}
+`
+
+export let translate = load => {
+  let className = classNameFromFilename(load.metadata.pluginArgument),
+    snippet = reexportHotVersionSnippet(className),
+    output = reactTools.transformWithDetails(load.source + snippet, {es6module: true})
   load.source = output.code;
-  console.log(load.source)
   load.metadata.sourceMap = output.sourceMap;
 }
 
-export var hotReload = module => {
-  //let reactHotReload = reactHotApi(_ => ReactMount._instancesByReactRootID)
-  //console.log(reactHotReload)
-  //console.log(module)
-  //console.log(module.default.prototype instanceof React.Component)
-  //reactHotReload(module.default)
+export let hotReload = module => {
+  // Noop here either. This only runs on the updated modules, not on
+  // the first one, and the react-hot-reloader needs to be injected
+  // from the very beginning.
 }

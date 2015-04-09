@@ -1,11 +1,10 @@
 .Controls {
-  @extend inverted;
   width: 320px;
   margin: 0.5rem;
   padding: 0.5rem;
 
   > h2 {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   > textarea {
     width: 100%;

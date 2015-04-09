@@ -24,6 +24,8 @@ System.config({
     "insert-css": "npm:insert-css@0.2.0",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.0.0",
     "json": "github:systemjs/plugin-json@0.1.0",
+    "pascal-case": "npm:pascal-case@1.1.0",
+    "path": "github:jspm/nodelibs-path@0.1.0",
     "postcss": "npm:postcss@4.0.6",
     "postcss-nested": "npm:postcss-nested@0.2.2",
     "postcss-simple-extend": "npm:postcss-simple-extend@0.3.0",
@@ -180,6 +182,10 @@ System.config({
       "base64-js": "npm:base64-js@0.0.8",
       "ieee754": "npm:ieee754@1.1.4",
       "is-array": "npm:is-array@1.0.1"
+    },
+    "npm:camel-case@1.1.1": {
+      "sentence-case": "npm:sentence-case@1.1.2",
+      "upper-case": "npm:upper-case@1.1.2"
     },
     "npm:commander@2.5.1": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
@@ -437,6 +443,10 @@ System.config({
       "pbkdf2-compat": "npm:pbkdf2-compat@3.0.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
+    "npm:pascal-case@1.1.0": {
+      "camel-case": "npm:camel-case@1.1.1",
+      "upper-case-first": "npm:upper-case-first@1.1.1"
+    },
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
@@ -542,6 +552,9 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
+    "npm:sentence-case@1.1.2": {
+      "lower-case": "npm:lower-case@1.1.2"
+    },
     "npm:sha.js@2.3.6": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -596,6 +609,9 @@ System.config({
     },
     "npm:uniqueid@0.1.0": {
       "assert": "github:jspm/nodelibs-assert@0.1.0"
+    },
+    "npm:upper-case-first@1.1.1": {
+      "upper-case": "npm:upper-case@1.1.2"
     },
     "npm:url@0.10.3": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
