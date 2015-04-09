@@ -4,16 +4,20 @@
 
   > header {
     @extend inverted;
-    @extend headings;
+    @extend logo;
     width: 100%;
     padding: 1rem;
-    text-align: center;
     text-transform: uppercase;
-    span {
-      display: inline-block;
-      &::first-letter {
-        font-size: 1.2em;
-      }
+  }
+}
+
+.Frame-Logo {
+  text-align: center;
+  > span {
+    display: inline-block;
+    &::first-letter {
+      font-size: 1.4em;
+      vertical-align: text-top;
     }
   }
 }

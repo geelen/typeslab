@@ -4,7 +4,7 @@ import Autoprefixer from 'autoprefixer-core'
 import nested from 'postcss-nested'
 import vars from 'postcss-simple-vars'
 import extend from 'postcss-simple-extend'
-let processor = postcss([vars, nested, extend])
+let processor = postcss([Autoprefixer("Last 2 Versions"), vars, nested, extend])
 
 let sourceMap = new Map(),
   notLoadedYet = Symbol(),
@@ -13,7 +13,7 @@ let sourceMap = new Map(),
     let url = prevElem.getAttribute('href')
     prevElem.parentNode.removeChild(prevElem)
     URL.revokeObjectURL(url)
-    console.log(`CSS removed from URL ${url}`)
+    //console.log(`CSS removed from URL ${url}`)
   },
   createElement = (source) => {
     let processed = processor.process(source).css,
@@ -25,7 +25,7 @@ let sourceMap = new Map(),
     linkElement.setAttribute('href', url)
     linkElement.setAttribute('rel', 'stylesheet')
     head.appendChild(linkElement)
-    console.log(`CSS of ${processed.length} bytes added as URL ${url}`)
+    //console.log(`CSS of ${processed.length} bytes added as URL ${url}`)
   }
 
 export var fetch = (load, fetch) => {
