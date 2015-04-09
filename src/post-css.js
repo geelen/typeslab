@@ -28,7 +28,6 @@ let sourceMap = new Map(),
 
 export var translate = (load) => {
   let filename = load.metadata.pluginArgument.replace(/\?.*$/,'')
-  console.log(filename)
   sourceMap.set(filename, load.source)
 
   let prevElem = linkElement,
