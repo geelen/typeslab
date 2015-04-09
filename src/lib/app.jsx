@@ -9,6 +9,9 @@ class CanvasImage extends React.Component {
 }
 
 export default class App extends React.Component {
+  constructor() {
+    super()
+  }
   render() {
     return <FluxComponent flux={this.props.flux}>
       <Frame/>

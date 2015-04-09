@@ -51,4 +51,7 @@ export var fetch = (load, fetch) => {
   })
 }
 
-export var reloadable = true
+export var hotReload = (module) => {
+  // noop, the fetch already injected the new CSS
+  console.log(module)
+}

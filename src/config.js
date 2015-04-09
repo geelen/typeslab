@@ -24,19 +24,17 @@ System.config({
     "insert-css": "npm:insert-css@0.2.0",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.0.0",
     "json": "github:systemjs/plugin-json@0.1.0",
-    "jsx": "github:floatdrop/plugin-jsx@1.1.0",
     "postcss": "npm:postcss@4.0.6",
     "postcss-nested": "npm:postcss-nested@0.2.2",
     "postcss-simple-extend": "npm:postcss-simple-extend@0.3.0",
     "postcss-simple-vars": "npm:postcss-simple-vars@0.2.4",
     "react": "npm:react@0.13.1",
     "react-canvas": "npm:react-canvas@0.0.1",
+    "react-hot-api": "github:gaearon/react-hot-api@0.4.3",
+    "react-tools": "npm:react-tools@0.13.1",
     "traceur": "github:jmcriffey/bower-traceur@0.0.87",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.87",
     "whatwg-fetch": "npm:whatwg-fetch@0.7.0",
-    "github:floatdrop/plugin-jsx@1.1.0": {
-      "react-tools": "npm:react-tools@0.13.1"
-    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -227,7 +225,7 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "inherits": "npm:inherits@2.0.1",
       "ripemd160": "npm:ripemd160@1.0.0",
-      "sha.js": "npm:sha.js@2.3.6",
+      "sha.js": "npm:sha.js@2.4.0",
       "stream": "github:jspm/nodelibs-stream@0.1.0"
     },
     "npm:create-hmac@1.1.3": {
@@ -545,6 +543,12 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:sha.js@2.3.6": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "inherits": "npm:inherits@2.0.1",
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:sha.js@2.4.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "inherits": "npm:inherits@2.0.1",
