@@ -9,7 +9,7 @@ import './output.scss!post-css'
 let getFontFace = (font) => {
   let options = {weight: font.weight}
   if (font.italic) options.style = 'italic'
-  return FontFace(font.font, null, options)
+  return FontFace(font.name, null, options)
 }
 
 class Line extends React.Component {
@@ -32,24 +32,6 @@ export default class Output extends React.Component {
     this.canvas = this.refs.surface.getDOMNode()
   }
 
-  componentWillMount() {
-    if (this.props.chosenFont) this.setFont(this.props.chosenFont)
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (newProps.chosenFont !== this.props.chosenFont) {
-      this.setFont(newProps.chosenFont)
-      console.log("CHANGED FONT")
-    }
-  }
-
-  setFont(font) {
-    this.setState({
-      mainFont: getFontFace(font.main),
-      altFont: getFontFace(font.alt)
-    })
-  }
-
   render() {
     let lines = this.layoutLines(this.props.lines),
       text = 'typeslab.com'
@@ -66,33 +48,37 @@ export default class Output extends React.Component {
 
   layoutLines(lines) {
     let totalHeight = this.spacing,
-      sizedLines = [];
-    if (this.state.mainFont && this.state.altFont) {
+      sizedLines = []
+    if (this.props.chosenFont) {
       sizedLines = lines.map(line => {
-        let text = line, font, lineHeightFactor
-        if (text.match(/^!/)) {
-          text = text.replace(/^!/, '')
-          font = this.state.altFont
-          lineHeightFactor = 1.25
-        } else {
-          text = text.toUpperCase()
-          font = this.state.mainFont
+        let text = line, font, lineHeightFactor, prePaddingFactor
+        if (!text.match(/^!/)) {
+          font = this.props.chosenFont.main
           lineHeightFactor = 1.05
+          prePaddingFactor = 0
+        } else {
+          text = text.replace(/^!/, '')
+          font = this.props.chosenFont.alt
+          lineHeightFactor = 1.5
+          prePaddingFactor = 0.1
         }
-        let measurements = measureText(text, 9999, font, 12, 15),
+        text = font.caps ? text.toUpperCase() : text
+        let fontFace = getFontFace(font),
+          measurements = measureText(text, 9999, fontFace, 12, 15),
           factor = this.props.width / measurements.width,
           fontSize = Math.min(300, 12 * factor),
+          lineHeight = fontSize * lineHeightFactor,
           style = {
             fontSize,
             height: fontSize,
             lineHeight: fontSize,
-            top: totalHeight,
+            top: totalHeight + lineHeight * prePaddingFactor,
             width: 500 + 2 * this.spacing,
-            fontFace: font,
+            fontFace,
             left: 0,
             textAlign: 'center'
           }
-        totalHeight += fontSize * lineHeightFactor
+        totalHeight += lineHeight
         return {line: text, style}
       })
     }

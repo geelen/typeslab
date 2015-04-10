@@ -11,27 +11,42 @@ export default class FontsActions extends Actions {
   }
 
   loadLocalFonts() {
-    var isLocal = font => font.main.local && font.alt.local;
+    let isLocal = font => font.main.local && font.alt.local
     F.filter(isLocal, Fonts).forEach(font => {
       let isLoaded = f => FontDetect.isFontLoaded(f)
-      font.main.font = F.find(isLoaded, font.main.local) || 'sans-serif'
-      font.alt.font = F.find(isLoaded, font.alt.local) || 'serif'
+      font.main.name = F.find(isLoaded, font.main.local) || 'sans-serif'
+      font.alt.name = F.find(isLoaded, font.alt.local) || 'serif'
       this.fontLoaded(font)
     })
   }
 
   loadGoogleFonts() {
-    console.log(WebFont)
+    let isGoogle = font => font.main.google && font.alt.google,
+      fonts = [],
+      googleFonts = F.filter(isGoogle, Fonts),
+      toGoogleName = f => `${f.google}:${f.weight}${f.italic ? 'italic' : ''}`
+    googleFonts.forEach(font => fonts.push(toGoogleName(font.main), toGoogleName(font.alt)))
+    console.log(fonts)
     WebFont.load({
       classes: false,
-      fontactive: (familyName, fvd) => console.log(familyName, fvd),
       google: {
-        families: ['Droid Sans']
+        families: F.nub(fonts)
+      },
+      active: () => {
+        googleFonts.forEach(font => {
+          font.main.name = font.main.google
+          font.alt.name = font.alt.google
+          this.fontLoaded(font)
+        })
       }
     })
   }
 
   fontLoaded(font) {
+    return font
+  }
+
+  chooseFont(font) {
     return font
   }
 }

@@ -27,12 +27,12 @@ export default [
     main: {
       google: 'Gentium Book Basic',
       weight: 700,
-      italic: true
+      italic: true,
+      caps: true
     },
     alt: {
       google: 'Open Sans',
-      weight: 100,
-      caps: true
+      weight: 300
     }
   }
 ]
