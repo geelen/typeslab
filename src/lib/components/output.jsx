@@ -6,6 +6,12 @@ import FontFace from 'react-canvas/lib/FontFace'
 import measureText from 'react-canvas/lib/measureText'
 import './output.scss!post-css'
 
+let getFontFace = (font) => {
+  let options = {weight: font.weight}
+  if (font.italic) options.style = 'italic'
+  return FontFace(font.font, null, options)
+}
+
 class Line extends React.Component {
   componentDidMount() {
   }
@@ -18,8 +24,6 @@ class Line extends React.Component {
 export default class Output extends React.Component {
   constructor() {
     super()
-    this.font = FontFace('Avenir Next Condensed, Helvetica, sans-serif', null, {weight: 900})
-    this.altFont = FontFace('Georgia, serif', null, {style: 'italic', weight: 100})
     this.state = {}
     this.spacing = 32
   }
@@ -28,11 +32,23 @@ export default class Output extends React.Component {
     this.canvas = this.refs.surface.getDOMNode()
   }
 
-  //componentDidUpdate() {
-  //  requestAnimationFrame(_ => {
-  //    this.context.flux.getActions('message').imageRendered(this.canvas.toDataURL())
-  //  })
-  //}
+  componentWillMount() {
+    if (this.props.chosenFont) this.setFont(this.props.chosenFont)
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.chosenFont !== this.props.chosenFont) {
+      this.setFont(newProps.chosenFont)
+      console.log("CHANGED FONT")
+    }
+  }
+
+  setFont(font) {
+    this.setState({
+      mainFont: getFontFace(font.main),
+      altFont: getFontFace(font.alt)
+    })
+  }
 
   render() {
     let lines = this.layoutLines(this.props.lines),
@@ -50,15 +66,17 @@ export default class Output extends React.Component {
 
   layoutLines(lines) {
     let totalHeight = this.spacing,
+      sizedLines = [];
+    if (this.state.mainFont && this.state.altFont) {
       sizedLines = lines.map(line => {
         let text = line, font, lineHeightFactor
         if (text.match(/^!/)) {
           text = text.replace(/^!/, '')
-          font = this.altFont
+          font = this.state.altFont
           lineHeightFactor = 1.25
         } else {
           text = text.toUpperCase()
-          font = this.font
+          font = this.state.mainFont
           lineHeightFactor = 1.05
         }
         let measurements = measureText(text, 9999, font, 12, 15),
@@ -72,10 +90,12 @@ export default class Output extends React.Component {
             width: 500 + 2 * this.spacing,
             fontFace: font,
             left: 0,
-            textAlign: 'center'}
+            textAlign: 'center'
+          }
         totalHeight += fontSize * lineHeightFactor
         return {line: text, style}
       })
+    }
     return {totalHeight, sizedLines}
   }
 

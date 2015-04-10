@@ -2,6 +2,7 @@ import { Actions } from 'flummox'
 import Fonts from '../fonts'
 import FontDetect from 'FontDetect/lib/fontdetect'
 import F from 'fkit'
+import 'webfontloader'
 
 export default class FontsActions extends Actions {
   loadAllFonts() {
@@ -20,7 +21,14 @@ export default class FontsActions extends Actions {
   }
 
   loadGoogleFonts() {
-
+    console.log(WebFont)
+    WebFont.load({
+      classes: false,
+      fontactive: (familyName, fvd) => console.log(familyName, fvd),
+      google: {
+        families: ['Droid Sans']
+      }
+    })
   }
 
   fontLoaded(font) {

@@ -25,6 +25,7 @@
       "react-canvas": "npm:react-canvas@^0.0.1",
       "react-hot-api": "github:gaearon/react-hot-api@^0.4.3",
       "react-tools": "npm:react-tools@^0.13.1",
+      "webfontloader": "npm:webfontloader@^1.5.15",
       "whatwg-fetch": "npm:whatwg-fetch@^0.7.0"
     },
     "devDependencies": {

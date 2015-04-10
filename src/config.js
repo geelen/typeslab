@@ -38,6 +38,7 @@ System.config({
     "react-tools": "npm:react-tools@0.13.1",
     "traceur": "github:jmcriffey/bower-traceur@0.0.87",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.87",
+    "webfontloader": "npm:webfontloader@1.5.15",
     "whatwg-fetch": "npm:whatwg-fetch@0.7.0",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -627,6 +628,9 @@ System.config({
     },
     "npm:vm-browserify@0.0.4": {
       "indexof": "npm:indexof@0.0.1"
+    },
+    "npm:webfontloader@1.5.15": {
+      "process": "github:jspm/nodelibs-process@0.1.1"
     }
   }
 });
