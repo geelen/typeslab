@@ -5,10 +5,10 @@
     width: 100%;
   }
 
-  > * {
-    @trait (layout: pb1);
-  }
   > h2 {
-    @trait (type: 18pt medium, color: default);
+    @trait (type: 18pt medium, color: default, layout: mt2 mb1);
+    &:first-child {
+      margin-top: 0;
+    }
   }
 }

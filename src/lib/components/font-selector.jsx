@@ -1,5 +1,4 @@
 import React from 'react'
-import './controls.scss!post-css'
 
 export default class FontSelector extends React.Component {
   componentWillMount() {

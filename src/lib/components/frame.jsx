@@ -14,7 +14,7 @@ export default class Frame extends React.Component {
         </h1>
       </header>
       <Controls></Controls>
-      <FluxComponent connectToStores={['message','fonts']}>
+      <FluxComponent connectToStores={['message','fonts','colors']}>
         <Output width={500}></Output>
       </FluxComponent>
     </div>

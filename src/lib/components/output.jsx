@@ -35,6 +35,7 @@ export default class Output extends React.Component {
   render() {
     let lines = this.layoutLines(this.props.lines),
       text = 'typeslab.com'
+    console.log(this.props.chosenColor)
     return <div className='Output'>
       <Surface ref="surface" width={this.props.width + this.spacing * 2} height={lines.totalHeight + this.spacing} top={0} left={0}>
         <Layer style={this.getBorderStyle(lines.totalHeight)}/>

@@ -6,12 +6,20 @@
   display: inline-flex;
 }
 
+@define-placeholder flex:vertical {
+  flex-direction: column;
+}
+
 @define-placeholder flex:wrap {
   flex-wrap: wrap;
 }
 
 @define-placeholder flex:center {
   justify-content: center;
+}
+
+@define-placeholder flex:align-center {
+  align-items: center;
 }
 
 @define-placeholder flex-child {

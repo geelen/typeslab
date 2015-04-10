@@ -2,6 +2,7 @@ import React from 'react'
 import MessageEntry from './message-entry.jsx!'
 import FluxComponent from 'flummox/component'
 import FontSelector from './font-selector.jsx!'
+import ColorSelector from './color-selector.jsx!'
 import './controls.scss!post-css'
 
 export default class Controls extends React.Component {
@@ -14,6 +15,7 @@ export default class Controls extends React.Component {
         <FontSelector />
       </FluxComponent>
       <h2>Choose a colour scheme:</h2>
+      <ColorSelector />
     </div>
   }
 }
