@@ -65,3 +65,68 @@
   padding-left: 2rem;
 }
 
+@define-placeholder layout:m0.25 {
+  margin: 0.25rem;
+}
+@define-placeholder layout:m0.5 {
+  margin: 0.5rem;
+}
+@define-placeholder layout:m1 {
+  margin: 1rem;
+}
+@define-placeholder layout:m2 {
+  margin: 2rem;
+}
+
+@define-placeholder layout:mt0.25 {
+  margin-top: 0.25rem;
+}
+@define-placeholder layout:mr0.25 {
+  margin-right: 0.25rem;
+}
+@define-placeholder layout:mb0.25 {
+  margin-bottom: 0.25rem;
+}
+@define-placeholder layout:ml0.25 {
+  margin-left: 0.25rem;
+}
+
+@define-placeholder layout:mt0.5 {
+  margin-top: 0.5rem;
+}
+@define-placeholder layout:mr0.5 {
+  margin-right: 0.5rem;
+}
+@define-placeholder layout:mb0.5 {
+  margin-bottom: 0.5rem;
+}
+@define-placeholder layout:ml0.5 {
+  margin-left: 0.5rem;
+}
+
+@define-placeholder layout:mt1 {
+  margin-top: 1rem;
+}
+@define-placeholder layout:mr1 {
+  margin-right: 1rem;
+}
+@define-placeholder layout:mb1 {
+  margin-bottom: 1rem;
+}
+@define-placeholder layout:ml1 {
+  margin-left: 1rem;
+}
+
+@define-placeholder layout:mt2 {
+  margin-top: 2rem;
+}
+@define-placeholder layout:mr2 {
+  margin-right: 2rem;
+}
+@define-placeholder layout:mb2 {
+  margin-bottom: 2rem;
+}
+@define-placeholder layout:ml2 {
+  margin-left: 2rem;
+}
+

@@ -7,6 +7,8 @@ export default class Controls extends React.Component {
     return <div className="Controls">
       <h2>Enter your message:</h2>
       <MessageEntry />
+      <h2>Pick your font pairing:</h2>
+      <h2>Choose a colour scheme:</h2>
     </div>
   }
 }

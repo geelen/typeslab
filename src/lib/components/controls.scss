@@ -1,9 +1,11 @@
 .Controls {
-  @trait(color: inverted, layout: p1);
+  @trait(color: default, layout: p1);
   width: 320px;
-  border-top: 1px solid $borders;
 
+  > * {
+    @trait(layout: pb1);
+  }
   > h2 {
-    @trait(type: 18pt medium, color: inverted, layout: pb1);
+    @trait(type: 18pt medium, color: default);
   }
 }

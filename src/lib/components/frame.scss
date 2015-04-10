@@ -2,7 +2,7 @@
   @trait(flex: wrap);
 
   > header {
-    @trait(color: inverted, type: logo, layout: p1);
+    @trait(color: inverted, type: logo, layout: p1 mb1);
     width: 100%;
   }
 }
