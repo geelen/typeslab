@@ -1,9 +1,12 @@
 .Frame {
-  @trait(flex: wrap);
+  min-height: 100vh;
+  @trait(flex: vertical);
 
   > header {
-    @trait(color: inverted, type: logo, layout: p1 mb1);
-    width: 100%;
+    @trait(color: inverted, type: logo, layout: p1);
+  }
+  > main {
+    @trait(flex: wrap, flex-child: grow);
   }
 }
 

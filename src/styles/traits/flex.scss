@@ -14,10 +14,16 @@
   flex-wrap: wrap;
 }
 
+@define-placeholder flex:start {
+  justify-content: start;
+}
 @define-placeholder flex:center {
   justify-content: center;
 }
 
+@define-placeholder flex:align-start {
+  align-items: flex-start;
+}
 @define-placeholder flex:align-center {
   align-items: center;
 }

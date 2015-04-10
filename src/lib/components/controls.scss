@@ -1,12 +1,12 @@
 .Controls {
-  @trait (color: default, layout: p1);
+  @trait (layout: p1, color: default);
   width: 320px;
   @media screen and (max-width: 600px) {
     width: 100%;
   }
 
   > h2 {
-    @trait (type: 18pt medium, color: default, layout: mt2 mb1);
+    @trait (type: 18pt medium, layout: mt2 mb1);
     &:first-child {
       margin-top: 0;
     }

@@ -36,8 +36,8 @@ export default class Output extends React.Component {
     let lines = this.layoutLines(this.props.lines),
       text = 'typeslab.com'
     console.log(this.props.chosenColor)
-    return <div className='Output'>
-      <Surface ref="surface" width={this.props.width + this.spacing * 2} height={lines.totalHeight + this.spacing} top={0} left={0}>
+    return <div className='Output' style={{backgroundColor: this.props.chosenColor.background}}>
+      <Surface ref="surface" width={this.props.width + this.spacing * 2} height={lines.totalHeight + this.spacing} top={0} left={0} style={{backgroundColor: this.props.chosenColor.background}}>
         <Layer style={this.getBorderStyle(lines.totalHeight)}/>
         {lines.sizedLines.map((line) => {
           return <Line line={line}/>
@@ -77,7 +77,8 @@ export default class Output extends React.Component {
             width: 500 + 2 * this.spacing,
             fontFace,
             left: 0,
-            textAlign: 'center'
+            textAlign: 'center',
+            color: this.props.chosenColor.foreground
           }
         totalHeight += lineHeight
         return {line: text, style}
@@ -88,7 +89,7 @@ export default class Output extends React.Component {
 
   getBorderStyle(height) {
     return {
-      borderColor: '#444',
+      borderColor: this.props.chosenColor.foreground,
       top: this.spacing / 2,
       width: this.props.width + this.spacing,
       left: this.spacing / 2,
@@ -98,16 +99,17 @@ export default class Output extends React.Component {
 
   getByLineStyle(text, height) {
     let font = FontFace('Avenir Next Condensed, Helvetica, sans-serif', null, {weight: 400}),
-      size = 7,
+      size = 8,
       width = measureText(text, 9999, font, size, 15).width
     return {
       fontFace: font,
       fontSize: size,
-      backgroundColor: 'white',
+      backgroundColor: this.props.chosenColor.background,
+      color: this.props.chosenColor.foreground,
       textAlign: 'center',
       width: width + 6,
       left: this.props.width / 2 + this.spacing / 4,
-      top: height + 12,
+      top: height + 11,
       height: 16
     }
   }

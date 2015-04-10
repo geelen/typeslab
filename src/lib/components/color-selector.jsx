@@ -16,6 +16,10 @@ export default class ColorSelector extends React.Component {
         name: "Sienna",
         foreground: 'black',
         background: 'rgb(242,70,17)'
+      }, {
+        name: "Albatross",
+        foreground: 'rgb(202,58,53)',
+        background: 'rgb(208,210,207)'
       }]
     }
   }

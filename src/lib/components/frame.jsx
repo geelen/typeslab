@@ -13,10 +13,12 @@ export default class Frame extends React.Component {
           <span>Type</span><span>Slab</span>
         </h1>
       </header>
-      <Controls></Controls>
-      <FluxComponent connectToStores={['message','fonts','colors']}>
-        <Output width={500}></Output>
-      </FluxComponent>
+      <main>
+        <Controls></Controls>
+        <FluxComponent connectToStores={['message','fonts','colors']}>
+          <Output width={500}></Output>
+        </FluxComponent>
+      </main>
     </div>
   }
 }
