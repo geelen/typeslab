@@ -1,3 +1,7 @@
+@define-placeholder color:default {
+  background-color: $light-text;
+  color: $dark-background;
+}
 @define-placeholder color:inverted {
   background-color: $dark-background;
   color: $light-text;

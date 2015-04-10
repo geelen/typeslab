@@ -1,6 +1,5 @@
-@define-placeholder type:base {
+@define-placeholder type:sans {
   font-family: "Avenir Next", "Arial Black";
-  font-weight: 400;
 }
 
 @define-placeholder type:logo {
@@ -22,6 +21,9 @@
   font-size: 1.25rem;
 }
 
+@define-placeholder type:normal {
+  font-weight: 400;
+}
 @define-placeholder type:medium {
   font-weight: 500;
 }

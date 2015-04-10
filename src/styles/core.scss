@@ -3,8 +3,7 @@
 }
 
 body {
-  @trait(type: base);
-  background: #fff;
+  @trait(type: sans normal, color: default);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
