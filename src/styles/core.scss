@@ -3,6 +3,7 @@
 }
 
 body {
+  @extend type-base;
   background: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

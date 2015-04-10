@@ -1,11 +1,16 @@
-@define-placeholder logo {
+@define-placeholder type-base {
+  font-family: "Avenir Next", "Arial Black";
+  font-weight: 400;
+}
+
+@define-placeholder type-logo {
   font-family: "Avenir Next", "Arial Black";
   font-weight: 700;
   letter-spacing: 5px;
 }
 
-@define-placeholder headings {
+@define-placeholder type-heading {
   font-family: "Avenir Next", "Arial Black";
   font-weight: 400;
-  letter-spacing: 5px;
+  font-size: 1.2rem;
 }

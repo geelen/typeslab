@@ -4,9 +4,7 @@ import './message-entry.scss!post-css'
 export default class MessageEntry extends React.Component {
   componentWillMount() {
     this.messageActions = this.context.flux.getActions('messages')
-    this.setValue("Something over\ntwo lines")
-    setTimeout(_ => this.setValue("Something over\nthree\nwhole lines"), 2000)
-    setTimeout(_ => this.setValue("Something over\n!three lines\nthis time with italics"), 4000)
+    this.setValue("Whatever you write here\nwill be rendered as a slab-type\nposter!\n!Start a line with an !\n!to use the alternate\n!typeface :)")
   }
   handleChange(event) {
     this.setValue(event.target.value)
