@@ -4,7 +4,23 @@ import Autoprefixer from 'autoprefixer-core'
 import nested from 'postcss-nested'
 import vars from 'postcss-simple-vars'
 import extend from 'postcss-simple-extend'
-let processor = postcss([Autoprefixer("Last 2 Versions"), vars, nested, extend])
+let mixins = css => {
+  css.eachAtRule(rule => {
+    if (rule.name == 'trait') {
+      let expressions = rule.params.replace(/^\(|\)$/g, '').split(/, +/)
+      expressions.forEach(expression => {
+        let [trait, args] = expression.split(/: +/)
+        args.split(" ").forEach(arg => {
+          let decl = postcss.atRule({name: "extend", params: `${trait}:${arg}`, source: rule.source})
+          rule.parent.insertBefore(rule, decl)
+        })
+      })
+      rule.removeSelf()
+    }
+  })
+}
+
+let processor = postcss([Autoprefixer("Last 2 Versions"), mixins, vars, nested, extend])
 
 let sourceMap = new Map(),
   notLoadedYet = Symbol(),

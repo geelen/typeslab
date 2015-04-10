@@ -1,11 +1,11 @@
 .Controls {
-  @extend inverted;
+  @trait(color: inverted);
   width: 320px;
   padding: 1rem;
   border-top: 1px solid $borders;
 
   > h2 {
-    @extend type-heading;
+    @trait(type: 20pt medium small-caps, color: inverted);
   }
   > textarea {
     width: 100%;
