@@ -4,15 +4,15 @@ import Autoprefixer from 'autoprefixer-core'
 import nested from 'postcss-nested'
 import vars from 'postcss-simple-vars'
 import extend from 'postcss-simple-extend'
-let mixins = css => {
+let traits = (css, result) => {
   css.eachAtRule(rule => {
     if (rule.name == 'trait') {
       let expressions = rule.params.replace(/^\(|\)$/g, '').split(/, +/)
       expressions.forEach(expression => {
         let [trait, args] = expression.split(/: +/)
-        args.split(" ").forEach(arg => {
-          let decl = postcss.atRule({name: "extend", params: `${trait}:${arg}`, source: rule.source})
-          rule.parent.insertBefore(rule, decl)
+        rule.parent.insertBefore(rule, postcss.atRule({name: "extend", params: trait, source: rule.source}))
+        if (args) args.split(" ").forEach(arg => {
+          rule.parent.insertBefore(rule, postcss.atRule({name: "extend", params: `${trait}:${arg}`, source: rule.source}))
         })
       })
       rule.removeSelf()
@@ -20,7 +20,7 @@ let mixins = css => {
   })
 }
 
-let processor = postcss([Autoprefixer("Last 2 Versions"), mixins, vars, nested, extend])
+let processor = postcss([Autoprefixer("Last 2 Versions"), traits, vars, nested, extend])
 
 let sourceMap = new Map(),
   notLoadedYet = Symbol(),
@@ -32,10 +32,12 @@ let sourceMap = new Map(),
     //console.log(`CSS removed from URL ${url}`)
   },
   createElement = (source) => {
-    let processed = processor.process(source).css,
-        blob = new Blob([processed], {type: 'text/css'}),
+    let processed = processor.process(source),
+        blob = new Blob([processed.css], {type: 'text/css'}),
         url = URL.createObjectURL(blob),
         head = document.getElementsByTagName('head')[0]
+
+    processed.warnings().forEach(w => console.warn(w.toString()))
 
     linkElement = document.createElement('link')
     linkElement.setAttribute('href', url)

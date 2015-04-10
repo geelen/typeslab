@@ -26,7 +26,7 @@ System.config({
     "json": "github:systemjs/plugin-json@0.1.0",
     "pascal-case": "npm:pascal-case@1.1.0",
     "path": "github:jspm/nodelibs-path@0.1.0",
-    "postcss": "npm:postcss@4.0.6",
+    "postcss": "npm:postcss@4.1.4",
     "postcss-nested": "npm:postcss-nested@0.2.2",
     "postcss-simple-extend": "npm:postcss-simple-extend@0.3.0",
     "postcss-simple-vars": "npm:postcss-simple-vars@0.2.4",

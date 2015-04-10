@@ -1,15 +1,9 @@
 .Controls {
-  @trait(color: inverted);
+  @trait(color: inverted, layout: p1);
   width: 320px;
-  padding: 1rem;
   border-top: 1px solid $borders;
 
   > h2 {
-    @trait(type: 20pt medium small-caps, color: inverted);
-  }
-  > textarea {
-    width: 100%;
-    border: none;
-    height: 200px;
+    @trait(type: 18pt medium, color: inverted, layout: pb1);
   }
 }

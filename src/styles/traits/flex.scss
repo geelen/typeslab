@@ -1,0 +1,24 @@
+@define-placeholder flex {
+  display: flex;
+}
+
+@define-placeholder flex:inline {
+  display: inline-flex;
+}
+
+@define-placeholder flex:wrap {
+  flex-wrap: wrap;
+}
+
+@define-placeholder flex:center {
+  justify-content: center;
+}
+
+@define-placeholder flex-child {
+}
+@define-placeholder flex-child:no-shrink {
+  flex-shrink: 0;
+}
+@define-placeholder flex-child:grow {
+  flex-grow: 1;
+}

@@ -1,0 +1,67 @@
+@define-placeholder layout {
+}
+@define-placeholder layout:p0.25 {
+  padding: 0.25rem;
+}
+@define-placeholder layout:p0.5 {
+  padding: 0.5rem;
+}
+@define-placeholder layout:p1 {
+  padding: 1rem;
+}
+@define-placeholder layout:p2 {
+  padding: 2rem;
+}
+
+@define-placeholder layout:pt0.25 {
+  padding-top: 0.25rem;
+}
+@define-placeholder layout:pr0.25 {
+  padding-right: 0.25rem;
+}
+@define-placeholder layout:pb0.25 {
+  padding-bottom: 0.25rem;
+}
+@define-placeholder layout:pl0.25 {
+  padding-left: 0.25rem;
+}
+
+@define-placeholder layout:pt0.5 {
+  padding-top: 0.5rem;
+}
+@define-placeholder layout:pr0.5 {
+  padding-right: 0.5rem;
+}
+@define-placeholder layout:pb0.5 {
+  padding-bottom: 0.5rem;
+}
+@define-placeholder layout:pl0.5 {
+  padding-left: 0.5rem;
+}
+
+@define-placeholder layout:pt1 {
+  padding-top: 1rem;
+}
+@define-placeholder layout:pr1 {
+  padding-right: 1rem;
+}
+@define-placeholder layout:pb1 {
+  padding-bottom: 1rem;
+}
+@define-placeholder layout:pl1 {
+  padding-left: 1rem;
+}
+
+@define-placeholder layout:pt2 {
+  padding-top: 2rem;
+}
+@define-placeholder layout:pr2 {
+  padding-right: 2rem;
+}
+@define-placeholder layout:pb2 {
+  padding-bottom: 2rem;
+}
+@define-placeholder layout:pl2 {
+  padding-left: 2rem;
+}
+

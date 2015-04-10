@@ -1,6 +1,12 @@
 .Output {
-  padding: 1rem;
+  @trait(flex-child: grow);
+  text-align: center;
+  overflow: hidden;
   canvas {
+    max-width: calc(100vw - 320px);
+    height: auto !important;
+    display: inline-block;
     background: white;
+    transform-origin: 0% 0%;
   }
 }

@@ -1,0 +1,48 @@
+@define-placeholder type {
+}
+
+@define-placeholder type:14pt {
+  font-size: 0.875rem;
+}
+@define-placeholder type:16pt {
+  font-size: 1rem;
+}
+@define-placeholder type:18pt {
+  font-size: 1.125rem;
+}
+@define-placeholder type:20pt {
+  font-size: 1.25rem;
+}
+
+@define-placeholder type:normal {
+  font-weight: 400;
+}
+@define-placeholder type:medium {
+  font-weight: 500;
+}
+@define-placeholder type:bold {
+  font-weight: 700;
+}
+@define-placeholder type:small-caps {
+  font-variant: small-caps;
+}
+@define-placeholder type:upcase {
+  text-transform: uppercase;
+}
+
+@define-placeholder type:sans {
+  font-family: "Avenir Next", "Arial Black";
+}
+
+@define-placeholder type:logo {
+  font-family: "Avenir Next", "Arial Black";
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+@define-placeholder type:heading {
+  font-family: "Avenir Next", "Arial Black";
+  font-weight: 400;
+  font-size: 1.2rem;
+}

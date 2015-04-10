@@ -1,13 +1,9 @@
 .Frame {
-  display: flex;
-  flex-wrap: wrap;
+  @trait(flex: wrap);
 
   > header {
-    @trait(color: inverted, type: logo);
+    @trait(color: inverted, type: logo, layout: p1);
     width: 100%;
-    padding: 1rem;
-    text-transform: uppercase;
-    font-weight: 700;
   }
 }
 

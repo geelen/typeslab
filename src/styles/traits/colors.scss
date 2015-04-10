@@ -1,8 +1,15 @@
+@define-placeholder color {
+}
 @define-placeholder color:default {
   background-color: $light-text;
   color: $dark-background;
 }
 @define-placeholder color:inverted {
   background-color: $dark-background;
+  color: $light-text;
+}
+
+@define-placeholder color:recessed {
+  background-color: $borders;
   color: $light-text;
 }
