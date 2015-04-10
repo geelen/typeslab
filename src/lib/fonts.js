@@ -1,12 +1,12 @@
 export default [
   {
     main: {
-      local: ['Avenir Next', 'Arial Black'],
+      local: ['Avenir Next', 'Arial Black', 'sans-serif'],
       weight: 900,
       caps: true
     },
     alt: {
-      local: ['Georgia', 'Times New Roman'],
+      local: ['Georgia', 'Times New Roman', 'serif'],
       weight: 400,
       italic: true
     }

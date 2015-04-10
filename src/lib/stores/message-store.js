@@ -4,7 +4,7 @@ export default class MessageStore extends Store {
   constructor(flux) {
     super()
 
-    const messageActions = flux.getActions('messages')
+    const messageActions = flux.getActions('message')
     this.register(messageActions.changeMessage, this.handleChangedMessage)
     this.register(messageActions.imageRendered, this.handleNewImage)
     this.state = {

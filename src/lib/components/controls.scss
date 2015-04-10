@@ -1,11 +1,14 @@
 .Controls {
-  @trait(color: default, layout: p1);
+  @trait (color: default, layout: p1);
   width: 320px;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 
   > * {
-    @trait(layout: pb1);
+    @trait (layout: pb1);
   }
   > h2 {
-    @trait(type: 18pt medium, color: default);
+    @trait (type: 18pt medium, color: default);
   }
 }

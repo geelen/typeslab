@@ -30,7 +30,7 @@ export default class Output extends React.Component {
 
   //componentDidUpdate() {
   //  requestAnimationFrame(_ => {
-  //    this.context.flux.getActions('messages').imageRendered(this.canvas.toDataURL())
+  //    this.context.flux.getActions('message').imageRendered(this.canvas.toDataURL())
   //  })
   //}
 
