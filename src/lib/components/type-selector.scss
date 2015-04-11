@@ -1,0 +1,14 @@
+.TypeSelector {
+  text-align: center;
+  > li {
+    @trait (layout: m0.25 pl0.5 pr0.5, flex: inline);
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    > span {
+      @trait (layout: p0.5);
+      &:first-child {
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}

@@ -26,7 +26,6 @@ export default class FontsActions extends Actions {
       googleFonts = F.filter(isGoogle, Fonts),
       toGoogleName = f => `${f.google}:${f.weight}${f.italic ? 'italic' : ''}`
     googleFonts.forEach(font => fonts.push(toGoogleName(font.main), toGoogleName(font.alt)))
-    console.log(fonts)
     WebFont.load({
       classes: false,
       google: {

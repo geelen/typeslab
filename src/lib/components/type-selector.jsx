@@ -1,6 +1,7 @@
 import React from 'react'
+import './type-selector.scss!post-css'
 
-export default class FontSelector extends React.Component {
+export default class TypeSelector extends React.Component {
   componentWillMount() {
     this.fontsActions = this.props.flux.getActions('fonts')
     this.fontsActions.loadAllFonts()
@@ -9,16 +10,16 @@ export default class FontSelector extends React.Component {
   chooseFont(font) {
     this.fontsActions.chooseFont(font)
   }
+
   render() {
-    return <div>{
+    return <ul className="TypeSelector">{
       this.props.loadedFonts.map(f =>
-        <div onClick={this.chooseFont.bind(this, f)}>
-          <span style={this.getTextStyle(f.main)}>{f.main.name}</span>
-          +
-          <span style={this.getTextStyle(f.alt)}>{f.alt.name}</span>
-          </div>
+          <li onClick={this.chooseFont.bind(this, f)}>
+            <span style={this.getTextStyle(f.main)}>{f.main.name}</span>
+            <span style={this.getTextStyle(f.alt)}>{f.alt.name}</span>
+          </li>
       )
-    }</div>
+    }</ul>
   }
 
   getTextStyle(font) {

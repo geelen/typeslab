@@ -35,7 +35,6 @@ export default class Output extends React.Component {
   render() {
     let lines = this.layoutLines(this.props.lines),
       text = 'typeslab.com'
-    console.log(this.props.chosenColor)
     return <div className='Output' style={{backgroundColor: this.props.chosenColor.background}}>
       <Surface ref="surface" width={this.props.width + this.spacing * 2} height={lines.totalHeight + this.spacing} top={0} left={0} style={{backgroundColor: this.props.chosenColor.background}}>
         <Layer style={this.getBorderStyle(lines.totalHeight)}/>
@@ -55,13 +54,13 @@ export default class Output extends React.Component {
         let text = line, font, lineHeightFactor, prePaddingFactor
         if (!text.match(/^!/)) {
           font = this.props.chosenFont.main
-          lineHeightFactor = 1.05
-          prePaddingFactor = 0
+          lineHeightFactor = this.props.chosenFont.main.lineHeightFactor || 1.05
+          prePaddingFactor = this.props.chosenFont.main.prePaddingFactor || 0
         } else {
           text = text.replace(/^!/, '')
           font = this.props.chosenFont.alt
-          lineHeightFactor = 1.5
-          prePaddingFactor = 0.1
+          lineHeightFactor = this.props.chosenFont.alt.lineHeightFactor || 1.4
+          prePaddingFactor = this.props.chosenFont.alt.prePaddingFactor || 0.05
         }
         text = font.caps ? text.toUpperCase() : text
         let fontFace = getFontFace(font),

@@ -1,26 +1,11 @@
 import React from 'react'
 import './color-selector.scss!post-css'
+import Colors from '../colors'
 
 export default class ColorSelector extends React.Component {
   constructor() {
     this.state = {
-      options: [{
-        name: "Default",
-        foreground: 'black',
-        background: 'white'
-      }, {
-        name: "Inverted",
-        foreground: 'white',
-        background: 'black'
-      }, {
-        name: "Sienna",
-        foreground: 'black',
-        background: 'rgb(242,70,17)'
-      }, {
-        name: "Albatross",
-        foreground: 'rgb(202,58,53)',
-        background: 'rgb(208,210,207)'
-      }]
+      options: Colors
     }
   }
 
