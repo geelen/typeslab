@@ -34,4 +34,12 @@ export default [{
   name: "<a>",
   foreground: 'hsl(232, 77%, 39%)',
   background: 'hsl(40, 39%, 95%)'
+}, {
+  name: "Scroll",
+  foreground: 'hsl(0, 0%, 9%)',
+  background: 'hsl(35, 46%, 87%)'
+}, {
+  name: "Neo",
+  foreground: 'rgb(32,255,30)',
+  background: 'black'
 }]

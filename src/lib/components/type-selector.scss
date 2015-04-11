@@ -1,7 +1,7 @@
 .TypeSelector {
   text-align: center;
   > li {
-    @trait (layout: m0.25 pl0.5 pr0.5, flex: inline);
+    @trait (layout: m0.25 pl0.25 pr0.25, flex: inline align-baseline);
     box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.1);
     border-radius: 0.25rem;
     > span {
@@ -10,5 +10,9 @@
         border-right: 1px solid rgba(0, 0, 0, 0.1);
       }
     }
+  }
+  > span {
+    @trait (layout: p1);
+    display: block;
   }
 }

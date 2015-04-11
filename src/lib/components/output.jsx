@@ -51,28 +51,28 @@ export default class Output extends React.Component {
       sizedLines = []
     if (this.props.chosenFont) {
       sizedLines = lines.map(line => {
-        let text = line, font, lineHeightFactor, prePaddingFactor
+        let text = line, font, defaultLH, defaultPP
         if (!text.match(/^!/)) {
           font = this.props.chosenFont.main
-          lineHeightFactor = this.props.chosenFont.main.lineHeightFactor || 1.05
-          prePaddingFactor = this.props.chosenFont.main.prePaddingFactor || 0
+          defaultLH = 1.35
+          defaultPP = 0.15
         } else {
           text = text.replace(/^!/, '')
           font = this.props.chosenFont.alt
-          lineHeightFactor = this.props.chosenFont.alt.lineHeightFactor || 1.4
-          prePaddingFactor = this.props.chosenFont.alt.prePaddingFactor || 0.05
+          defaultLH = 1.5
+          defaultPP = 0.15
         }
         text = font.caps ? text.toUpperCase() : text
         let fontFace = getFontFace(font),
           measurements = measureText(text, 9999, fontFace, 12, 15),
           factor = this.props.width / measurements.width,
           fontSize = Math.min(300, 12 * factor),
-          lineHeight = fontSize * lineHeightFactor,
+          lineHeight = fontSize * (typeof font.lineHeightFactor == "undefined" ? defaultLH : font.lineHeightFactor),
           style = {
             fontSize,
             height: fontSize,
             lineHeight: fontSize,
-            top: totalHeight + lineHeight * prePaddingFactor,
+            top: totalHeight + lineHeight * (typeof font.lineHeightFactor == "undefined" ? defaultPP : font.prePaddingFactor),
             width: 500 + 2 * this.spacing,
             fontFace,
             left: 0,

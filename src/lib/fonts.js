@@ -4,8 +4,8 @@ export default [
       local: ['Avenir Next', 'Arial Black', 'sans-serif'],
       weight: 900,
       caps: true,
-      lineHeightFactor: undefined,
-      prePaddingFactor: undefined
+      lineHeightFactor: 1.05,
+      prePaddingFactor: 0
     },
     alt: {
       local: ['Georgia', 'Times New Roman', 'serif'],
@@ -67,8 +67,8 @@ export default [
       weight: 700,
       italic: true,
       caps: true,
-      lineHeightFactor: undefined,
-      prePaddingFactor: undefined
+      lineHeightFactor: 1.1,
+      prePaddingFactor: -0.05
     },
     alt: {
       google: 'Open Sans',
@@ -79,33 +79,18 @@ export default [
   },
   {
     main: {
-      google: 'Grativas One',
-      weight: 700,
-      caps: true,
-      lineHeightFactor: undefined,
-      prePaddingFactor: undefined
-    },
-    alt: {
-      google: 'Lato',
-      weight: 300,
-      lineHeightFactor: undefined,
-      prePaddingFactor: undefined
-    }
-  },
-  {
-    main: {
       google: 'Playfair Display',
       weight: 900,
       caps: true,
       italic: true,
-      lineHeightFactor: undefined,
-      prePaddingFactor: undefined
+      lineHeightFactor: 1.35,
+      prePaddingFactor: 0.15
     },
     alt: {
       google: 'Lato',
-      weight: 300,
-      lineHeightFactor: undefined,
-      prePaddingFactor: undefined
+      weight: 100,
+      lineHeightFactor: 1.3,
+      prePaddingFactor: 0.0
     }
   }
 ]

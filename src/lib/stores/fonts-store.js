@@ -7,8 +7,10 @@ export default class FontsStore extends Store {
     const fontsActions = flux.getActions('fonts')
     this.register(fontsActions.fontLoaded, this.handleFontLoaded)
     this.register(fontsActions.chooseFont, this.handleChosenFont)
+    this.register(fontsActions.fontLoadingFinished, this.finishLoading)
     this.state = {
-      loadedFonts: []
+      loadedFonts: [],
+      stillLoading: true
     }
   }
 
@@ -22,6 +24,13 @@ export default class FontsStore extends Store {
   handleChosenFont(font) {
     this.setState({
       chosenFont: font
+    })
+  }
+
+  finishLoading() {
+    console.log("finished!")
+    this.setState({
+      stillLoading: false
     })
   }
 }

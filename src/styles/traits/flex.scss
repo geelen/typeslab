@@ -27,6 +27,9 @@
 @define-placeholder flex:align-center {
   align-items: center;
 }
+@define-placeholder flex:align-baseline {
+  align-items: baseline;
+}
 
 @define-placeholder flex-child {
 }

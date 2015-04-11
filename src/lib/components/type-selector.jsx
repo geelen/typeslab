@@ -19,7 +19,7 @@ export default class TypeSelector extends React.Component {
             <span style={this.getTextStyle(f.alt)}>{f.alt.name}</span>
           </li>
       )
-    }</ul>
+    }{ this.props.stillLoading ? "Loading..." : "" }</ul>
   }
 
   getTextStyle(font) {
