@@ -3,6 +3,7 @@ import Surface from 'react-canvas/lib/Surface'
 import Layer from 'react-canvas/lib/Layer'
 import Text from 'react-canvas/lib/Text'
 import FontFace from 'react-canvas/lib/FontFace'
+import Share from './share.jsx!'
 import measureText from 'react-canvas/lib/measureText'
 import './output.scss!post-css'
 
@@ -29,7 +30,9 @@ export default class Output extends React.Component {
   }
 
   componentDidMount() {
-    this.canvas = this.refs.surface.getDOMNode()
+    this.setState({
+      canvas: this.refs.surface.getDOMNode()
+    })
   }
 
   render() {
@@ -43,6 +46,7 @@ export default class Output extends React.Component {
         })}
         <Text style={this.getByLineStyle(text, lines.totalHeight)}>{text}</Text>
       </Surface>
+      <Share canvas={this.state.canvas}/>
     </div>
   }
 

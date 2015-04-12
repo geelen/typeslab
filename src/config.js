@@ -20,6 +20,7 @@ System.config({
     "autoprefixer-core": "npm:autoprefixer-core@5.1.8",
     "babel": "npm:babel@4.7.16",
     "babel-runtime": "npm:babel-runtime@4.7.16",
+    "blueimp-canvas-to-blob": "npm:blueimp-canvas-to-blob@2.1.1",
     "caniuse-db": "npm:caniuse-db@1.0.30000111",
     "fkit": "npm:fkit@0.16.2",
     "flummox": "npm:flummox@3.5.0",
