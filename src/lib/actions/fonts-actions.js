@@ -1,5 +1,5 @@
 import { Actions } from 'flummox'
-import Fonts from '../fonts'
+import TypePairings from '../type-pairings'
 import FontDetect from 'FontDetect/lib/fontdetect'
 import F from 'fkit'
 import 'webfontloader'
@@ -14,7 +14,7 @@ export default class FontsActions extends Actions {
 
   loadLocalFonts() {
     let isLocal = font => font.main.local && font.alt.local
-    F.filter(isLocal, Fonts).forEach(font => {
+    F.filter(isLocal, TypePairings).forEach(font => {
       let isLoaded = f => FontDetect.isFontLoaded(f)
       font.main.name = F.find(isLoaded, font.main.local) || 'sans-serif'
       font.alt.name = F.find(isLoaded, font.alt.local) || 'serif'
@@ -27,7 +27,7 @@ export default class FontsActions extends Actions {
     return new Promise((resolve, reject) => {
       let isGoogle = font => font.main.google && font.alt.google,
         fonts = [],
-        googleFonts = F.filter(isGoogle, Fonts),
+        googleFonts = F.filter(isGoogle, TypePairings),
         toGoogleName = f => `${f.google}:${f.weight}${f.italic ? 'italic' : ''}`
       googleFonts.forEach(font => fonts.push(toGoogleName(font.main), toGoogleName(font.alt)))
       WebFont.load({
