@@ -21,6 +21,8 @@ export default class Frame extends React.Component {
       </main>
       <footer>
         <p>Made with &lt;3 by <a href="http://glenmaddern.com" target="_blank">Glen Maddern</a></p>
+        {' '}
+        <p>View source <a target="_blank" href="https://github.com/geelen/typeslab">on GitHub</a></p>
       </footer>
     </div>
   }

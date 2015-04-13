@@ -6,11 +6,12 @@
     @trait(color: inverted, type: logo, layout: p1);
   }
   > footer {
-    @trait(color: inverted, type: footer, layout: p1);
+    @trait(flex: wrap center, color: inverted, type: footer, layout: p1);
     > p {
+      @trait(layout: p0.25 pr1 pl1);
       text-align: center;
       > a {
-        @trait(link: inline);
+        @trait(link: inline, type: unbroken);
       }
     }
   }

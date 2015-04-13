@@ -20,6 +20,9 @@
 @define-mixin flex:center {
   justify-content: center;
 }
+@define-mixin flex:space-around {
+  justify-content: space-around;
+}
 
 @define-mixin flex:align-start {
   align-items: flex-start;

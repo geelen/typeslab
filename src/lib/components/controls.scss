@@ -4,6 +4,9 @@
   @media screen and (max-width: 600px) {
     width: 100%;
   }
+  @media screen and (min-width: 1200px) {
+    width: 480px;
+  }
 
   > h2 {
     @trait (type: 18pt medium, layout: mt2 mb1);

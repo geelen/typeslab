@@ -1,5 +1,5 @@
 .Share {
-  @trait(layout: pt2, flex: center wrap align-center);
+  @trait(layout: pt2 pb2, flex: center wrap align-center);
   > p {
     width: 100%;
     @trait(layout: pb0.5);

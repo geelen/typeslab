@@ -29,6 +29,9 @@
 @define-mixin type:upcase {
   text-transform: uppercase;
 }
+@define-mixin type:unbroken {
+  white-space: nowrap;
+}
 
 @define-mixin type:sans {
   font-family: "Avenir Next", "Arial Black";
@@ -53,4 +56,5 @@
   font-size: 0.8rem;
   letter-spacing: 2px;
   text-transform: uppercase;
+  line-height: 1.4;
 }
