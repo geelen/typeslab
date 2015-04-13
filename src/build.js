@@ -1,19 +1,18 @@
 "format register";
-System.register("styles/core.scss!post-css", [], false, function(__require, __exports, __module) {
-  System.get("@@global-helpers").prepareGlobal(__module.id, []);
-  (function() {
-    (function(css) {
-      var blob = new Blob([css], {type: 'text/css'}),
-          url = URL.createObjectURL(blob),
-          elem = document.createElement('link'),
-          head = document.getElementsByTagName('head')[0];
-      linkElement.setAttribute('href', url);
-      linkElement.setAttribute('rel', 'stylesheet');
-      head.appendChild(linkElement);
-    })("/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\n\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n\tdisplay: block;\n}\nbody {\n\tline-height: 1;\n}\nol, ul {\n\tlist-style: none;\n}\nblockquote, q {\n\tquotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n\tcontent: '';\n\tcontent: none;\n}\ntable {\n\tborder-collapse: collapse;\n\tborder-spacing: 0;\n}\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  background: #eee;\n}\n\n.flex {\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n}\n.flex.wrap {\n\t-webkit-flex-wrap: wrap;\n\t    -ms-flex-wrap: wrap;\n\t        flex-wrap: wrap;\n}\n");
-  }).call(System.global);
-  return System.get("@@global-helpers").retrieveGlobal(__module.id, false);
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 System.register("npm:process@0.10.1/browser", [], true, function(require, exports, module) {
   var global = System.global,
@@ -1764,7 +1763,7 @@ System.register("npm:react@0.13.1/lib/isTextInputElement", [], true, function(re
     'week': true
   };
   function isTextInputElement(elem) {
-    return linkElement && ((linkElement.nodeName === 'INPUT' && supportedInputTypes[linkElement.type] || linkElement.nodeName === 'TEXTAREA'));
+    return elem && ((elem.nodeName === 'INPUT' && supportedInputTypes[elem.type] || elem.nodeName === 'TEXTAREA'));
   }
   module.exports = isTextInputElement;
   global.define = __define;
@@ -3538,906 +3537,6 @@ System.register("npm:babel-runtime@4.7.16/helpers/create-class", [], true, funct
   exports.__esModule = true;
   global.define = __define;
   return module.exports;
-});
-
-System.register("npm:react@0.13.1/lib/ReactLink", ["npm:react@0.13.1/lib/React"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var React = require("npm:react@0.13.1/lib/React");
-  function ReactLink(value, requestChange) {
-    this.value = value;
-    this.requestChange = requestChange;
-  }
-  function createLinkTypeChecker(linkType) {
-    var shapes = {
-      value: typeof linkType === 'undefined' ? React.PropTypes.any.isRequired : linkType.isRequired,
-      requestChange: React.PropTypes.func.isRequired
-    };
-    return React.PropTypes.shape(shapes);
-  }
-  ReactLink.PropTypes = {link: createLinkTypeChecker};
-  module.exports = ReactLink;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:react@0.13.1/lib/ReactStateSetters", [], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var ReactStateSetters = {
-    createStateSetter: function(component, funcReturningState) {
-      return function(a, b, c, d, e, f) {
-        var partialState = funcReturningState.call(component, a, b, c, d, e, f);
-        if (partialState) {
-          component.setState(partialState);
-        }
-      };
-    },
-    createStateKeySetter: function(component, key) {
-      var cache = component.__keySetters || (component.__keySetters = {});
-      return cache[key] || (cache[key] = createStateKeySetter(component, key));
-    }
-  };
-  function createStateKeySetter(component, key) {
-    var partialState = {};
-    return function stateKeySetter(value) {
-      partialState[key] = value;
-      component.setState(partialState);
-    };
-  }
-  ReactStateSetters.Mixin = {
-    createStateSetter: function(funcReturningState) {
-      return ReactStateSetters.createStateSetter(this, funcReturningState);
-    },
-    createStateKeySetter: function(key) {
-      return ReactStateSetters.createStateKeySetter(this, key);
-    }
-  };
-  module.exports = ReactStateSetters;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:react@0.13.1/lib/ReactComponentWithPureRenderMixin", ["npm:react@0.13.1/lib/shallowEqual"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var shallowEqual = require("npm:react@0.13.1/lib/shallowEqual");
-  var ReactComponentWithPureRenderMixin = {shouldComponentUpdate: function(nextProps, nextState) {
-      return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
-    }};
-  module.exports = ReactComponentWithPureRenderMixin;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:react@0.13.1/lib/ReactTransitionChildMapping", ["npm:react@0.13.1/lib/ReactChildren", "npm:react@0.13.1/lib/ReactFragment"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var ReactChildren = require("npm:react@0.13.1/lib/ReactChildren");
-  var ReactFragment = require("npm:react@0.13.1/lib/ReactFragment");
-  var ReactTransitionChildMapping = {
-    getChildMapping: function(children) {
-      if (!children) {
-        return children;
-      }
-      return ReactFragment.extract(ReactChildren.map(children, function(child) {
-        return child;
-      }));
-    },
-    mergeChildMappings: function(prev, next) {
-      prev = prev || {};
-      next = next || {};
-      function getValueForKey(key) {
-        if (next.hasOwnProperty(key)) {
-          return next[key];
-        } else {
-          return prev[key];
-        }
-      }
-      var nextKeysPending = {};
-      var pendingKeys = [];
-      for (var prevKey in prev) {
-        if (next.hasOwnProperty(prevKey)) {
-          if (pendingKeys.length) {
-            nextKeysPending[prevKey] = pendingKeys;
-            pendingKeys = [];
-          }
-        } else {
-          pendingKeys.push(prevKey);
-        }
-      }
-      var i;
-      var childMapping = {};
-      for (var nextKey in next) {
-        if (nextKeysPending.hasOwnProperty(nextKey)) {
-          for (i = 0; i < nextKeysPending[nextKey].length; i++) {
-            var pendingNextKey = nextKeysPending[nextKey][i];
-            childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
-          }
-        }
-        childMapping[nextKey] = getValueForKey(nextKey);
-      }
-      for (i = 0; i < pendingKeys.length; i++) {
-        childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
-      }
-      return childMapping;
-    }
-  };
-  module.exports = ReactTransitionChildMapping;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:react@0.13.1/lib/joinClasses", [], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  function joinClasses(className) {
-    if (!className) {
-      className = '';
-    }
-    var nextClass;
-    var argLength = arguments.length;
-    if (argLength > 1) {
-      for (var ii = 1; ii < argLength; ii++) {
-        nextClass = arguments[ii];
-        if (nextClass) {
-          className = (className ? className + ' ' : '') + nextClass;
-        }
-      }
-    }
-    return className;
-  }
-  module.exports = joinClasses;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:react@0.13.1/lib/CSSCore", ["npm:react@0.13.1/lib/invariant", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    var invariant = require("npm:react@0.13.1/lib/invariant");
-    var CSSCore = {
-      addClass: function(element, className) {
-        ("production" !== process.env.NODE_ENV ? invariant(!/\s/.test(className), 'CSSCore.addClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(!/\s/.test(className)));
-        if (className) {
-          if (element.classList) {
-            element.classList.add(className);
-          } else if (!CSSCore.hasClass(element, className)) {
-            element.className = element.className + ' ' + className;
-          }
-        }
-        return element;
-      },
-      removeClass: function(element, className) {
-        ("production" !== process.env.NODE_ENV ? invariant(!/\s/.test(className), 'CSSCore.removeClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(!/\s/.test(className)));
-        if (className) {
-          if (element.classList) {
-            element.classList.remove(className);
-          } else if (CSSCore.hasClass(element, className)) {
-            element.className = element.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)', 'g'), '$1').replace(/\s+/g, ' ').replace(/^\s*|\s*$/g, '');
-          }
-        }
-        return element;
-      },
-      conditionClass: function(element, className, bool) {
-        return (bool ? CSSCore.addClass : CSSCore.removeClass)(element, className);
-      },
-      hasClass: function(element, className) {
-        ("production" !== process.env.NODE_ENV ? invariant(!/\s/.test(className), 'CSS.hasClass takes only a single class name.') : invariant(!/\s/.test(className)));
-        if (element.classList) {
-          return !!className && element.classList.contains(className);
-        }
-        return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
-      }
-    };
-    module.exports = CSSCore;
-  })(require("github:jspm/nodelibs-process@0.1.1"));
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:react@0.13.1/lib/ReactTransitionEvents", ["npm:react@0.13.1/lib/ExecutionEnvironment"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var ExecutionEnvironment = require("npm:react@0.13.1/lib/ExecutionEnvironment");
-  var EVENT_NAME_MAP = {
-    transitionend: {
-      'transition': 'transitionend',
-      'WebkitTransition': 'webkitTransitionEnd',
-      'MozTransition': 'mozTransitionEnd',
-      'OTransition': 'oTransitionEnd',
-      'msTransition': 'MSTransitionEnd'
-    },
-    animationend: {
-      'animation': 'animationend',
-      'WebkitAnimation': 'webkitAnimationEnd',
-      'MozAnimation': 'mozAnimationEnd',
-      'OAnimation': 'oAnimationEnd',
-      'msAnimation': 'MSAnimationEnd'
-    }
-  };
-  var endEvents = [];
-  function detectEvents() {
-    var testEl = document.createElement('div');
-    var style = testEl.style;
-    if (!('AnimationEvent' in window)) {
-      delete EVENT_NAME_MAP.animationend.animation;
-    }
-    if (!('TransitionEvent' in window)) {
-      delete EVENT_NAME_MAP.transitionend.transition;
-    }
-    for (var baseEventName in EVENT_NAME_MAP) {
-      var baseEvents = EVENT_NAME_MAP[baseEventName];
-      for (var styleName in baseEvents) {
-        if (styleName in style) {
-          endEvents.push(baseEvents[styleName]);
-          break;
-        }
-      }
-    }
-  }
-  if (ExecutionEnvironment.canUseDOM) {
-    detectEvents();
-  }
-  function addEventListener(node, eventName, eventListener) {
-    node.addEventListener(eventName, eventListener, false);
-  }
-  function removeEventListener(node, eventName, eventListener) {
-    node.removeEventListener(eventName, eventListener, false);
-  }
-  var ReactTransitionEvents = {
-    addEndEventListener: function(node, eventListener) {
-      if (endEvents.length === 0) {
-        window.setTimeout(eventListener, 0);
-        return ;
-      }
-      endEvents.forEach(function(endEvent) {
-        addEventListener(node, endEvent, eventListener);
-      });
-    },
-    removeEndEventListener: function(node, eventListener) {
-      if (endEvents.length === 0) {
-        return ;
-      }
-      endEvents.forEach(function(endEvent) {
-        removeEventListener(node, endEvent, eventListener);
-      });
-    }
-  };
-  module.exports = ReactTransitionEvents;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:react@0.13.1/lib/cx", ["npm:react@0.13.1/lib/warning", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var warning = require("npm:react@0.13.1/lib/warning");
-    var warned = false;
-    function cx(classNames) {
-      if ("production" !== process.env.NODE_ENV) {
-        ("production" !== process.env.NODE_ENV ? warning(warned, 'React.addons.classSet will be deprecated in a future version. See ' + 'http://fb.me/react-addons-classset') : null);
-        warned = true;
-      }
-      if (typeof classNames == 'object') {
-        return Object.keys(classNames).filter(function(className) {
-          return classNames[className];
-        }).join(' ');
-      } else {
-        return Array.prototype.join.call(arguments, ' ');
-      }
-    }
-    module.exports = cx;
-  })(require("github:jspm/nodelibs-process@0.1.1"));
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:react@0.13.1/lib/update", ["npm:react@0.13.1/lib/Object.assign", "npm:react@0.13.1/lib/keyOf", "npm:react@0.13.1/lib/invariant", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var assign = require("npm:react@0.13.1/lib/Object.assign");
-    var keyOf = require("npm:react@0.13.1/lib/keyOf");
-    var invariant = require("npm:react@0.13.1/lib/invariant");
-    function shallowCopy(x) {
-      if (Array.isArray(x)) {
-        return x.concat();
-      } else if (x && typeof x === 'object') {
-        return assign(new x.constructor(), x);
-      } else {
-        return x;
-      }
-    }
-    var COMMAND_PUSH = keyOf({$push: null});
-    var COMMAND_UNSHIFT = keyOf({$unshift: null});
-    var COMMAND_SPLICE = keyOf({$splice: null});
-    var COMMAND_SET = keyOf({$set: null});
-    var COMMAND_MERGE = keyOf({$merge: null});
-    var COMMAND_APPLY = keyOf({$apply: null});
-    var ALL_COMMANDS_LIST = [COMMAND_PUSH, COMMAND_UNSHIFT, COMMAND_SPLICE, COMMAND_SET, COMMAND_MERGE, COMMAND_APPLY];
-    var ALL_COMMANDS_SET = {};
-    ALL_COMMANDS_LIST.forEach(function(command) {
-      ALL_COMMANDS_SET[command] = true;
-    });
-    function invariantArrayCase(value, spec, command) {
-      ("production" !== process.env.NODE_ENV ? invariant(Array.isArray(value), 'update(): expected target of %s to be an array; got %s.', command, value) : invariant(Array.isArray(value)));
-      var specValue = spec[command];
-      ("production" !== process.env.NODE_ENV ? invariant(Array.isArray(specValue), 'update(): expected spec of %s to be an array; got %s. ' + 'Did you forget to wrap your parameter in an array?', command, specValue) : invariant(Array.isArray(specValue)));
-    }
-    function update(value, spec) {
-      ("production" !== process.env.NODE_ENV ? invariant(typeof spec === 'object', 'update(): You provided a key path to update() that did not contain one ' + 'of %s. Did you forget to include {%s: ...}?', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : invariant(typeof spec === 'object'));
-      if (spec.hasOwnProperty(COMMAND_SET)) {
-        ("production" !== process.env.NODE_ENV ? invariant(Object.keys(spec).length === 1, 'Cannot have more than one key in an object with %s', COMMAND_SET) : invariant(Object.keys(spec).length === 1));
-        return spec[COMMAND_SET];
-      }
-      var nextValue = shallowCopy(value);
-      if (spec.hasOwnProperty(COMMAND_MERGE)) {
-        var mergeObj = spec[COMMAND_MERGE];
-        ("production" !== process.env.NODE_ENV ? invariant(mergeObj && typeof mergeObj === 'object', 'update(): %s expects a spec of type \'object\'; got %s', COMMAND_MERGE, mergeObj) : invariant(mergeObj && typeof mergeObj === 'object'));
-        ("production" !== process.env.NODE_ENV ? invariant(nextValue && typeof nextValue === 'object', 'update(): %s expects a target of type \'object\'; got %s', COMMAND_MERGE, nextValue) : invariant(nextValue && typeof nextValue === 'object'));
-        assign(nextValue, spec[COMMAND_MERGE]);
-      }
-      if (spec.hasOwnProperty(COMMAND_PUSH)) {
-        invariantArrayCase(value, spec, COMMAND_PUSH);
-        spec[COMMAND_PUSH].forEach(function(item) {
-          nextValue.push(item);
-        });
-      }
-      if (spec.hasOwnProperty(COMMAND_UNSHIFT)) {
-        invariantArrayCase(value, spec, COMMAND_UNSHIFT);
-        spec[COMMAND_UNSHIFT].forEach(function(item) {
-          nextValue.unshift(item);
-        });
-      }
-      if (spec.hasOwnProperty(COMMAND_SPLICE)) {
-        ("production" !== process.env.NODE_ENV ? invariant(Array.isArray(value), 'Expected %s target to be an array; got %s', COMMAND_SPLICE, value) : invariant(Array.isArray(value)));
-        ("production" !== process.env.NODE_ENV ? invariant(Array.isArray(spec[COMMAND_SPLICE]), 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(Array.isArray(spec[COMMAND_SPLICE])));
-        spec[COMMAND_SPLICE].forEach(function(args) {
-          ("production" !== process.env.NODE_ENV ? invariant(Array.isArray(args), 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(Array.isArray(args)));
-          nextValue.splice.apply(nextValue, args);
-        });
-      }
-      if (spec.hasOwnProperty(COMMAND_APPLY)) {
-        ("production" !== process.env.NODE_ENV ? invariant(typeof spec[COMMAND_APPLY] === 'function', 'update(): expected spec of %s to be a function; got %s.', COMMAND_APPLY, spec[COMMAND_APPLY]) : invariant(typeof spec[COMMAND_APPLY] === 'function'));
-        nextValue = spec[COMMAND_APPLY](nextValue);
-      }
-      for (var k in spec) {
-        if (!(ALL_COMMANDS_SET.hasOwnProperty(k) && ALL_COMMANDS_SET[k])) {
-          nextValue[k] = update(value[k], spec[k]);
-        }
-      }
-      return nextValue;
-    }
-    module.exports = update;
-  })(require("github:jspm/nodelibs-process@0.1.1"));
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:react@0.13.1/lib/ReactTestUtils", ["npm:react@0.13.1/lib/EventConstants", "npm:react@0.13.1/lib/EventPluginHub", "npm:react@0.13.1/lib/EventPropagators", "npm:react@0.13.1/lib/React", "npm:react@0.13.1/lib/ReactElement", "npm:react@0.13.1/lib/ReactEmptyComponent", "npm:react@0.13.1/lib/ReactBrowserEventEmitter", "npm:react@0.13.1/lib/ReactCompositeComponent", "npm:react@0.13.1/lib/ReactInstanceHandles", "npm:react@0.13.1/lib/ReactInstanceMap", "npm:react@0.13.1/lib/ReactMount", "npm:react@0.13.1/lib/ReactUpdates", "npm:react@0.13.1/lib/SyntheticEvent", "npm:react@0.13.1/lib/Object.assign"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var EventConstants = require("npm:react@0.13.1/lib/EventConstants");
-  var EventPluginHub = require("npm:react@0.13.1/lib/EventPluginHub");
-  var EventPropagators = require("npm:react@0.13.1/lib/EventPropagators");
-  var React = require("npm:react@0.13.1/lib/React");
-  var ReactElement = require("npm:react@0.13.1/lib/ReactElement");
-  var ReactEmptyComponent = require("npm:react@0.13.1/lib/ReactEmptyComponent");
-  var ReactBrowserEventEmitter = require("npm:react@0.13.1/lib/ReactBrowserEventEmitter");
-  var ReactCompositeComponent = require("npm:react@0.13.1/lib/ReactCompositeComponent");
-  var ReactInstanceHandles = require("npm:react@0.13.1/lib/ReactInstanceHandles");
-  var ReactInstanceMap = require("npm:react@0.13.1/lib/ReactInstanceMap");
-  var ReactMount = require("npm:react@0.13.1/lib/ReactMount");
-  var ReactUpdates = require("npm:react@0.13.1/lib/ReactUpdates");
-  var SyntheticEvent = require("npm:react@0.13.1/lib/SyntheticEvent");
-  var assign = require("npm:react@0.13.1/lib/Object.assign");
-  var topLevelTypes = EventConstants.topLevelTypes;
-  function Event(suffix) {}
-  var ReactTestUtils = {
-    renderIntoDocument: function(instance) {
-      var div = document.createElement('div');
-      return React.render(instance, div);
-    },
-    isElement: function(element) {
-      return ReactElement.isValidElement(element);
-    },
-    isElementOfType: function(inst, convenienceConstructor) {
-      return (ReactElement.isValidElement(inst) && inst.type === convenienceConstructor);
-    },
-    isDOMComponent: function(inst) {
-      return !!(inst && inst.tagName && inst.getDOMNode);
-    },
-    isDOMComponentElement: function(inst) {
-      return !!(inst && ReactElement.isValidElement(inst) && !!inst.tagName);
-    },
-    isCompositeComponent: function(inst) {
-      return typeof inst.render === 'function' && typeof inst.setState === 'function';
-    },
-    isCompositeComponentWithType: function(inst, type) {
-      return !!(ReactTestUtils.isCompositeComponent(inst) && (inst.constructor === type));
-    },
-    isCompositeComponentElement: function(inst) {
-      if (!ReactElement.isValidElement(inst)) {
-        return false;
-      }
-      var prototype = inst.type.prototype;
-      return (typeof prototype.render === 'function' && typeof prototype.setState === 'function');
-    },
-    isCompositeComponentElementWithType: function(inst, type) {
-      return !!(ReactTestUtils.isCompositeComponentElement(inst) && (inst.constructor === type));
-    },
-    getRenderedChildOfCompositeComponent: function(inst) {
-      if (!ReactTestUtils.isCompositeComponent(inst)) {
-        return null;
-      }
-      var internalInstance = ReactInstanceMap.get(inst);
-      return internalInstance._renderedComponent.getPublicInstance();
-    },
-    findAllInRenderedTree: function(inst, test) {
-      if (!inst) {
-        return [];
-      }
-      var ret = test(inst) ? [inst] : [];
-      if (ReactTestUtils.isDOMComponent(inst)) {
-        var internalInstance = ReactInstanceMap.get(inst);
-        var renderedChildren = internalInstance._renderedComponent._renderedChildren;
-        var key;
-        for (key in renderedChildren) {
-          if (!renderedChildren.hasOwnProperty(key)) {
-            continue;
-          }
-          if (!renderedChildren[key].getPublicInstance) {
-            continue;
-          }
-          ret = ret.concat(ReactTestUtils.findAllInRenderedTree(renderedChildren[key].getPublicInstance(), test));
-        }
-      } else if (ReactTestUtils.isCompositeComponent(inst)) {
-        ret = ret.concat(ReactTestUtils.findAllInRenderedTree(ReactTestUtils.getRenderedChildOfCompositeComponent(inst), test));
-      }
-      return ret;
-    },
-    scryRenderedDOMComponentsWithClass: function(root, className) {
-      return ReactTestUtils.findAllInRenderedTree(root, function(inst) {
-        var instClassName = inst.props.className;
-        return ReactTestUtils.isDOMComponent(inst) && ((instClassName && (' ' + instClassName + ' ').indexOf(' ' + className + ' ') !== -1));
-      });
-    },
-    findRenderedDOMComponentWithClass: function(root, className) {
-      var all = ReactTestUtils.scryRenderedDOMComponentsWithClass(root, className);
-      if (all.length !== 1) {
-        throw new Error('Did not find exactly one match ' + '(found: ' + all.length + ') for class:' + className);
-      }
-      return all[0];
-    },
-    scryRenderedDOMComponentsWithTag: function(root, tagName) {
-      return ReactTestUtils.findAllInRenderedTree(root, function(inst) {
-        return ReactTestUtils.isDOMComponent(inst) && inst.tagName === tagName.toUpperCase();
-      });
-    },
-    findRenderedDOMComponentWithTag: function(root, tagName) {
-      var all = ReactTestUtils.scryRenderedDOMComponentsWithTag(root, tagName);
-      if (all.length !== 1) {
-        throw new Error('Did not find exactly one match for tag:' + tagName);
-      }
-      return all[0];
-    },
-    scryRenderedComponentsWithType: function(root, componentType) {
-      return ReactTestUtils.findAllInRenderedTree(root, function(inst) {
-        return ReactTestUtils.isCompositeComponentWithType(inst, componentType);
-      });
-    },
-    findRenderedComponentWithType: function(root, componentType) {
-      var all = ReactTestUtils.scryRenderedComponentsWithType(root, componentType);
-      if (all.length !== 1) {
-        throw new Error('Did not find exactly one match for componentType:' + componentType);
-      }
-      return all[0];
-    },
-    mockComponent: function(module, mockTagName) {
-      mockTagName = mockTagName || module.mockTagName || "div";
-      module.prototype.render.mockImplementation(function() {
-        return React.createElement(mockTagName, null, this.props.children);
-      });
-      return this;
-    },
-    simulateNativeEventOnNode: function(topLevelType, node, fakeNativeEvent) {
-      fakeNativeEvent.target = node;
-      ReactBrowserEventEmitter.ReactEventListener.dispatchEvent(topLevelType, fakeNativeEvent);
-    },
-    simulateNativeEventOnDOMComponent: function(topLevelType, comp, fakeNativeEvent) {
-      ReactTestUtils.simulateNativeEventOnNode(topLevelType, comp.getDOMNode(), fakeNativeEvent);
-    },
-    nativeTouchData: function(x, y) {
-      return {touches: [{
-          pageX: x,
-          pageY: y
-        }]};
-    },
-    createRenderer: function() {
-      return new ReactShallowRenderer();
-    },
-    Simulate: null,
-    SimulateNative: {}
-  };
-  var ReactShallowRenderer = function() {
-    this._instance = null;
-  };
-  ReactShallowRenderer.prototype.getRenderOutput = function() {
-    return ((this._instance && this._instance._renderedComponent && this._instance._renderedComponent._renderedOutput) || null);
-  };
-  var NoopInternalComponent = function(element) {
-    this._renderedOutput = element;
-    this._currentElement = element === null || element === false ? ReactEmptyComponent.emptyElement : element;
-  };
-  NoopInternalComponent.prototype = {
-    mountComponent: function() {},
-    receiveComponent: function(element) {
-      this._renderedOutput = element;
-      this._currentElement = element === null || element === false ? ReactEmptyComponent.emptyElement : element;
-    },
-    unmountComponent: function() {}
-  };
-  var ShallowComponentWrapper = function() {};
-  assign(ShallowComponentWrapper.prototype, ReactCompositeComponent.Mixin, {
-    _instantiateReactComponent: function(element) {
-      return new NoopInternalComponent(element);
-    },
-    _replaceNodeWithMarkupByID: function() {},
-    _renderValidatedComponent: ReactCompositeComponent.Mixin._renderValidatedComponentWithoutOwnerOrContext
-  });
-  ReactShallowRenderer.prototype.render = function(element, context) {
-    var transaction = ReactUpdates.ReactReconcileTransaction.getPooled();
-    this._render(element, transaction, context);
-    ReactUpdates.ReactReconcileTransaction.release(transaction);
-  };
-  ReactShallowRenderer.prototype.unmount = function() {
-    if (this._instance) {
-      this._instance.unmountComponent();
-    }
-  };
-  ReactShallowRenderer.prototype._render = function(element, transaction, context) {
-    if (!this._instance) {
-      var rootID = ReactInstanceHandles.createReactRootID();
-      var instance = new ShallowComponentWrapper(element.type);
-      instance.construct(element);
-      instance.mountComponent(rootID, transaction, context);
-      this._instance = instance;
-    } else {
-      this._instance.receiveComponent(element, transaction, context);
-    }
-  };
-  function makeSimulator(eventType) {
-    return function(domComponentOrNode, eventData) {
-      var node;
-      if (ReactTestUtils.isDOMComponent(domComponentOrNode)) {
-        node = domComponentOrNode.getDOMNode();
-      } else if (domComponentOrNode.tagName) {
-        node = domComponentOrNode;
-      }
-      var fakeNativeEvent = new Event();
-      fakeNativeEvent.target = node;
-      var event = new SyntheticEvent(ReactBrowserEventEmitter.eventNameDispatchConfigs[eventType], ReactMount.getID(node), fakeNativeEvent);
-      assign(event, eventData);
-      EventPropagators.accumulateTwoPhaseDispatches(event);
-      ReactUpdates.batchedUpdates(function() {
-        EventPluginHub.enqueueEvents(event);
-        EventPluginHub.processEventQueue();
-      });
-    };
-  }
-  function buildSimulators() {
-    ReactTestUtils.Simulate = {};
-    var eventType;
-    for (eventType in ReactBrowserEventEmitter.eventNameDispatchConfigs) {
-      ReactTestUtils.Simulate[eventType] = makeSimulator(eventType);
-    }
-  }
-  var oldInjectEventPluginOrder = EventPluginHub.injection.injectEventPluginOrder;
-  EventPluginHub.injection.injectEventPluginOrder = function() {
-    oldInjectEventPluginOrder.apply(this, arguments);
-    buildSimulators();
-  };
-  var oldInjectEventPlugins = EventPluginHub.injection.injectEventPluginsByName;
-  EventPluginHub.injection.injectEventPluginsByName = function() {
-    oldInjectEventPlugins.apply(this, arguments);
-    buildSimulators();
-  };
-  buildSimulators();
-  function makeNativeSimulator(eventType) {
-    return function(domComponentOrNode, nativeEventData) {
-      var fakeNativeEvent = new Event(eventType);
-      assign(fakeNativeEvent, nativeEventData);
-      if (ReactTestUtils.isDOMComponent(domComponentOrNode)) {
-        ReactTestUtils.simulateNativeEventOnDOMComponent(eventType, domComponentOrNode, fakeNativeEvent);
-      } else if (!!domComponentOrNode.tagName) {
-        ReactTestUtils.simulateNativeEventOnNode(eventType, domComponentOrNode, fakeNativeEvent);
-      }
-    };
-  }
-  var eventType;
-  for (eventType in topLevelTypes) {
-    var convenienceName = eventType.indexOf('top') === 0 ? eventType.charAt(3).toLowerCase() + eventType.substr(4) : eventType;
-    ReactTestUtils.SimulateNative[convenienceName] = makeNativeSimulator(eventType);
-  }
-  module.exports = ReactTestUtils;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:eventemitter3@0.1.6/index", [], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  function EE(fn, context, once) {
-    this.fn = fn;
-    this.context = context;
-    this.once = once || false;
-  }
-  function EventEmitter() {}
-  EventEmitter.prototype._events = undefined;
-  EventEmitter.prototype.listeners = function listeners(event) {
-    if (!this._events || !this._events[event])
-      return [];
-    if (this._events[event].fn)
-      return [this._events[event].fn];
-    for (var i = 0,
-        l = this._events[event].length,
-        ee = new Array(l); i < l; i++) {
-      ee[i] = this._events[event][i].fn;
-    }
-    return ee;
-  };
-  EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
-    if (!this._events || !this._events[event])
-      return false;
-    var listeners = this._events[event],
-        len = arguments.length,
-        args,
-        i;
-    if ('function' === typeof listeners.fn) {
-      if (listeners.once)
-        this.removeListener(event, listeners.fn, true);
-      switch (len) {
-        case 1:
-          return listeners.fn.call(listeners.context), true;
-        case 2:
-          return listeners.fn.call(listeners.context, a1), true;
-        case 3:
-          return listeners.fn.call(listeners.context, a1, a2), true;
-        case 4:
-          return listeners.fn.call(listeners.context, a1, a2, a3), true;
-        case 5:
-          return listeners.fn.call(listeners.context, a1, a2, a3, a4), true;
-        case 6:
-          return listeners.fn.call(listeners.context, a1, a2, a3, a4, a5), true;
-      }
-      for (i = 1, args = new Array(len - 1); i < len; i++) {
-        args[i - 1] = arguments[i];
-      }
-      listeners.fn.apply(listeners.context, args);
-    } else {
-      var length = listeners.length,
-          j;
-      for (i = 0; i < length; i++) {
-        if (listeners[i].once)
-          this.removeListener(event, listeners[i].fn, true);
-        switch (len) {
-          case 1:
-            listeners[i].fn.call(listeners[i].context);
-            break;
-          case 2:
-            listeners[i].fn.call(listeners[i].context, a1);
-            break;
-          case 3:
-            listeners[i].fn.call(listeners[i].context, a1, a2);
-            break;
-          default:
-            if (!args)
-              for (j = 1, args = new Array(len - 1); j < len; j++) {
-                args[j - 1] = arguments[j];
-              }
-            listeners[i].fn.apply(listeners[i].context, args);
-        }
-      }
-    }
-    return true;
-  };
-  EventEmitter.prototype.on = function on(event, fn, context) {
-    var listener = new EE(fn, context || this);
-    if (!this._events)
-      this._events = {};
-    if (!this._events[event])
-      this._events[event] = listener;
-    else {
-      if (!this._events[event].fn)
-        this._events[event].push(listener);
-      else
-        this._events[event] = [this._events[event], listener];
-    }
-    return this;
-  };
-  EventEmitter.prototype.once = function once(event, fn, context) {
-    var listener = new EE(fn, context || this, true);
-    if (!this._events)
-      this._events = {};
-    if (!this._events[event])
-      this._events[event] = listener;
-    else {
-      if (!this._events[event].fn)
-        this._events[event].push(listener);
-      else
-        this._events[event] = [this._events[event], listener];
-    }
-    return this;
-  };
-  EventEmitter.prototype.removeListener = function removeListener(event, fn, once) {
-    if (!this._events || !this._events[event])
-      return this;
-    var listeners = this._events[event],
-        events = [];
-    if (fn) {
-      if (listeners.fn && (listeners.fn !== fn || (once && !listeners.once))) {
-        events.push(listeners);
-      }
-      if (!listeners.fn)
-        for (var i = 0,
-            length = listeners.length; i < length; i++) {
-          if (listeners[i].fn !== fn || (once && !listeners[i].once)) {
-            events.push(listeners[i]);
-          }
-        }
-    }
-    if (events.length) {
-      this._events[event] = events.length === 1 ? events[0] : events;
-    } else {
-      delete this._events[event];
-    }
-    return this;
-  };
-  EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
-    if (!this._events)
-      return this;
-    if (event)
-      delete this._events[event];
-    else
-      this._events = {};
-    return this;
-  };
-  EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
-  EventEmitter.prototype.addListener = EventEmitter.prototype.on;
-  EventEmitter.prototype.setMaxListeners = function setMaxListeners() {
-    return this;
-  };
-  EventEmitter.EventEmitter = EventEmitter;
-  EventEmitter.EventEmitter2 = EventEmitter;
-  EventEmitter.EventEmitter3 = EventEmitter;
-  module.exports = EventEmitter;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:object-assign@2.0.0/index", [], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  function ToObject(val) {
-    if (val == null) {
-      throw new TypeError('Object.assign cannot be called with null or undefined');
-    }
-    return Object(val);
-  }
-  module.exports = Object.assign || function(target, source) {
-    var from;
-    var keys;
-    var to = ToObject(target);
-    for (var s = 1; s < arguments.length; s++) {
-      from = arguments[s];
-      keys = Object.keys(Object(from));
-      for (var i = 0; i < keys.length; i++) {
-        to[keys[i]] = from[keys[i]];
-      }
-    }
-    return to;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:uniqueid@0.1.0/index", [], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var count = 0;
-  var id = module.exports = function(options) {
-    options = options || {};
-    var prefix = options.prefix;
-    var suffix = options.suffix;
-    var id = ++count * (options.multiplier || 1);
-    if (prefix == null) {
-      prefix = '';
-    }
-    if (suffix == null) {
-      suffix = '';
-    }
-    return String(prefix) + id + String(suffix);
-  };
-  id.reset = function() {
-    return count = 0;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:flux@2.0.1/lib/invariant", [], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  "use strict";
-  var invariant = function(condition, format, a, b, c, d, e, f) {
-    if (false) {
-      if (format === undefined) {
-        throw new Error('invariant requires an error message argument');
-      }
-    }
-    if (!condition) {
-      var error;
-      if (format === undefined) {
-        error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-      } else {
-        var args = [a, b, c, d, e, f];
-        var argIndex = 0;
-        error = new Error('Invariant Violation: ' + format.replace(/%s/g, function() {
-          return args[argIndex++];
-        }));
-      }
-      error.framesToPop = 1;
-      throw error;
-    }
-  };
-  module.exports = invariant;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("lib/components/controls/controls.scss!post-css", [], false, function(__require, __exports, __module) {
-  System.get("@@global-helpers").prepareGlobal(__module.id, []);
-  (function() {
-    (function(css) {
-      var blob = new Blob([css], {type: 'text/css'}),
-          url = URL.createObjectURL(blob),
-          elem = document.createElement('link'),
-          head = document.getElementsByTagName('head')[0];
-      linkElement.setAttribute('href', url);
-      linkElement.setAttribute('rel', 'stylesheet');
-      head.appendChild(linkElement);
-    })(".Controls {\n  width: 320px;\n  padding: 1rem\n}\n.Controls > h1 {\n  font-size: 2rem;\n}\n.Controls > textarea {\n  width: 100%;\n  border: none;\n  height: 200px;\n}\n");
-  }).call(System.global);
-  return System.get("@@global-helpers").retrieveGlobal(__module.id, false);
 });
 
 System.register("npm:babel-runtime@4.7.16/core-js", ["github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
@@ -6555,6 +5654,890 @@ System.register("npm:babel-runtime@4.7.16/core-js", ["github:jspm/nodelibs-proce
   return module.exports;
 });
 
+System.register("npm:react@0.13.1/lib/ReactLink", ["npm:react@0.13.1/lib/React"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var React = require("npm:react@0.13.1/lib/React");
+  function ReactLink(value, requestChange) {
+    this.value = value;
+    this.requestChange = requestChange;
+  }
+  function createLinkTypeChecker(linkType) {
+    var shapes = {
+      value: typeof linkType === 'undefined' ? React.PropTypes.any.isRequired : linkType.isRequired,
+      requestChange: React.PropTypes.func.isRequired
+    };
+    return React.PropTypes.shape(shapes);
+  }
+  ReactLink.PropTypes = {link: createLinkTypeChecker};
+  module.exports = ReactLink;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react@0.13.1/lib/ReactStateSetters", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var ReactStateSetters = {
+    createStateSetter: function(component, funcReturningState) {
+      return function(a, b, c, d, e, f) {
+        var partialState = funcReturningState.call(component, a, b, c, d, e, f);
+        if (partialState) {
+          component.setState(partialState);
+        }
+      };
+    },
+    createStateKeySetter: function(component, key) {
+      var cache = component.__keySetters || (component.__keySetters = {});
+      return cache[key] || (cache[key] = createStateKeySetter(component, key));
+    }
+  };
+  function createStateKeySetter(component, key) {
+    var partialState = {};
+    return function stateKeySetter(value) {
+      partialState[key] = value;
+      component.setState(partialState);
+    };
+  }
+  ReactStateSetters.Mixin = {
+    createStateSetter: function(funcReturningState) {
+      return ReactStateSetters.createStateSetter(this, funcReturningState);
+    },
+    createStateKeySetter: function(key) {
+      return ReactStateSetters.createStateKeySetter(this, key);
+    }
+  };
+  module.exports = ReactStateSetters;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react@0.13.1/lib/ReactComponentWithPureRenderMixin", ["npm:react@0.13.1/lib/shallowEqual"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var shallowEqual = require("npm:react@0.13.1/lib/shallowEqual");
+  var ReactComponentWithPureRenderMixin = {shouldComponentUpdate: function(nextProps, nextState) {
+      return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
+    }};
+  module.exports = ReactComponentWithPureRenderMixin;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react@0.13.1/lib/ReactTransitionChildMapping", ["npm:react@0.13.1/lib/ReactChildren", "npm:react@0.13.1/lib/ReactFragment"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var ReactChildren = require("npm:react@0.13.1/lib/ReactChildren");
+  var ReactFragment = require("npm:react@0.13.1/lib/ReactFragment");
+  var ReactTransitionChildMapping = {
+    getChildMapping: function(children) {
+      if (!children) {
+        return children;
+      }
+      return ReactFragment.extract(ReactChildren.map(children, function(child) {
+        return child;
+      }));
+    },
+    mergeChildMappings: function(prev, next) {
+      prev = prev || {};
+      next = next || {};
+      function getValueForKey(key) {
+        if (next.hasOwnProperty(key)) {
+          return next[key];
+        } else {
+          return prev[key];
+        }
+      }
+      var nextKeysPending = {};
+      var pendingKeys = [];
+      for (var prevKey in prev) {
+        if (next.hasOwnProperty(prevKey)) {
+          if (pendingKeys.length) {
+            nextKeysPending[prevKey] = pendingKeys;
+            pendingKeys = [];
+          }
+        } else {
+          pendingKeys.push(prevKey);
+        }
+      }
+      var i;
+      var childMapping = {};
+      for (var nextKey in next) {
+        if (nextKeysPending.hasOwnProperty(nextKey)) {
+          for (i = 0; i < nextKeysPending[nextKey].length; i++) {
+            var pendingNextKey = nextKeysPending[nextKey][i];
+            childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
+          }
+        }
+        childMapping[nextKey] = getValueForKey(nextKey);
+      }
+      for (i = 0; i < pendingKeys.length; i++) {
+        childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
+      }
+      return childMapping;
+    }
+  };
+  module.exports = ReactTransitionChildMapping;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react@0.13.1/lib/joinClasses", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  function joinClasses(className) {
+    if (!className) {
+      className = '';
+    }
+    var nextClass;
+    var argLength = arguments.length;
+    if (argLength > 1) {
+      for (var ii = 1; ii < argLength; ii++) {
+        nextClass = arguments[ii];
+        if (nextClass) {
+          className = (className ? className + ' ' : '') + nextClass;
+        }
+      }
+    }
+    return className;
+  }
+  module.exports = joinClasses;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react@0.13.1/lib/CSSCore", ["npm:react@0.13.1/lib/invariant", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    var invariant = require("npm:react@0.13.1/lib/invariant");
+    var CSSCore = {
+      addClass: function(element, className) {
+        ("production" !== process.env.NODE_ENV ? invariant(!/\s/.test(className), 'CSSCore.addClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(!/\s/.test(className)));
+        if (className) {
+          if (element.classList) {
+            element.classList.add(className);
+          } else if (!CSSCore.hasClass(element, className)) {
+            element.className = element.className + ' ' + className;
+          }
+        }
+        return element;
+      },
+      removeClass: function(element, className) {
+        ("production" !== process.env.NODE_ENV ? invariant(!/\s/.test(className), 'CSSCore.removeClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(!/\s/.test(className)));
+        if (className) {
+          if (element.classList) {
+            element.classList.remove(className);
+          } else if (CSSCore.hasClass(element, className)) {
+            element.className = element.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)', 'g'), '$1').replace(/\s+/g, ' ').replace(/^\s*|\s*$/g, '');
+          }
+        }
+        return element;
+      },
+      conditionClass: function(element, className, bool) {
+        return (bool ? CSSCore.addClass : CSSCore.removeClass)(element, className);
+      },
+      hasClass: function(element, className) {
+        ("production" !== process.env.NODE_ENV ? invariant(!/\s/.test(className), 'CSS.hasClass takes only a single class name.') : invariant(!/\s/.test(className)));
+        if (element.classList) {
+          return !!className && element.classList.contains(className);
+        }
+        return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
+      }
+    };
+    module.exports = CSSCore;
+  })(require("github:jspm/nodelibs-process@0.1.1"));
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react@0.13.1/lib/ReactTransitionEvents", ["npm:react@0.13.1/lib/ExecutionEnvironment"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var ExecutionEnvironment = require("npm:react@0.13.1/lib/ExecutionEnvironment");
+  var EVENT_NAME_MAP = {
+    transitionend: {
+      'transition': 'transitionend',
+      'WebkitTransition': 'webkitTransitionEnd',
+      'MozTransition': 'mozTransitionEnd',
+      'OTransition': 'oTransitionEnd',
+      'msTransition': 'MSTransitionEnd'
+    },
+    animationend: {
+      'animation': 'animationend',
+      'WebkitAnimation': 'webkitAnimationEnd',
+      'MozAnimation': 'mozAnimationEnd',
+      'OAnimation': 'oAnimationEnd',
+      'msAnimation': 'MSAnimationEnd'
+    }
+  };
+  var endEvents = [];
+  function detectEvents() {
+    var testEl = document.createElement('div');
+    var style = testEl.style;
+    if (!('AnimationEvent' in window)) {
+      delete EVENT_NAME_MAP.animationend.animation;
+    }
+    if (!('TransitionEvent' in window)) {
+      delete EVENT_NAME_MAP.transitionend.transition;
+    }
+    for (var baseEventName in EVENT_NAME_MAP) {
+      var baseEvents = EVENT_NAME_MAP[baseEventName];
+      for (var styleName in baseEvents) {
+        if (styleName in style) {
+          endEvents.push(baseEvents[styleName]);
+          break;
+        }
+      }
+    }
+  }
+  if (ExecutionEnvironment.canUseDOM) {
+    detectEvents();
+  }
+  function addEventListener(node, eventName, eventListener) {
+    node.addEventListener(eventName, eventListener, false);
+  }
+  function removeEventListener(node, eventName, eventListener) {
+    node.removeEventListener(eventName, eventListener, false);
+  }
+  var ReactTransitionEvents = {
+    addEndEventListener: function(node, eventListener) {
+      if (endEvents.length === 0) {
+        window.setTimeout(eventListener, 0);
+        return ;
+      }
+      endEvents.forEach(function(endEvent) {
+        addEventListener(node, endEvent, eventListener);
+      });
+    },
+    removeEndEventListener: function(node, eventListener) {
+      if (endEvents.length === 0) {
+        return ;
+      }
+      endEvents.forEach(function(endEvent) {
+        removeEventListener(node, endEvent, eventListener);
+      });
+    }
+  };
+  module.exports = ReactTransitionEvents;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react@0.13.1/lib/cx", ["npm:react@0.13.1/lib/warning", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var warning = require("npm:react@0.13.1/lib/warning");
+    var warned = false;
+    function cx(classNames) {
+      if ("production" !== process.env.NODE_ENV) {
+        ("production" !== process.env.NODE_ENV ? warning(warned, 'React.addons.classSet will be deprecated in a future version. See ' + 'http://fb.me/react-addons-classset') : null);
+        warned = true;
+      }
+      if (typeof classNames == 'object') {
+        return Object.keys(classNames).filter(function(className) {
+          return classNames[className];
+        }).join(' ');
+      } else {
+        return Array.prototype.join.call(arguments, ' ');
+      }
+    }
+    module.exports = cx;
+  })(require("github:jspm/nodelibs-process@0.1.1"));
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react@0.13.1/lib/update", ["npm:react@0.13.1/lib/Object.assign", "npm:react@0.13.1/lib/keyOf", "npm:react@0.13.1/lib/invariant", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var assign = require("npm:react@0.13.1/lib/Object.assign");
+    var keyOf = require("npm:react@0.13.1/lib/keyOf");
+    var invariant = require("npm:react@0.13.1/lib/invariant");
+    function shallowCopy(x) {
+      if (Array.isArray(x)) {
+        return x.concat();
+      } else if (x && typeof x === 'object') {
+        return assign(new x.constructor(), x);
+      } else {
+        return x;
+      }
+    }
+    var COMMAND_PUSH = keyOf({$push: null});
+    var COMMAND_UNSHIFT = keyOf({$unshift: null});
+    var COMMAND_SPLICE = keyOf({$splice: null});
+    var COMMAND_SET = keyOf({$set: null});
+    var COMMAND_MERGE = keyOf({$merge: null});
+    var COMMAND_APPLY = keyOf({$apply: null});
+    var ALL_COMMANDS_LIST = [COMMAND_PUSH, COMMAND_UNSHIFT, COMMAND_SPLICE, COMMAND_SET, COMMAND_MERGE, COMMAND_APPLY];
+    var ALL_COMMANDS_SET = {};
+    ALL_COMMANDS_LIST.forEach(function(command) {
+      ALL_COMMANDS_SET[command] = true;
+    });
+    function invariantArrayCase(value, spec, command) {
+      ("production" !== process.env.NODE_ENV ? invariant(Array.isArray(value), 'update(): expected target of %s to be an array; got %s.', command, value) : invariant(Array.isArray(value)));
+      var specValue = spec[command];
+      ("production" !== process.env.NODE_ENV ? invariant(Array.isArray(specValue), 'update(): expected spec of %s to be an array; got %s. ' + 'Did you forget to wrap your parameter in an array?', command, specValue) : invariant(Array.isArray(specValue)));
+    }
+    function update(value, spec) {
+      ("production" !== process.env.NODE_ENV ? invariant(typeof spec === 'object', 'update(): You provided a key path to update() that did not contain one ' + 'of %s. Did you forget to include {%s: ...}?', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : invariant(typeof spec === 'object'));
+      if (spec.hasOwnProperty(COMMAND_SET)) {
+        ("production" !== process.env.NODE_ENV ? invariant(Object.keys(spec).length === 1, 'Cannot have more than one key in an object with %s', COMMAND_SET) : invariant(Object.keys(spec).length === 1));
+        return spec[COMMAND_SET];
+      }
+      var nextValue = shallowCopy(value);
+      if (spec.hasOwnProperty(COMMAND_MERGE)) {
+        var mergeObj = spec[COMMAND_MERGE];
+        ("production" !== process.env.NODE_ENV ? invariant(mergeObj && typeof mergeObj === 'object', 'update(): %s expects a spec of type \'object\'; got %s', COMMAND_MERGE, mergeObj) : invariant(mergeObj && typeof mergeObj === 'object'));
+        ("production" !== process.env.NODE_ENV ? invariant(nextValue && typeof nextValue === 'object', 'update(): %s expects a target of type \'object\'; got %s', COMMAND_MERGE, nextValue) : invariant(nextValue && typeof nextValue === 'object'));
+        assign(nextValue, spec[COMMAND_MERGE]);
+      }
+      if (spec.hasOwnProperty(COMMAND_PUSH)) {
+        invariantArrayCase(value, spec, COMMAND_PUSH);
+        spec[COMMAND_PUSH].forEach(function(item) {
+          nextValue.push(item);
+        });
+      }
+      if (spec.hasOwnProperty(COMMAND_UNSHIFT)) {
+        invariantArrayCase(value, spec, COMMAND_UNSHIFT);
+        spec[COMMAND_UNSHIFT].forEach(function(item) {
+          nextValue.unshift(item);
+        });
+      }
+      if (spec.hasOwnProperty(COMMAND_SPLICE)) {
+        ("production" !== process.env.NODE_ENV ? invariant(Array.isArray(value), 'Expected %s target to be an array; got %s', COMMAND_SPLICE, value) : invariant(Array.isArray(value)));
+        ("production" !== process.env.NODE_ENV ? invariant(Array.isArray(spec[COMMAND_SPLICE]), 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(Array.isArray(spec[COMMAND_SPLICE])));
+        spec[COMMAND_SPLICE].forEach(function(args) {
+          ("production" !== process.env.NODE_ENV ? invariant(Array.isArray(args), 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(Array.isArray(args)));
+          nextValue.splice.apply(nextValue, args);
+        });
+      }
+      if (spec.hasOwnProperty(COMMAND_APPLY)) {
+        ("production" !== process.env.NODE_ENV ? invariant(typeof spec[COMMAND_APPLY] === 'function', 'update(): expected spec of %s to be a function; got %s.', COMMAND_APPLY, spec[COMMAND_APPLY]) : invariant(typeof spec[COMMAND_APPLY] === 'function'));
+        nextValue = spec[COMMAND_APPLY](nextValue);
+      }
+      for (var k in spec) {
+        if (!(ALL_COMMANDS_SET.hasOwnProperty(k) && ALL_COMMANDS_SET[k])) {
+          nextValue[k] = update(value[k], spec[k]);
+        }
+      }
+      return nextValue;
+    }
+    module.exports = update;
+  })(require("github:jspm/nodelibs-process@0.1.1"));
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:react@0.13.1/lib/ReactTestUtils", ["npm:react@0.13.1/lib/EventConstants", "npm:react@0.13.1/lib/EventPluginHub", "npm:react@0.13.1/lib/EventPropagators", "npm:react@0.13.1/lib/React", "npm:react@0.13.1/lib/ReactElement", "npm:react@0.13.1/lib/ReactEmptyComponent", "npm:react@0.13.1/lib/ReactBrowserEventEmitter", "npm:react@0.13.1/lib/ReactCompositeComponent", "npm:react@0.13.1/lib/ReactInstanceHandles", "npm:react@0.13.1/lib/ReactInstanceMap", "npm:react@0.13.1/lib/ReactMount", "npm:react@0.13.1/lib/ReactUpdates", "npm:react@0.13.1/lib/SyntheticEvent", "npm:react@0.13.1/lib/Object.assign"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var EventConstants = require("npm:react@0.13.1/lib/EventConstants");
+  var EventPluginHub = require("npm:react@0.13.1/lib/EventPluginHub");
+  var EventPropagators = require("npm:react@0.13.1/lib/EventPropagators");
+  var React = require("npm:react@0.13.1/lib/React");
+  var ReactElement = require("npm:react@0.13.1/lib/ReactElement");
+  var ReactEmptyComponent = require("npm:react@0.13.1/lib/ReactEmptyComponent");
+  var ReactBrowserEventEmitter = require("npm:react@0.13.1/lib/ReactBrowserEventEmitter");
+  var ReactCompositeComponent = require("npm:react@0.13.1/lib/ReactCompositeComponent");
+  var ReactInstanceHandles = require("npm:react@0.13.1/lib/ReactInstanceHandles");
+  var ReactInstanceMap = require("npm:react@0.13.1/lib/ReactInstanceMap");
+  var ReactMount = require("npm:react@0.13.1/lib/ReactMount");
+  var ReactUpdates = require("npm:react@0.13.1/lib/ReactUpdates");
+  var SyntheticEvent = require("npm:react@0.13.1/lib/SyntheticEvent");
+  var assign = require("npm:react@0.13.1/lib/Object.assign");
+  var topLevelTypes = EventConstants.topLevelTypes;
+  function Event(suffix) {}
+  var ReactTestUtils = {
+    renderIntoDocument: function(instance) {
+      var div = document.createElement('div');
+      return React.render(instance, div);
+    },
+    isElement: function(element) {
+      return ReactElement.isValidElement(element);
+    },
+    isElementOfType: function(inst, convenienceConstructor) {
+      return (ReactElement.isValidElement(inst) && inst.type === convenienceConstructor);
+    },
+    isDOMComponent: function(inst) {
+      return !!(inst && inst.tagName && inst.getDOMNode);
+    },
+    isDOMComponentElement: function(inst) {
+      return !!(inst && ReactElement.isValidElement(inst) && !!inst.tagName);
+    },
+    isCompositeComponent: function(inst) {
+      return typeof inst.render === 'function' && typeof inst.setState === 'function';
+    },
+    isCompositeComponentWithType: function(inst, type) {
+      return !!(ReactTestUtils.isCompositeComponent(inst) && (inst.constructor === type));
+    },
+    isCompositeComponentElement: function(inst) {
+      if (!ReactElement.isValidElement(inst)) {
+        return false;
+      }
+      var prototype = inst.type.prototype;
+      return (typeof prototype.render === 'function' && typeof prototype.setState === 'function');
+    },
+    isCompositeComponentElementWithType: function(inst, type) {
+      return !!(ReactTestUtils.isCompositeComponentElement(inst) && (inst.constructor === type));
+    },
+    getRenderedChildOfCompositeComponent: function(inst) {
+      if (!ReactTestUtils.isCompositeComponent(inst)) {
+        return null;
+      }
+      var internalInstance = ReactInstanceMap.get(inst);
+      return internalInstance._renderedComponent.getPublicInstance();
+    },
+    findAllInRenderedTree: function(inst, test) {
+      if (!inst) {
+        return [];
+      }
+      var ret = test(inst) ? [inst] : [];
+      if (ReactTestUtils.isDOMComponent(inst)) {
+        var internalInstance = ReactInstanceMap.get(inst);
+        var renderedChildren = internalInstance._renderedComponent._renderedChildren;
+        var key;
+        for (key in renderedChildren) {
+          if (!renderedChildren.hasOwnProperty(key)) {
+            continue;
+          }
+          if (!renderedChildren[key].getPublicInstance) {
+            continue;
+          }
+          ret = ret.concat(ReactTestUtils.findAllInRenderedTree(renderedChildren[key].getPublicInstance(), test));
+        }
+      } else if (ReactTestUtils.isCompositeComponent(inst)) {
+        ret = ret.concat(ReactTestUtils.findAllInRenderedTree(ReactTestUtils.getRenderedChildOfCompositeComponent(inst), test));
+      }
+      return ret;
+    },
+    scryRenderedDOMComponentsWithClass: function(root, className) {
+      return ReactTestUtils.findAllInRenderedTree(root, function(inst) {
+        var instClassName = inst.props.className;
+        return ReactTestUtils.isDOMComponent(inst) && ((instClassName && (' ' + instClassName + ' ').indexOf(' ' + className + ' ') !== -1));
+      });
+    },
+    findRenderedDOMComponentWithClass: function(root, className) {
+      var all = ReactTestUtils.scryRenderedDOMComponentsWithClass(root, className);
+      if (all.length !== 1) {
+        throw new Error('Did not find exactly one match ' + '(found: ' + all.length + ') for class:' + className);
+      }
+      return all[0];
+    },
+    scryRenderedDOMComponentsWithTag: function(root, tagName) {
+      return ReactTestUtils.findAllInRenderedTree(root, function(inst) {
+        return ReactTestUtils.isDOMComponent(inst) && inst.tagName === tagName.toUpperCase();
+      });
+    },
+    findRenderedDOMComponentWithTag: function(root, tagName) {
+      var all = ReactTestUtils.scryRenderedDOMComponentsWithTag(root, tagName);
+      if (all.length !== 1) {
+        throw new Error('Did not find exactly one match for tag:' + tagName);
+      }
+      return all[0];
+    },
+    scryRenderedComponentsWithType: function(root, componentType) {
+      return ReactTestUtils.findAllInRenderedTree(root, function(inst) {
+        return ReactTestUtils.isCompositeComponentWithType(inst, componentType);
+      });
+    },
+    findRenderedComponentWithType: function(root, componentType) {
+      var all = ReactTestUtils.scryRenderedComponentsWithType(root, componentType);
+      if (all.length !== 1) {
+        throw new Error('Did not find exactly one match for componentType:' + componentType);
+      }
+      return all[0];
+    },
+    mockComponent: function(module, mockTagName) {
+      mockTagName = mockTagName || module.mockTagName || "div";
+      module.prototype.render.mockImplementation(function() {
+        return React.createElement(mockTagName, null, this.props.children);
+      });
+      return this;
+    },
+    simulateNativeEventOnNode: function(topLevelType, node, fakeNativeEvent) {
+      fakeNativeEvent.target = node;
+      ReactBrowserEventEmitter.ReactEventListener.dispatchEvent(topLevelType, fakeNativeEvent);
+    },
+    simulateNativeEventOnDOMComponent: function(topLevelType, comp, fakeNativeEvent) {
+      ReactTestUtils.simulateNativeEventOnNode(topLevelType, comp.getDOMNode(), fakeNativeEvent);
+    },
+    nativeTouchData: function(x, y) {
+      return {touches: [{
+          pageX: x,
+          pageY: y
+        }]};
+    },
+    createRenderer: function() {
+      return new ReactShallowRenderer();
+    },
+    Simulate: null,
+    SimulateNative: {}
+  };
+  var ReactShallowRenderer = function() {
+    this._instance = null;
+  };
+  ReactShallowRenderer.prototype.getRenderOutput = function() {
+    return ((this._instance && this._instance._renderedComponent && this._instance._renderedComponent._renderedOutput) || null);
+  };
+  var NoopInternalComponent = function(element) {
+    this._renderedOutput = element;
+    this._currentElement = element === null || element === false ? ReactEmptyComponent.emptyElement : element;
+  };
+  NoopInternalComponent.prototype = {
+    mountComponent: function() {},
+    receiveComponent: function(element) {
+      this._renderedOutput = element;
+      this._currentElement = element === null || element === false ? ReactEmptyComponent.emptyElement : element;
+    },
+    unmountComponent: function() {}
+  };
+  var ShallowComponentWrapper = function() {};
+  assign(ShallowComponentWrapper.prototype, ReactCompositeComponent.Mixin, {
+    _instantiateReactComponent: function(element) {
+      return new NoopInternalComponent(element);
+    },
+    _replaceNodeWithMarkupByID: function() {},
+    _renderValidatedComponent: ReactCompositeComponent.Mixin._renderValidatedComponentWithoutOwnerOrContext
+  });
+  ReactShallowRenderer.prototype.render = function(element, context) {
+    var transaction = ReactUpdates.ReactReconcileTransaction.getPooled();
+    this._render(element, transaction, context);
+    ReactUpdates.ReactReconcileTransaction.release(transaction);
+  };
+  ReactShallowRenderer.prototype.unmount = function() {
+    if (this._instance) {
+      this._instance.unmountComponent();
+    }
+  };
+  ReactShallowRenderer.prototype._render = function(element, transaction, context) {
+    if (!this._instance) {
+      var rootID = ReactInstanceHandles.createReactRootID();
+      var instance = new ShallowComponentWrapper(element.type);
+      instance.construct(element);
+      instance.mountComponent(rootID, transaction, context);
+      this._instance = instance;
+    } else {
+      this._instance.receiveComponent(element, transaction, context);
+    }
+  };
+  function makeSimulator(eventType) {
+    return function(domComponentOrNode, eventData) {
+      var node;
+      if (ReactTestUtils.isDOMComponent(domComponentOrNode)) {
+        node = domComponentOrNode.getDOMNode();
+      } else if (domComponentOrNode.tagName) {
+        node = domComponentOrNode;
+      }
+      var fakeNativeEvent = new Event();
+      fakeNativeEvent.target = node;
+      var event = new SyntheticEvent(ReactBrowserEventEmitter.eventNameDispatchConfigs[eventType], ReactMount.getID(node), fakeNativeEvent);
+      assign(event, eventData);
+      EventPropagators.accumulateTwoPhaseDispatches(event);
+      ReactUpdates.batchedUpdates(function() {
+        EventPluginHub.enqueueEvents(event);
+        EventPluginHub.processEventQueue();
+      });
+    };
+  }
+  function buildSimulators() {
+    ReactTestUtils.Simulate = {};
+    var eventType;
+    for (eventType in ReactBrowserEventEmitter.eventNameDispatchConfigs) {
+      ReactTestUtils.Simulate[eventType] = makeSimulator(eventType);
+    }
+  }
+  var oldInjectEventPluginOrder = EventPluginHub.injection.injectEventPluginOrder;
+  EventPluginHub.injection.injectEventPluginOrder = function() {
+    oldInjectEventPluginOrder.apply(this, arguments);
+    buildSimulators();
+  };
+  var oldInjectEventPlugins = EventPluginHub.injection.injectEventPluginsByName;
+  EventPluginHub.injection.injectEventPluginsByName = function() {
+    oldInjectEventPlugins.apply(this, arguments);
+    buildSimulators();
+  };
+  buildSimulators();
+  function makeNativeSimulator(eventType) {
+    return function(domComponentOrNode, nativeEventData) {
+      var fakeNativeEvent = new Event(eventType);
+      assign(fakeNativeEvent, nativeEventData);
+      if (ReactTestUtils.isDOMComponent(domComponentOrNode)) {
+        ReactTestUtils.simulateNativeEventOnDOMComponent(eventType, domComponentOrNode, fakeNativeEvent);
+      } else if (!!domComponentOrNode.tagName) {
+        ReactTestUtils.simulateNativeEventOnNode(eventType, domComponentOrNode, fakeNativeEvent);
+      }
+    };
+  }
+  var eventType;
+  for (eventType in topLevelTypes) {
+    var convenienceName = eventType.indexOf('top') === 0 ? eventType.charAt(3).toLowerCase() + eventType.substr(4) : eventType;
+    ReactTestUtils.SimulateNative[convenienceName] = makeNativeSimulator(eventType);
+  }
+  module.exports = ReactTestUtils;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:eventemitter3@0.1.6/index", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  function EE(fn, context, once) {
+    this.fn = fn;
+    this.context = context;
+    this.once = once || false;
+  }
+  function EventEmitter() {}
+  EventEmitter.prototype._events = undefined;
+  EventEmitter.prototype.listeners = function listeners(event) {
+    if (!this._events || !this._events[event])
+      return [];
+    if (this._events[event].fn)
+      return [this._events[event].fn];
+    for (var i = 0,
+        l = this._events[event].length,
+        ee = new Array(l); i < l; i++) {
+      ee[i] = this._events[event][i].fn;
+    }
+    return ee;
+  };
+  EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
+    if (!this._events || !this._events[event])
+      return false;
+    var listeners = this._events[event],
+        len = arguments.length,
+        args,
+        i;
+    if ('function' === typeof listeners.fn) {
+      if (listeners.once)
+        this.removeListener(event, listeners.fn, true);
+      switch (len) {
+        case 1:
+          return listeners.fn.call(listeners.context), true;
+        case 2:
+          return listeners.fn.call(listeners.context, a1), true;
+        case 3:
+          return listeners.fn.call(listeners.context, a1, a2), true;
+        case 4:
+          return listeners.fn.call(listeners.context, a1, a2, a3), true;
+        case 5:
+          return listeners.fn.call(listeners.context, a1, a2, a3, a4), true;
+        case 6:
+          return listeners.fn.call(listeners.context, a1, a2, a3, a4, a5), true;
+      }
+      for (i = 1, args = new Array(len - 1); i < len; i++) {
+        args[i - 1] = arguments[i];
+      }
+      listeners.fn.apply(listeners.context, args);
+    } else {
+      var length = listeners.length,
+          j;
+      for (i = 0; i < length; i++) {
+        if (listeners[i].once)
+          this.removeListener(event, listeners[i].fn, true);
+        switch (len) {
+          case 1:
+            listeners[i].fn.call(listeners[i].context);
+            break;
+          case 2:
+            listeners[i].fn.call(listeners[i].context, a1);
+            break;
+          case 3:
+            listeners[i].fn.call(listeners[i].context, a1, a2);
+            break;
+          default:
+            if (!args)
+              for (j = 1, args = new Array(len - 1); j < len; j++) {
+                args[j - 1] = arguments[j];
+              }
+            listeners[i].fn.apply(listeners[i].context, args);
+        }
+      }
+    }
+    return true;
+  };
+  EventEmitter.prototype.on = function on(event, fn, context) {
+    var listener = new EE(fn, context || this);
+    if (!this._events)
+      this._events = {};
+    if (!this._events[event])
+      this._events[event] = listener;
+    else {
+      if (!this._events[event].fn)
+        this._events[event].push(listener);
+      else
+        this._events[event] = [this._events[event], listener];
+    }
+    return this;
+  };
+  EventEmitter.prototype.once = function once(event, fn, context) {
+    var listener = new EE(fn, context || this, true);
+    if (!this._events)
+      this._events = {};
+    if (!this._events[event])
+      this._events[event] = listener;
+    else {
+      if (!this._events[event].fn)
+        this._events[event].push(listener);
+      else
+        this._events[event] = [this._events[event], listener];
+    }
+    return this;
+  };
+  EventEmitter.prototype.removeListener = function removeListener(event, fn, once) {
+    if (!this._events || !this._events[event])
+      return this;
+    var listeners = this._events[event],
+        events = [];
+    if (fn) {
+      if (listeners.fn && (listeners.fn !== fn || (once && !listeners.once))) {
+        events.push(listeners);
+      }
+      if (!listeners.fn)
+        for (var i = 0,
+            length = listeners.length; i < length; i++) {
+          if (listeners[i].fn !== fn || (once && !listeners[i].once)) {
+            events.push(listeners[i]);
+          }
+        }
+    }
+    if (events.length) {
+      this._events[event] = events.length === 1 ? events[0] : events;
+    } else {
+      delete this._events[event];
+    }
+    return this;
+  };
+  EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
+    if (!this._events)
+      return this;
+    if (event)
+      delete this._events[event];
+    else
+      this._events = {};
+    return this;
+  };
+  EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+  EventEmitter.prototype.addListener = EventEmitter.prototype.on;
+  EventEmitter.prototype.setMaxListeners = function setMaxListeners() {
+    return this;
+  };
+  EventEmitter.EventEmitter = EventEmitter;
+  EventEmitter.EventEmitter2 = EventEmitter;
+  EventEmitter.EventEmitter3 = EventEmitter;
+  module.exports = EventEmitter;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:object-assign@2.0.0/index", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  function ToObject(val) {
+    if (val == null) {
+      throw new TypeError('Object.assign cannot be called with null or undefined');
+    }
+    return Object(val);
+  }
+  module.exports = Object.assign || function(target, source) {
+    var from;
+    var keys;
+    var to = ToObject(target);
+    for (var s = 1; s < arguments.length; s++) {
+      from = arguments[s];
+      keys = Object.keys(Object(from));
+      for (var i = 0; i < keys.length; i++) {
+        to[keys[i]] = from[keys[i]];
+      }
+    }
+    return to;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:uniqueid@0.1.0/index", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var count = 0;
+  var id = module.exports = function(options) {
+    options = options || {};
+    var prefix = options.prefix;
+    var suffix = options.suffix;
+    var id = ++count * (options.multiplier || 1);
+    if (prefix == null) {
+      prefix = '';
+    }
+    if (suffix == null) {
+      suffix = '';
+    }
+    return String(prefix) + id + String(suffix);
+  };
+  id.reset = function() {
+    return count = 0;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:flux@2.0.1/lib/invariant", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  var invariant = function(condition, format, a, b, c, d, e, f) {
+    if (false) {
+      if (format === undefined) {
+        throw new Error('invariant requires an error message argument');
+      }
+    }
+    if (!condition) {
+      var error;
+      if (format === undefined) {
+        error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+      } else {
+        var args = [a, b, c, d, e, f];
+        var argIndex = 0;
+        error = new Error('Invariant Violation: ' + format.replace(/%s/g, function() {
+          return args[argIndex++];
+        }));
+      }
+      error.framesToPop = 1;
+      throw error;
+    }
+  };
+  module.exports = invariant;
+  global.define = __define;
+  return module.exports;
+});
+
 System.register("npm:react-canvas@0.0.1/lib/ContainerMixin", ["npm:react@0.13.1", "npm:react@0.13.1/lib/ReactMultiChild", "npm:react@0.13.1/lib/Object.assign", "npm:react@0.13.1/lib/emptyObject"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -7557,20 +7540,335 @@ System.register("npm:react-canvas@0.0.1/lib/LayerMixin", ["npm:react-canvas@0.0.
   return module.exports;
 });
 
-System.register("lib/components/output/output.scss!post-css", [], false, function(__require, __exports, __module) {
-  System.get("@@global-helpers").prepareGlobal(__module.id, []);
+System.register("npm:react-canvas@0.0.1/lib/Text", ["npm:react-canvas@0.0.1/lib/createComponent", "npm:react-canvas@0.0.1/lib/LayerMixin"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var createComponent = require("npm:react-canvas@0.0.1/lib/createComponent");
+  var LayerMixin = require("npm:react-canvas@0.0.1/lib/LayerMixin");
+  var Text = createComponent('Text', LayerMixin, {
+    applyTextProps: function(prevProps, props) {
+      var style = (props && props.style) ? props.style : {};
+      var layer = this.node;
+      layer.type = 'text';
+      layer.text = childrenAsString(props.children);
+      layer.color = style.color;
+      layer.fontFace = style.fontFace;
+      layer.fontSize = style.fontSize;
+      layer.lineHeight = style.lineHeight;
+      layer.textAlign = style.textAlign;
+    },
+    mountComponent: function(rootID, transaction, context) {
+      var props = this._currentElement.props;
+      var layer = this.node;
+      this.applyLayerProps({}, props);
+      this.applyTextProps({}, props);
+      return layer;
+    },
+    receiveComponent: function(nextComponent, transaction, context) {
+      var props = nextComponent.props;
+      var prevProps = this._currentElement.props;
+      this.applyLayerProps(prevProps, props);
+      this.applyTextProps(prevProps, props);
+      this._currentElement = nextComponent;
+    }
+  });
+  function childrenAsString(children) {
+    if (!children) {
+      return '';
+    }
+    if (typeof children === 'string') {
+      return children;
+    }
+    if (children.length) {
+      return children.join('\n');
+    }
+    return '';
+  }
+  module.exports = Text;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:whatwg-fetch@0.7.0/fetch", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "format cjs";
   (function() {
-    (function(css) {
-      var blob = new Blob([css], {type: 'text/css'}),
-          url = URL.createObjectURL(blob),
-          elem = document.createElement('link'),
-          head = document.getElementsByTagName('head')[0];
-      linkElement.setAttribute('href', url);
-      linkElement.setAttribute('rel', 'stylesheet');
-      head.appendChild(linkElement);
-    })(".Output {\n  padding: 1rem\n}\n.Output > p {\n  white-space: pre-line\n}\n.Output canvas {\n  background: white;\n}\n");
-  }).call(System.global);
-  return System.get("@@global-helpers").retrieveGlobal(__module.id, false);
+    'use strict';
+    if (self.fetch) {
+      return ;
+    }
+    function Headers(headers) {
+      this.map = {};
+      var self = this;
+      if (headers instanceof Headers) {
+        headers.forEach(function(name, values) {
+          values.forEach(function(value) {
+            self.append(name, value);
+          });
+        });
+      } else if (headers) {
+        Object.getOwnPropertyNames(headers).forEach(function(name) {
+          self.append(name, headers[name]);
+        });
+      }
+    }
+    Headers.prototype.append = function(name, value) {
+      name = name.toLowerCase();
+      var list = this.map[name];
+      if (!list) {
+        list = [];
+        this.map[name] = list;
+      }
+      list.push(value);
+    };
+    Headers.prototype['delete'] = function(name) {
+      delete this.map[name.toLowerCase()];
+    };
+    Headers.prototype.get = function(name) {
+      var values = this.map[name.toLowerCase()];
+      return values ? values[0] : null;
+    };
+    Headers.prototype.getAll = function(name) {
+      return this.map[name.toLowerCase()] || [];
+    };
+    Headers.prototype.has = function(name) {
+      return this.map.hasOwnProperty(name.toLowerCase());
+    };
+    Headers.prototype.set = function(name, value) {
+      this.map[name.toLowerCase()] = [value];
+    };
+    Headers.prototype.forEach = function(callback) {
+      var self = this;
+      Object.getOwnPropertyNames(this.map).forEach(function(name) {
+        callback(name, self.map[name]);
+      });
+    };
+    function consumed(body) {
+      if (body.bodyUsed) {
+        return Promise.reject(new TypeError('Already read'));
+      }
+      body.bodyUsed = true;
+    }
+    function fileReaderReady(reader) {
+      return new Promise(function(resolve, reject) {
+        reader.onload = function() {
+          resolve(reader.result);
+        };
+        reader.onerror = function() {
+          reject(reader.error);
+        };
+      });
+    }
+    function readBlobAsArrayBuffer(blob) {
+      var reader = new FileReader();
+      reader.readAsArrayBuffer(blob);
+      return fileReaderReady(reader);
+    }
+    function readBlobAsText(blob) {
+      var reader = new FileReader();
+      reader.readAsText(blob);
+      return fileReaderReady(reader);
+    }
+    var support = {
+      blob: 'FileReader' in self && 'Blob' in self && (function() {
+        try {
+          new Blob();
+          return true;
+        } catch (e) {
+          return false;
+        }
+      })(),
+      formData: 'FormData' in self
+    };
+    function Body() {
+      this.bodyUsed = false;
+      if (support.blob) {
+        this._initBody = function(body) {
+          this._bodyInit = body;
+          if (typeof body === 'string') {
+            this._bodyText = body;
+          } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+            this._bodyBlob = body;
+          } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+            this._bodyFormData = body;
+          } else if (!body) {
+            this._bodyText = '';
+          } else {
+            throw new Error('unsupported BodyInit type');
+          }
+        };
+        this.blob = function() {
+          var rejected = consumed(this);
+          if (rejected) {
+            return rejected;
+          }
+          if (this._bodyBlob) {
+            return Promise.resolve(this._bodyBlob);
+          } else if (this._bodyFormData) {
+            throw new Error('could not read FormData body as blob');
+          } else {
+            return Promise.resolve(new Blob([this._bodyText]));
+          }
+        };
+        this.arrayBuffer = function() {
+          return this.blob().then(readBlobAsArrayBuffer);
+        };
+        this.text = function() {
+          var rejected = consumed(this);
+          if (rejected) {
+            return rejected;
+          }
+          if (this._bodyBlob) {
+            return readBlobAsText(this._bodyBlob);
+          } else if (this._bodyFormData) {
+            throw new Error('could not read FormData body as text');
+          } else {
+            return Promise.resolve(this._bodyText);
+          }
+        };
+      } else {
+        this._initBody = function(body) {
+          this._bodyInit = body;
+          if (typeof body === 'string') {
+            this._bodyText = body;
+          } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+            this._bodyFormData = body;
+          } else if (!body) {
+            this._bodyText = '';
+          } else {
+            throw new Error('unsupported BodyInit type');
+          }
+        };
+        this.text = function() {
+          var rejected = consumed(this);
+          return rejected ? rejected : Promise.resolve(this._bodyText);
+        };
+      }
+      if (support.formData) {
+        this.formData = function() {
+          return this.text().then(decode);
+        };
+      }
+      this.json = function() {
+        return this.text().then(JSON.parse);
+      };
+      return this;
+    }
+    var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'];
+    function normalizeMethod(method) {
+      var upcased = method.toUpperCase();
+      return (methods.indexOf(upcased) > -1) ? upcased : method;
+    }
+    function Request(url, options) {
+      options = options || {};
+      this.url = url;
+      this.credentials = options.credentials || 'omit';
+      this.headers = new Headers(options.headers);
+      this.method = normalizeMethod(options.method || 'GET');
+      this.mode = options.mode || null;
+      this.referrer = null;
+      if ((this.method === 'GET' || this.method === 'HEAD') && options.body) {
+        throw new TypeError('Body not allowed for GET or HEAD requests');
+      }
+      this._initBody(options.body);
+    }
+    function decode(body) {
+      var form = new FormData();
+      body.trim().split('&').forEach(function(bytes) {
+        if (bytes) {
+          var split = bytes.split('=');
+          var name = split.shift().replace(/\+/g, ' ');
+          var value = split.join('=').replace(/\+/g, ' ');
+          form.append(decodeURIComponent(name), decodeURIComponent(value));
+        }
+      });
+      return form;
+    }
+    function headers(xhr) {
+      var head = new Headers();
+      var pairs = xhr.getAllResponseHeaders().trim().split('\n');
+      pairs.forEach(function(header) {
+        var split = header.trim().split(':');
+        var key = split.shift().trim();
+        var value = split.join(':').trim();
+        head.append(key, value);
+      });
+      return head;
+    }
+    Request.prototype.fetch = function() {
+      var self = this;
+      return new Promise(function(resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        if (self.credentials === 'cors') {
+          xhr.withCredentials = true;
+        }
+        function responseURL() {
+          if ('responseURL' in xhr) {
+            return xhr.responseURL;
+          }
+          if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
+            return xhr.getResponseHeader('X-Request-URL');
+          }
+          return ;
+        }
+        xhr.onload = function() {
+          var status = (xhr.status === 1223) ? 204 : xhr.status;
+          if (status < 100 || status > 599) {
+            reject(new TypeError('Network request failed'));
+            return ;
+          }
+          var options = {
+            status: status,
+            statusText: xhr.statusText,
+            headers: headers(xhr),
+            url: responseURL()
+          };
+          var body = 'response' in xhr ? xhr.response : xhr.responseText;
+          resolve(new Response(body, options));
+        };
+        xhr.onerror = function() {
+          reject(new TypeError('Network request failed'));
+        };
+        xhr.open(self.method, self.url, true);
+        if ('responseType' in xhr && support.blob) {
+          xhr.responseType = 'blob';
+        }
+        self.headers.forEach(function(name, values) {
+          values.forEach(function(value) {
+            xhr.setRequestHeader(name, value);
+          });
+        });
+        xhr.send(typeof self._bodyInit === 'undefined' ? null : self._bodyInit);
+      });
+    };
+    Body.call(Request.prototype);
+    function Response(bodyInit, options) {
+      if (!options) {
+        options = {};
+      }
+      this._initBody(bodyInit);
+      this.type = 'default';
+      this.url = null;
+      this.status = options.status;
+      this.statusText = options.statusText;
+      this.headers = options.headers;
+      this.url = options.url || '';
+    }
+    Body.call(Response.prototype);
+    self.Headers = Headers;
+    self.Request = Request;
+    self.Response = Response;
+    self.fetch = function(url, options) {
+      return new Request(url, options).fetch();
+    };
+    self.fetch.polyfill = true;
+  })();
+  global.define = __define;
+  return module.exports;
 });
 
 System.register("npm:flummox@3.5.0", ["npm:flummox@3.5.0/lib/Flux"], true, function(require, exports, module) {
@@ -7578,6 +7876,1488 @@ System.register("npm:flummox@3.5.0", ["npm:flummox@3.5.0/lib/Flux"], true, funct
       __define = global.define;
   global.define = undefined;
   module.exports = require("npm:flummox@3.5.0/lib/Flux");
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("github:JenniferSimonds/FontDetect@master/lib/fontdetect", [], false, function(__require, __exports, __module) {
+  System.get("@@global-helpers").prepareGlobal(__module.id, []);
+  (function() {
+    FontDetect = function() {
+      var _isInitialized = false;
+      var _aFallbackFonts = ['serif', 'sans-serif', 'monospace', 'cursive', 'fantasy'];
+      var span = null;
+      function _init() {
+        if (_isInitialized) {
+          return ;
+        }
+        _isInitialized = true;
+        var body = document.body;
+        var firstChild = document.body.firstChild;
+        var div = document.createElement('div');
+        div.id = 'fontdetectHelper';
+        span = document.createElement('span');
+        span.innerText = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        div.appendChild(span);
+        body.insertBefore(div, firstChild);
+        div.style.position = 'absolute';
+        div.style.visibility = 'hidden';
+        div.style.top = '-200px';
+        div.style.left = '-100000px';
+        div.style.width = '100000px';
+        div.style.height = '200px';
+        div.style.fontSize = '100px';
+      }
+      function _getCss(p_element, p_cssStyle) {
+        if (p_element instanceof Element) {
+          return window.getComputedStyle(p_element).getPropertyValue(p_cssStyle);
+        } else if (window.jQuery) {
+          return $(p_element).css(p_cssStyle);
+        } else {
+          return '';
+        }
+      }
+      return {
+        onFontLoaded: function(p_cssFontName, p_onLoad, p_onFail, p_options) {
+          if (!p_cssFontName) {
+            return ;
+          }
+          var msInterval = (p_options && p_options.msInterval) ? p_options.msInterval : 100;
+          var msTimeout = (p_options && p_options.msTimeout) ? p_options.msTimeout : 2000;
+          if (!p_onLoad && !p_onFail) {
+            return ;
+          }
+          if (!_isInitialized) {
+            _init();
+          }
+          if (this.isFontLoaded(p_cssFontName)) {
+            if (p_onLoad) {
+              p_onLoad(p_cssFontName);
+            }
+            return ;
+          }
+          var outerThis = this;
+          var utStart = new Date().getTime();
+          var idInterval = setInterval(function() {
+            if (outerThis.isFontLoaded(p_cssFontName)) {
+              clearInterval(idInterval);
+              p_onLoad(p_cssFontName);
+              return ;
+            } else {
+              var utNow = new Date().getTime();
+              if ((utNow - utStart) > msTimeout) {
+                clearInterval(idInterval);
+                if (p_onFail) {
+                  p_onFail(p_cssFontName);
+                }
+              }
+            }
+          }, msInterval);
+        },
+        isFontLoaded: function(p_cssFontName) {
+          var wThisFont = 0;
+          var wPrevFont = 0;
+          if (!_isInitialized) {
+            _init();
+          }
+          for (var ix = 0; ix < _aFallbackFonts.length; ++ix) {
+            span.style.fontFamily = '"' + p_cssFontName + '",' + _aFallbackFonts[ix];
+            wThisFont = span.offsetWidth;
+            if (ix > 0 && wThisFont != wPrevFont) {
+              return false;
+            }
+            wPrevFont = wThisFont;
+          }
+          return true;
+        },
+        whichFont: function(p_element) {
+          var sStack = _getCss(p_element, 'font-family');
+          var aStack = sStack.split(',');
+          var sFont = aStack.shift();
+          while (sFont) {
+            sFont = sFont.replace(/^\s*['"]?\s*([^'"]*)\s*['"]?\s*$/, '$1');
+            for (var ix = 0; ix < _aFallbackFonts.length; ix++) {
+              if (sFont == _aFallbackFonts[ix]) {
+                return sFont;
+              }
+            }
+            if (this.isFontLoaded(sFont)) {
+              return sFont;
+            }
+            sFont = aStack.shift();
+          }
+          return null;
+        }
+      };
+    }();
+  }).call(System.global);
+  return System.get("@@global-helpers").retrieveGlobal(__module.id, false);
+});
+
+System.register("npm:fkit@0.16.2/src/util", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  module.exports = {
+    extend: function(target, objects) {
+      objects.forEach(function(object) {
+        Object.getOwnPropertyNames(object).forEach(function(property) {
+          target[property] = object[property];
+        });
+      });
+      return target;
+    },
+    slice: Array.prototype.slice
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/fn", ["npm:fkit@0.16.2/src/util"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var util = require("npm:fkit@0.16.2/src/util");
+  function flatten(as) {
+    return as.reduce(function(a, b) {
+      return a.concat(b);
+    }, []);
+  }
+  function curry(f) {
+    var arity = f.length;
+    return (arity <= 1) ? f : given([], 0);
+    function given(args, applications) {
+      return function() {
+        var newArgs = args.concat((arguments.length > 0) ? util.slice.call(arguments, 0) : undefined);
+        return (newArgs.length >= arity) ? f.apply(this, newArgs) : given(newArgs, applications + 1);
+      };
+    }
+  }
+  function variadic(f) {
+    var arity = f.length;
+    if (arity < 1) {
+      return f;
+    } else if (arity === 1) {
+      return function() {
+        var args = util.slice.call(arguments, 0),
+            newArgs = (arguments.length === 1) ? flatten(args) : args;
+        return f.call(this, newArgs);
+      };
+    } else {
+      return function() {
+        var numMissingArgs = Math.max(arity - arguments.length - 1, 0),
+            missingArgs = new Array(numMissingArgs),
+            namedArgs = util.slice.call(arguments, 0, arity - 1),
+            variadicArgs = util.slice.call(arguments, f.length - 1);
+        return f.apply(this, namedArgs.concat(missingArgs).concat([variadicArgs]));
+      };
+    }
+  }
+  var self;
+  self = module.exports = {
+    flatten: flatten,
+    apply: curry(function(f, a) {
+      return f(a);
+    }),
+    apply2: curry(function(f, a, b) {
+      return f(a, b);
+    }),
+    apply3: curry(function(f, a, b, c) {
+      return f(a, b, c);
+    }),
+    applyRight: curry(function(a, f) {
+      return f(a);
+    }),
+    compose: variadic(function(fs) {
+      return function(a) {
+        return fs.reduceRight(function(a, f) {
+          return f(a);
+        }, a);
+      };
+    }),
+    flip: curry(function(f, a, b) {
+      return f(b, a);
+    }),
+    id: function(a) {
+      return a;
+    },
+    const: function(c) {
+      return function() {
+        return c;
+      };
+    },
+    curry: curry,
+    uncurry: curry(function(f, p) {
+      return f(p[0], p[1]);
+    }),
+    unary: function(f) {
+      return (f.length === 1) ? f : self.apply(f);
+    },
+    binary: function(f) {
+      return (f.length === 2) ? f : self.apply2(f);
+    },
+    variadic: variadic,
+    tap: curry(function(f, a) {
+      f(a);
+      return a;
+    }),
+    equal: curry(function(a, b) {
+      return b === a;
+    }),
+    notEqual: curry(function(a, b) {
+      return b !== a;
+    }),
+    compare: curry(function(a, b) {
+      if (a > b) {
+        return 1;
+      } else if (a < b) {
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/list/base", ["npm:fkit@0.16.2/src/fn"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var fn = require("npm:fkit@0.16.2/src/fn");
+  var self;
+  self = module.exports = {
+    isString: function(as) {
+      return (typeof as === 'string');
+    },
+    isArrayOfStrings: function(as) {
+      return Array.isArray(as) && as.length > 0 && as.reduce(function(a, b) {
+        return a && self.isString(b);
+      }, true);
+    },
+    mempty: function(as) {
+      return self.isString(as) || self.isArrayOfStrings(as) ? '' : [];
+    },
+    pure: function(a) {
+      return self.isString(a) || self.isArrayOfStrings(a) ? a : [a];
+    },
+    toArray: function(as) {
+      return self.isString(as) ? as.split('') : as;
+    },
+    toList: function(as, t) {
+      return t === 'string' ? as.join('') : as;
+    },
+    length: function(as) {
+      return as.length;
+    },
+    empty: function(as) {
+      return as.length === 0;
+    },
+    append: fn.curry(function(a, bs) {
+      return self.isString(bs) ? (bs + a) : bs.concat([a]);
+    }),
+    prepend: fn.curry(function(a, bs) {
+      return self.isString(bs) ? (a + bs) : [a].concat(bs);
+    }),
+    surround: fn.curry(function(a, b, cs) {
+      return self.append(b, self.prepend(a, cs));
+    }),
+    head: function(as) {
+      return as[0];
+    },
+    last: function(as) {
+      return as[as.length - 1];
+    },
+    init: function(as) {
+      return as.slice(0, as.length - 1);
+    },
+    tail: function(as) {
+      return as.slice(1);
+    },
+    inits: function inits(as) {
+      return self.prepend(self.mempty(as), self.empty(as) ? [] : inits(self.tail(as)).map(self.prepend(self.head(as))));
+    },
+    tails: function tails(as) {
+      return self.prepend(as, self.empty(as) ? [] : tails(self.tail(as)));
+    }
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/math", ["npm:fkit@0.16.2/src/fn"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var fn = require("npm:fkit@0.16.2/src/fn");
+  module.exports = {
+    add: fn.curry(function(a, b) {
+      return b + a;
+    }),
+    sub: fn.curry(function(a, b) {
+      return b - a;
+    }),
+    mul: fn.curry(function(a, b) {
+      return b * a;
+    }),
+    div: fn.curry(function(a, b) {
+      return b / a;
+    }),
+    mod: fn.curry(function(a, b) {
+      return b % a;
+    }),
+    max: fn.curry(function(a, b) {
+      return b > a ? b : a;
+    }),
+    min: fn.curry(function(a, b) {
+      return a > b ? b : a;
+    }),
+    negate: function(a) {
+      return -a;
+    },
+    eq: fn.curry(function(a, b) {
+      return b == a;
+    }),
+    neq: fn.curry(function(a, b) {
+      return b != a;
+    }),
+    gt: fn.curry(function(a, b) {
+      return b > a;
+    }),
+    gte: fn.curry(function(a, b) {
+      return b >= a;
+    }),
+    lt: fn.curry(function(a, b) {
+      return b < a;
+    }),
+    lte: fn.curry(function(a, b) {
+      return b <= a;
+    }),
+    inc: function(a) {
+      return a + 1;
+    },
+    dec: function(a) {
+      return a - 1;
+    },
+    randomInt: fn.curry(function(a, b) {
+      return Math.floor(Math.random() * (b - a + 1)) + a;
+    }),
+    randomFloat: fn.curry(function(a, b) {
+      return (Math.random() * (b - a)) + a;
+    })
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/list/sublist", ["npm:fkit@0.16.2/src/list/base", "npm:fkit@0.16.2/src/fn", "npm:fkit@0.16.2/src/list/fold"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var base = require("npm:fkit@0.16.2/src/list/base"),
+      fn = require("npm:fkit@0.16.2/src/fn"),
+      fold = require("npm:fkit@0.16.2/src/list/fold");
+  var self;
+  self = module.exports = {
+    take: fn.curry(function(n, as) {
+      var s = base.isString(as) ? '' : [],
+          m = as.length;
+      for (var i = 0; i < Math.min(m, n); i++) {
+        s = s.concat(as[i]);
+      }
+      return s;
+    }),
+    drop: fn.curry(function(n, as) {
+      var s = base.isString(as) ? '' : [],
+          m = as.length;
+      for (var i = n; i < m; i++) {
+        s = s.concat(as[i]);
+      }
+      return s;
+    }),
+    takeWhile: fn.curry(function(p, as) {
+      var s = base.isString(as) ? '' : [],
+          n = as.length;
+      for (var i = 0; i < n && p(as[i]); i++) {
+        s = s.concat(as[i]);
+      }
+      return s;
+    }),
+    dropWhile: fn.curry(function(p, as) {
+      var s = base.isString(as) ? '' : [],
+          m = as.length,
+          n = 0;
+      while (p(as[n]) && n < as.length) {
+        n++;
+      }
+      for (var i = n; i < m; i++) {
+        s = s.concat(as[i]);
+      }
+      return s;
+    }),
+    splitAt: fn.curry(function(n, as) {
+      return [self.take(n, as), self.drop(n, as)];
+    }),
+    span: fn.curry(function(p, as) {
+      return [self.takeWhile(p, as), self.dropWhile(p, as)];
+    }),
+    group: function(as) {
+      return self.groupBy(fn.equal, as);
+    },
+    groupBy: fn.curry(function groupBy(f, as) {
+      var b = base.head(as),
+          bs = self.span(f(b), base.tail(as));
+      return base.empty(as) ? [] : base.prepend(base.prepend(b, base.head(bs)), groupBy(f, base.last(bs)));
+    })
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/list/map", ["npm:fkit@0.16.2/src/list/base", "npm:fkit@0.16.2/src/fn", "npm:fkit@0.16.2/src/list/fold"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var base = require("npm:fkit@0.16.2/src/list/base"),
+      fn = require("npm:fkit@0.16.2/src/fn"),
+      fold = require("npm:fkit@0.16.2/src/list/fold");
+  module.exports = {
+    map: fn.curry(function(f, as) {
+      return base.toArray(as).map(f);
+    }),
+    reverse: function(as) {
+      return base.toArray(as).reduce(fn.flip(base.prepend), base.mempty(as));
+    },
+    intersperse: fn.curry(function(s, as) {
+      return base.empty(as) ? base.mempty(as) : fold.concat(base.head(as), prependToAll(base.tail(as)));
+      function prependToAll(bs) {
+        return base.empty(bs) ? base.mempty(bs) : fold.concat(s, base.head(bs), prependToAll(base.tail(bs)));
+      }
+    })
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/logic", ["npm:fkit@0.16.2/src/fn", "npm:fkit@0.16.2/src/list/map"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var fn = require("npm:fkit@0.16.2/src/fn"),
+      map = require("npm:fkit@0.16.2/src/list/map");
+  var self;
+  self = module.exports = {
+    and: fn.curry(function(a, b) {
+      return b && a;
+    }),
+    or: fn.curry(function(a, b) {
+      return b || a;
+    }),
+    not: function(a) {
+      return !a;
+    },
+    branch: fn.curry(function(p, f, g, a) {
+      return p(a) ? f(a) : g(a);
+    }),
+    whereAll: fn.curry(function(ps, a) {
+      return ps.map(fn.applyRight(a)).reduce(self.and, true);
+    }),
+    whereAny: fn.curry(function(ps, a) {
+      return ps.map(fn.applyRight(a)).reduce(self.or, false);
+    })
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/list/set", ["npm:fkit@0.16.2/src/list/base", "npm:fkit@0.16.2/src/list/build", "npm:fkit@0.16.2/src/fn", "npm:fkit@0.16.2/src/list/fold", "npm:fkit@0.16.2/src/list/map", "npm:fkit@0.16.2/src/list/search"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var base = require("npm:fkit@0.16.2/src/list/base"),
+      build = require("npm:fkit@0.16.2/src/list/build"),
+      fn = require("npm:fkit@0.16.2/src/fn"),
+      fold = require("npm:fkit@0.16.2/src/list/fold"),
+      map = require("npm:fkit@0.16.2/src/list/map"),
+      search = require("npm:fkit@0.16.2/src/list/search");
+  var self;
+  self = module.exports = {
+    nub: function(as) {
+      return self.nubBy(fn.equal, as);
+    },
+    nubBy: fn.curry(function nubBy(f, as) {
+      var a = base.head(as);
+      return base.empty(as) ? base.mempty(as) : base.prepend(a, nubBy(f, search.filter(function(b) {
+        return !f(a, b);
+      }, base.tail(as))));
+    }),
+    union: fn.curry(function(as, bs) {
+      return fold.fold(function(cs, b) {
+        return (search.elem(b, cs)) ? cs : base.append(b, cs);
+      }, as, bs);
+    }),
+    intersect: fn.curry(function(as, bs) {
+      return fold.fold(function(cs, a) {
+        return (search.elem(a, bs)) ? base.append(a, cs) : cs;
+      }, base.mempty(as), as);
+    }),
+    difference: fn.curry(function(as, bs) {
+      return fold.fold(fn.flip(self.remove), as, bs);
+    }),
+    remove: fn.curry(function(a, bs) {
+      return self.removeBy(fn.equal, a, bs);
+    }),
+    removeBy: fn.curry(function removeBy(f, a, bs_) {
+      var b = base.head(bs_),
+          bs = base.tail(bs_);
+      return base.empty(bs_) ? base.mempty(bs_) : f(a, b) ? bs : base.prepend(b, removeBy(f, a, bs));
+    }),
+    cartesian: fn.curry(function cartesian(as, bs) {
+      return base.empty(as) ? [] : fold.concat(map.map(build.pair(base.head(as)), bs), cartesian(base.tail(as), bs));
+    }),
+    subsequences: function(as) {
+      return base.prepend(base.mempty(as), subsequences_(as));
+      function subsequences_(bs) {
+        var b = base.head(bs);
+        if (base.empty(bs)) {
+          return [];
+        } else {
+          return base.prepend(base.pure(b), fold.foldRight(f, [], subsequences_(base.tail(bs))));
+        }
+        function f(ys, r) {
+          return fold.concat(base.pure(ys), base.pure(base.prepend(b, ys)), r);
+        }
+      }
+    },
+    permutations: function permutations(as) {
+      return base.prepend(as, permutations_(as, []));
+      function permutations_(bs_, cs) {
+        var b = base.head(bs_),
+            bs = base.tail(bs_);
+        return base.empty(bs_) ? [] : fold.foldRight(interleave, permutations_(bs, base.prepend(b, cs)), permutations(cs));
+        function interleave(ds, r) {
+          return interleave_(fn.id, ds)[1];
+          function interleave_(f, es_) {
+            if (base.empty(es_)) {
+              return [bs, r];
+            } else {
+              var e = base.head(es_),
+                  es = base.tail(es_),
+                  s = interleave_(fn.compose(f, base.prepend(e)), es);
+              return [base.prepend(e, s[0]), base.prepend(f(fold.concat(b, e, s[0])), s[1])];
+            }
+          }
+        }
+      }
+    }
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/list/sort", ["npm:fkit@0.16.2/src/list/base", "npm:fkit@0.16.2/src/fn", "npm:fkit@0.16.2/src/util"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var base = require("npm:fkit@0.16.2/src/list/base"),
+      fn = require("npm:fkit@0.16.2/src/fn"),
+      util = require("npm:fkit@0.16.2/src/util");
+  var self;
+  self = module.exports = {
+    sort: function(as) {
+      return self.sortBy(fn.compare, as);
+    },
+    sortBy: fn.curry(function(c, as) {
+      var bs = base.toArray(as.slice(0));
+      return base.toList(bs.sort(c), typeof as);
+    })
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/list/zip", ["npm:fkit@0.16.2/src/list/base", "npm:fkit@0.16.2/src/list/build", "npm:fkit@0.16.2/src/fn"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var base = require("npm:fkit@0.16.2/src/list/base"),
+      build = require("npm:fkit@0.16.2/src/list/build"),
+      fn = require("npm:fkit@0.16.2/src/fn");
+  var self;
+  self = module.exports = {
+    zipWith: fn.curry(function(f, as, bs) {
+      var n = Math.min(as.length, bs.length);
+      return base.toArray(as.slice(0, n)).map(function(a, i) {
+        return f(a, bs[i]);
+      });
+    }),
+    zip: fn.curry(function(as, bs) {
+      return self.zipWith(build.pair, as, bs);
+    }),
+    unzip: function(as) {
+      var s = base.mempty(as[0]);
+      return as.reduceRight(function(p, ps) {
+        var a = ps[0],
+            b = ps[1],
+            as = p[0],
+            bs = p[1];
+        return [base.prepend(a, as), base.prepend(b, bs)];
+      }, [s, s]);
+    }
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/obj", ["npm:fkit@0.16.2/src/fn", "npm:fkit@0.16.2/src/list/set", "npm:fkit@0.16.2/src/util"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var fn = require("npm:fkit@0.16.2/src/fn"),
+      set = require("npm:fkit@0.16.2/src/list/set"),
+      util = require("npm:fkit@0.16.2/src/util");
+  var self;
+  self = module.exports = {
+    applyMethod: fn.curry(function(k, a, o) {
+      return o[k](a);
+    }),
+    applyMethod2: fn.curry(function(k, a, b, o) {
+      return o[k](a, b);
+    }),
+    applyMethod3: fn.curry(function(k, a, b, c, o) {
+      return o[k](a, b, c);
+    }),
+    copy: fn.variadic(function(o, ps) {
+      return util.extend(new o.constructor(), [o].concat(ps));
+    }),
+    get: fn.curry(function(k, o) {
+      return o[k];
+    }),
+    getIn: fn.curry(function(ks, o) {
+      return ks.reduce(function(a, b) {
+        return (a !== undefined) ? a[b] : undefined;
+      }, o);
+    }),
+    set: fn.curry(function(k, v, o) {
+      var p = {};
+      p[k] = v;
+      return self.copy(o, p);
+    }),
+    update: fn.curry(function(k, f, o) {
+      return self.set(k, f(self.get(k, o)), o);
+    }),
+    pick: fn.curry(function(ks, o) {
+      return ks.reduce(function(p, k) {
+        return self.set(k, self.get(k, o), p);
+      }, {});
+    }),
+    omit: fn.curry(function(ks, o) {
+      return set.difference(self.keys(o), ks).reduce(function(p, k) {
+        return self.set(k, self.get(k, o), p);
+      }, {});
+    }),
+    pairs: function(o) {
+      return Object.keys(o).map(function(k) {
+        return [k, self.get(k, o)];
+      });
+    },
+    keys: function(o) {
+      return Object.keys(o);
+    },
+    values: function(o) {
+      return Object.keys(o).map(fn.flip(self.get)(o));
+    }
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/string", ["npm:fkit@0.16.2/src/fn"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var fn = require("npm:fkit@0.16.2/src/fn");
+  module.exports = {
+    toUpper: function(s) {
+      return s.toUpperCase();
+    },
+    toLower: function(s) {
+      return s.toLowerCase();
+    },
+    replace: fn.curry(function(a, b, s) {
+      return s.replace(a, b);
+    })
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:webfontloader@1.5.15/webfontloader", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "format cjs";
+  ;
+  (function(window, document, undefined) {
+    function aa(a, b, c) {
+      return a.call.apply(a.bind, arguments);
+    }
+    function ba(a, b, c) {
+      if (!a)
+        throw Error();
+      if (2 < arguments.length) {
+        var d = Array.prototype.slice.call(arguments, 2);
+        return function() {
+          var c = Array.prototype.slice.call(arguments);
+          Array.prototype.unshift.apply(c, d);
+          return a.apply(b, c);
+        };
+      }
+      return function() {
+        return a.apply(b, arguments);
+      };
+    }
+    function k(a, b, c) {
+      k = Function.prototype.bind && -1 != Function.prototype.bind.toString().indexOf("native code") ? aa : ba;
+      return k.apply(null, arguments);
+    }
+    var n = Date.now || function() {
+      return +new Date;
+    };
+    function q(a, b) {
+      this.J = a;
+      this.t = b || a;
+      this.C = this.t.document;
+    }
+    q.prototype.createElement = function(a, b, c) {
+      a = this.C.createElement(a);
+      if (b)
+        for (var d in b)
+          b.hasOwnProperty(d) && ("style" == d ? a.style.cssText = b[d] : a.setAttribute(d, b[d]));
+      c && a.appendChild(this.C.createTextNode(c));
+      return a;
+    };
+    function r(a, b, c) {
+      a = a.C.getElementsByTagName(b)[0];
+      a || (a = document.documentElement);
+      a && a.lastChild && a.insertBefore(c, a.lastChild);
+    }
+    function ca(a, b) {
+      function c() {
+        a.C.body ? b() : setTimeout(c, 0);
+      }
+      c();
+    }
+    function s(a, b, c) {
+      b = b || [];
+      c = c || [];
+      for (var d = a.className.split(/\s+/),
+          e = 0; e < b.length; e += 1) {
+        for (var f = !1,
+            g = 0; g < d.length; g += 1)
+          if (b[e] === d[g]) {
+            f = !0;
+            break;
+          }
+        f || d.push(b[e]);
+      }
+      b = [];
+      for (e = 0; e < d.length; e += 1) {
+        f = !1;
+        for (g = 0; g < c.length; g += 1)
+          if (d[e] === c[g]) {
+            f = !0;
+            break;
+          }
+        f || b.push(d[e]);
+      }
+      a.className = b.join(" ").replace(/\s+/g, " ").replace(/^\s+|\s+$/, "");
+    }
+    function t(a, b) {
+      for (var c = a.className.split(/\s+/),
+          d = 0,
+          e = c.length; d < e; d++)
+        if (c[d] == b)
+          return !0;
+      return !1;
+    }
+    function u(a) {
+      if ("string" === typeof a.ma)
+        return a.ma;
+      var b = a.t.location.protocol;
+      "about:" == b && (b = a.J.location.protocol);
+      return "https:" == b ? "https:" : "http:";
+    }
+    function v(a, b) {
+      var c = a.createElement("link", {
+        rel: "stylesheet",
+        href: b
+      }),
+          d = !1;
+      c.onload = function() {
+        d || (d = !0);
+      };
+      c.onerror = function() {
+        d || (d = !0);
+      };
+      r(a, "head", c);
+    }
+    function w(a, b, c, d) {
+      var e = a.C.getElementsByTagName("head")[0];
+      if (e) {
+        var f = a.createElement("script", {src: b}),
+            g = !1;
+        f.onload = f.onreadystatechange = function() {
+          g || this.readyState && "loaded" != this.readyState && "complete" != this.readyState || (g = !0, c && c(null), f.onload = f.onreadystatechange = null, "HEAD" == f.parentNode.tagName && e.removeChild(f));
+        };
+        e.appendChild(f);
+        window.setTimeout(function() {
+          g || (g = !0, c && c(Error("Script load timeout")));
+        }, d || 5E3);
+        return f;
+      }
+      return null;
+    }
+    ;
+    function x(a, b) {
+      this.X = a;
+      this.fa = b;
+    }
+    ;
+    function y(a, b, c, d) {
+      this.c = null != a ? a : null;
+      this.g = null != b ? b : null;
+      this.A = null != c ? c : null;
+      this.e = null != d ? d : null;
+    }
+    var da = /^([0-9]+)(?:[\._-]([0-9]+))?(?:[\._-]([0-9]+))?(?:[\._+-]?(.*))?$/;
+    y.prototype.compare = function(a) {
+      return this.c > a.c || this.c === a.c && this.g > a.g || this.c === a.c && this.g === a.g && this.A > a.A ? 1 : this.c < a.c || this.c === a.c && this.g < a.g || this.c === a.c && this.g === a.g && this.A < a.A ? -1 : 0;
+    };
+    y.prototype.toString = function() {
+      return [this.c, this.g || "", this.A || "", this.e || ""].join("");
+    };
+    function z(a) {
+      a = da.exec(a);
+      var b = null,
+          c = null,
+          d = null,
+          e = null;
+      a && (null !== a[1] && a[1] && (b = parseInt(a[1], 10)), null !== a[2] && a[2] && (c = parseInt(a[2], 10)), null !== a[3] && a[3] && (d = parseInt(a[3], 10)), null !== a[4] && a[4] && (e = /^[0-9]+$/.test(a[4]) ? parseInt(a[4], 10) : a[4]));
+      return new y(b, c, d, e);
+    }
+    ;
+    function A(a, b, c, d, e, f, g, h) {
+      this.M = a;
+      this.k = h;
+    }
+    A.prototype.getName = function() {
+      return this.M;
+    };
+    function B(a) {
+      this.a = a;
+    }
+    var ea = new A("Unknown", 0, 0, 0, 0, 0, 0, new x(!1, !1));
+    B.prototype.parse = function() {
+      var a;
+      if (-1 != this.a.indexOf("MSIE") || -1 != this.a.indexOf("Trident/")) {
+        a = C(this);
+        var b = z(D(this)),
+            c = null,
+            d = E(this.a, /Trident\/([\d\w\.]+)/, 1),
+            c = -1 != this.a.indexOf("MSIE") ? z(E(this.a, /MSIE ([\d\w\.]+)/, 1)) : z(E(this.a, /rv:([\d\w\.]+)/, 1));
+        "" != d && z(d);
+        a = new A("MSIE", 0, 0, 0, 0, 0, 0, new x("Windows" == a && 6 <= c.c || "Windows Phone" == a && 8 <= b.c, !1));
+      } else if (-1 != this.a.indexOf("Opera"))
+        a: if (a = z(E(this.a, /Presto\/([\d\w\.]+)/, 1)), z(D(this)), null !== a.c || z(E(this.a, /rv:([^\)]+)/, 1)), -1 != this.a.indexOf("Opera Mini/"))
+          a = z(E(this.a, /Opera Mini\/([\d\.]+)/, 1)), a = new A("OperaMini", 0, 0, 0, C(this), 0, 0, new x(!1, !1));
+        else {
+          if (-1 != this.a.indexOf("Version/") && (a = z(E(this.a, /Version\/([\d\.]+)/, 1)), null !== a.c)) {
+            a = new A("Opera", 0, 0, 0, C(this), 0, 0, new x(10 <= a.c, !1));
+            break a;
+          }
+          a = z(E(this.a, /Opera[\/ ]([\d\.]+)/, 1));
+          a = null !== a.c ? new A("Opera", 0, 0, 0, C(this), 0, 0, new x(10 <= a.c, !1)) : new A("Opera", 0, 0, 0, C(this), 0, 0, new x(!1, !1));
+        }
+      else
+        /OPR\/[\d.]+/.test(this.a) ? a = F(this) : /AppleWeb(K|k)it/.test(this.a) ? a = F(this) : -1 != this.a.indexOf("Gecko") ? (a = "Unknown", b = new y, z(D(this)), b = !1, -1 != this.a.indexOf("Firefox") ? (a = "Firefox", b = z(E(this.a, /Firefox\/([\d\w\.]+)/, 1)), b = 3 <= b.c && 5 <= b.g) : -1 != this.a.indexOf("Mozilla") && (a = "Mozilla"), c = z(E(this.a, /rv:([^\)]+)/, 1)), b || (b = 1 < c.c || 1 == c.c && 9 < c.g || 1 == c.c && 9 == c.g && 2 <= c.A), a = new A(a, 0, 0, 0, C(this), 0, 0, new x(b, !1))) : a = ea;
+      return a;
+    };
+    function C(a) {
+      var b = E(a.a, /(iPod|iPad|iPhone|Android|Windows Phone|BB\d{2}|BlackBerry)/, 1);
+      if ("" != b)
+        return /BB\d{2}/.test(b) && (b = "BlackBerry"), b;
+      a = E(a.a, /(Linux|Mac_PowerPC|Macintosh|Windows|CrOS|PlayStation|CrKey)/, 1);
+      return "" != a ? ("Mac_PowerPC" == a ? a = "Macintosh" : "PlayStation" == a && (a = "Linux"), a) : "Unknown";
+    }
+    function D(a) {
+      var b = E(a.a, /(OS X|Windows NT|Android) ([^;)]+)/, 2);
+      if (b || (b = E(a.a, /Windows Phone( OS)? ([^;)]+)/, 2)) || (b = E(a.a, /(iPhone )?OS ([\d_]+)/, 2)))
+        return b;
+      if (b = E(a.a, /(?:Linux|CrOS|CrKey) ([^;)]+)/, 1))
+        for (var b = b.split(/\s/),
+            c = 0; c < b.length; c += 1)
+          if (/^[\d\._]+$/.test(b[c]))
+            return b[c];
+      return (a = E(a.a, /(BB\d{2}|BlackBerry).*?Version\/([^\s]*)/, 2)) ? a : "Unknown";
+    }
+    function F(a) {
+      var b = C(a),
+          c = z(D(a)),
+          d = z(E(a.a, /AppleWeb(?:K|k)it\/([\d\.\+]+)/, 1)),
+          e = "Unknown",
+          f = new y,
+          f = "Unknown",
+          g = !1;
+      /OPR\/[\d.]+/.test(a.a) ? e = "Opera" : -1 != a.a.indexOf("Chrome") || -1 != a.a.indexOf("CrMo") || -1 != a.a.indexOf("CriOS") ? e = "Chrome" : /Silk\/\d/.test(a.a) ? e = "Silk" : "BlackBerry" == b || "Android" == b ? e = "BuiltinBrowser" : -1 != a.a.indexOf("PhantomJS") ? e = "PhantomJS" : -1 != a.a.indexOf("Safari") ? e = "Safari" : -1 != a.a.indexOf("AdobeAIR") ? e = "AdobeAIR" : -1 != a.a.indexOf("PlayStation") && (e = "BuiltinBrowser");
+      "BuiltinBrowser" == e ? f = "Unknown" : "Silk" == e ? f = E(a.a, /Silk\/([\d\._]+)/, 1) : "Chrome" == e ? f = E(a.a, /(Chrome|CrMo|CriOS)\/([\d\.]+)/, 2) : -1 != a.a.indexOf("Version/") ? f = E(a.a, /Version\/([\d\.\w]+)/, 1) : "AdobeAIR" == e ? f = E(a.a, /AdobeAIR\/([\d\.]+)/, 1) : "Opera" == e ? f = E(a.a, /OPR\/([\d.]+)/, 1) : "PhantomJS" == e && (f = E(a.a, /PhantomJS\/([\d.]+)/, 1));
+      f = z(f);
+      g = "AdobeAIR" == e ? 2 < f.c || 2 == f.c && 5 <= f.g : "BlackBerry" == b ? 10 <= c.c : "Android" == b ? 2 < c.c || 2 == c.c && 1 < c.g : 526 <= d.c || 525 <= d.c && 13 <= d.g;
+      return new A(e, 0, 0, 0, 0, 0, 0, new x(g, 536 > d.c || 536 == d.c && 11 > d.g));
+    }
+    function E(a, b, c) {
+      return (a = a.match(b)) && a[c] ? a[c] : "";
+    }
+    ;
+    function G(a) {
+      this.la = a || "-";
+    }
+    G.prototype.e = function(a) {
+      for (var b = [],
+          c = 0; c < arguments.length; c++)
+        b.push(arguments[c].replace(/[\W_]+/g, "").toLowerCase());
+      return b.join(this.la);
+    };
+    function H(a, b) {
+      this.M = a;
+      this.Y = 4;
+      this.N = "n";
+      var c = (b || "n4").match(/^([nio])([1-9])$/i);
+      c && (this.N = c[1], this.Y = parseInt(c[2], 10));
+    }
+    H.prototype.getName = function() {
+      return this.M;
+    };
+    function I(a) {
+      return a.N + a.Y;
+    }
+    function ga(a) {
+      var b = 4,
+          c = "n",
+          d = null;
+      a && ((d = a.match(/(normal|oblique|italic)/i)) && d[1] && (c = d[1].substr(0, 1).toLowerCase()), (d = a.match(/([1-9]00|normal|bold)/i)) && d[1] && (/bold/i.test(d[1]) ? b = 7 : /[1-9]00/.test(d[1]) && (b = parseInt(d[1].substr(0, 1), 10))));
+      return c + b;
+    }
+    ;
+    function ha(a, b) {
+      this.d = a;
+      this.p = a.t.document.documentElement;
+      this.P = b;
+      this.j = "wf";
+      this.h = new G("-");
+      this.ga = !1 !== b.events;
+      this.B = !1 !== b.classes;
+    }
+    function J(a) {
+      if (a.B) {
+        var b = t(a.p, a.h.e(a.j, "active")),
+            c = [],
+            d = [a.h.e(a.j, "loading")];
+        b || c.push(a.h.e(a.j, "inactive"));
+        s(a.p, c, d);
+      }
+      K(a, "inactive");
+    }
+    function K(a, b, c) {
+      if (a.ga && a.P[b])
+        if (c)
+          a.P[b](c.getName(), I(c));
+        else
+          a.P[b]();
+    }
+    ;
+    function ia() {
+      this.w = {};
+    }
+    ;
+    function L(a, b) {
+      this.d = a;
+      this.G = b;
+      this.m = this.d.createElement("span", {"aria-hidden": "true"}, this.G);
+    }
+    function M(a) {
+      r(a.d, "body", a.m);
+    }
+    function N(a) {
+      var b;
+      b = [];
+      for (var c = a.M.split(/,\s*/),
+          d = 0; d < c.length; d++) {
+        var e = c[d].replace(/['"]/g, "");
+        -1 == e.indexOf(" ") ? b.push(e) : b.push("'" + e + "'");
+      }
+      b = b.join(",");
+      c = "normal";
+      "o" === a.N ? c = "oblique" : "i" === a.N && (c = "italic");
+      return "display:block;position:absolute;top:-9999px;left:-9999px;font-size:300px;width:auto;height:auto;line-height:normal;margin:0;padding:0;font-variant:normal;white-space:nowrap;font-family:" + b + ";" + ("font-style:" + c + ";font-weight:" + (a.Y + "00") + ";");
+    }
+    L.prototype.remove = function() {
+      var a = this.m;
+      a.parentNode && a.parentNode.removeChild(a);
+    };
+    function O(a, b, c, d, e, f, g, h) {
+      this.Z = a;
+      this.ja = b;
+      this.d = c;
+      this.s = d;
+      this.G = h || "BESbswy";
+      this.k = e;
+      this.I = {};
+      this.W = f || 3E3;
+      this.ba = g || null;
+      this.F = this.D = null;
+      a = new L(this.d, this.G);
+      M(a);
+      for (var m in P)
+        P.hasOwnProperty(m) && (b = new H(P[m], I(this.s)), b = N(b), a.m.style.cssText = b, this.I[P[m]] = a.m.offsetWidth);
+      a.remove();
+    }
+    var P = {
+      ra: "serif",
+      qa: "sans-serif",
+      pa: "monospace"
+    };
+    O.prototype.start = function() {
+      this.D = new L(this.d, this.G);
+      M(this.D);
+      this.F = new L(this.d, this.G);
+      M(this.F);
+      this.na = n();
+      var a = new H(this.s.getName() + ",serif", I(this.s)),
+          a = N(a);
+      this.D.m.style.cssText = a;
+      a = new H(this.s.getName() + ",sans-serif", I(this.s));
+      a = N(a);
+      this.F.m.style.cssText = a;
+      Q(this);
+    };
+    function R(a, b, c) {
+      for (var d in P)
+        if (P.hasOwnProperty(d) && b === a.I[P[d]] && c === a.I[P[d]])
+          return !0;
+      return !1;
+    }
+    function Q(a) {
+      var b = a.D.m.offsetWidth,
+          c = a.F.m.offsetWidth;
+      b === a.I.serif && c === a.I["sans-serif"] || a.k.fa && R(a, b, c) ? n() - a.na >= a.W ? a.k.fa && R(a, b, c) && (null === a.ba || a.ba.hasOwnProperty(a.s.getName())) ? S(a, a.Z) : S(a, a.ja) : ja(a) : S(a, a.Z);
+    }
+    function ja(a) {
+      setTimeout(k(function() {
+        Q(this);
+      }, a), 25);
+    }
+    function S(a, b) {
+      a.D.remove();
+      a.F.remove();
+      b(a.s);
+    }
+    ;
+    function T(a, b, c, d) {
+      this.d = b;
+      this.u = c;
+      this.R = 0;
+      this.da = this.aa = !1;
+      this.W = d;
+      this.k = a.k;
+    }
+    function ka(a, b, c, d, e) {
+      c = c || {};
+      if (0 === b.length && e)
+        J(a.u);
+      else
+        for (a.R += b.length, e && (a.aa = e), e = 0; e < b.length; e++) {
+          var f = b[e],
+              g = c[f.getName()],
+              h = a.u,
+              m = f;
+          h.B && s(h.p, [h.h.e(h.j, m.getName(), I(m).toString(), "loading")]);
+          K(h, "fontloading", m);
+          h = null;
+          h = new O(k(a.ha, a), k(a.ia, a), a.d, f, a.k, a.W, d, g);
+          h.start();
+        }
+    }
+    T.prototype.ha = function(a) {
+      var b = this.u;
+      b.B && s(b.p, [b.h.e(b.j, a.getName(), I(a).toString(), "active")], [b.h.e(b.j, a.getName(), I(a).toString(), "loading"), b.h.e(b.j, a.getName(), I(a).toString(), "inactive")]);
+      K(b, "fontactive", a);
+      this.da = !0;
+      la(this);
+    };
+    T.prototype.ia = function(a) {
+      var b = this.u;
+      if (b.B) {
+        var c = t(b.p, b.h.e(b.j, a.getName(), I(a).toString(), "active")),
+            d = [],
+            e = [b.h.e(b.j, a.getName(), I(a).toString(), "loading")];
+        c || d.push(b.h.e(b.j, a.getName(), I(a).toString(), "inactive"));
+        s(b.p, d, e);
+      }
+      K(b, "fontinactive", a);
+      la(this);
+    };
+    function la(a) {
+      0 == --a.R && a.aa && (a.da ? (a = a.u, a.B && s(a.p, [a.h.e(a.j, "active")], [a.h.e(a.j, "loading"), a.h.e(a.j, "inactive")]), K(a, "active")) : J(a.u));
+    }
+    ;
+    function U(a) {
+      this.J = a;
+      this.v = new ia;
+      this.oa = new B(a.navigator.userAgent);
+      this.a = this.oa.parse();
+      this.T = this.U = 0;
+      this.Q = this.S = !0;
+    }
+    U.prototype.load = function(a) {
+      this.d = new q(this.J, a.context || this.J);
+      this.S = !1 !== a.events;
+      this.Q = !1 !== a.classes;
+      var b = new ha(this.d, a),
+          c = [],
+          d = a.timeout;
+      b.B && s(b.p, [b.h.e(b.j, "loading")]);
+      K(b, "loading");
+      var c = this.v,
+          e = this.d,
+          f = [],
+          g;
+      for (g in a)
+        if (a.hasOwnProperty(g)) {
+          var h = c.w[g];
+          h && f.push(h(a[g], e));
+        }
+      c = f;
+      this.T = this.U = c.length;
+      a = new T(this.a, this.d, b, d);
+      d = 0;
+      for (g = c.length; d < g; d++)
+        e = c[d], e.K(this.a, k(this.ka, this, e, b, a));
+    };
+    U.prototype.ka = function(a, b, c, d) {
+      var e = this;
+      d ? a.load(function(a, b, d) {
+        ma(e, c, a, b, d);
+      }) : (a = 0 == --this.U, this.T--, a && 0 == this.T ? J(b) : (this.Q || this.S) && ka(c, [], {}, null, a));
+    };
+    function ma(a, b, c, d, e) {
+      var f = 0 == --a.U;
+      (a.Q || a.S) && setTimeout(function() {
+        ka(b, c, d || null, e || null, f);
+      }, 0);
+    }
+    ;
+    function na(a, b, c) {
+      this.O = a ? a : b + oa;
+      this.q = [];
+      this.V = [];
+      this.ea = c || "";
+    }
+    var oa = "//fonts.googleapis.com/css";
+    na.prototype.e = function() {
+      if (0 == this.q.length)
+        throw Error("No fonts to load!");
+      if (-1 != this.O.indexOf("kit="))
+        return this.O;
+      for (var a = this.q.length,
+          b = [],
+          c = 0; c < a; c++)
+        b.push(this.q[c].replace(/ /g, "+"));
+      a = this.O + "?family=" + b.join("%7C");
+      0 < this.V.length && (a += "&subset=" + this.V.join(","));
+      0 < this.ea.length && (a += "&text=" + encodeURIComponent(this.ea));
+      return a;
+    };
+    function pa(a) {
+      this.q = a;
+      this.ca = [];
+      this.L = {};
+    }
+    var qa = {
+      latin: "BESbswy",
+      cyrillic: "&#1081;&#1103;&#1046;",
+      greek: "&#945;&#946;&#931;",
+      khmer: "&#x1780;&#x1781;&#x1782;",
+      Hanuman: "&#x1780;&#x1781;&#x1782;"
+    },
+        ra = {
+          thin: "1",
+          extralight: "2",
+          "extra-light": "2",
+          ultralight: "2",
+          "ultra-light": "2",
+          light: "3",
+          regular: "4",
+          book: "4",
+          medium: "5",
+          "semi-bold": "6",
+          semibold: "6",
+          "demi-bold": "6",
+          demibold: "6",
+          bold: "7",
+          "extra-bold": "8",
+          extrabold: "8",
+          "ultra-bold": "8",
+          ultrabold: "8",
+          black: "9",
+          heavy: "9",
+          l: "3",
+          r: "4",
+          b: "7"
+        },
+        sa = {
+          i: "i",
+          italic: "i",
+          n: "n",
+          normal: "n"
+        },
+        ta = /^(thin|(?:(?:extra|ultra)-?)?light|regular|book|medium|(?:(?:semi|demi|extra|ultra)-?)?bold|black|heavy|l|r|b|[1-9]00)?(n|i|normal|italic)?$/;
+    pa.prototype.parse = function() {
+      for (var a = this.q.length,
+          b = 0; b < a; b++) {
+        var c = this.q[b].split(":"),
+            d = c[0].replace(/\+/g, " "),
+            e = ["n4"];
+        if (2 <= c.length) {
+          var f;
+          var g = c[1];
+          f = [];
+          if (g)
+            for (var g = g.split(","),
+                h = g.length,
+                m = 0; m < h; m++) {
+              var l;
+              l = g[m];
+              if (l.match(/^[\w-]+$/)) {
+                l = ta.exec(l.toLowerCase());
+                var p = void 0;
+                if (null == l)
+                  p = "";
+                else {
+                  p = void 0;
+                  p = l[1];
+                  if (null == p || "" == p)
+                    p = "4";
+                  else
+                    var fa = ra[p],
+                        p = fa ? fa : isNaN(p) ? "4" : p.substr(0, 1);
+                  l = l[2];
+                  p = [null == l || "" == l ? "n" : sa[l], p].join("");
+                }
+                l = p;
+              } else
+                l = "";
+              l && f.push(l);
+            }
+          0 < f.length && (e = f);
+          3 == c.length && (c = c[2], f = [], c = c ? c.split(",") : f, 0 < c.length && (c = qa[c[0]]) && (this.L[d] = c));
+        }
+        this.L[d] || (c = qa[d]) && (this.L[d] = c);
+        for (c = 0; c < e.length; c += 1)
+          this.ca.push(new H(d, e[c]));
+      }
+    };
+    function V(a, b) {
+      this.a = (new B(navigator.userAgent)).parse();
+      this.d = a;
+      this.f = b;
+    }
+    var ua = {
+      Arimo: !0,
+      Cousine: !0,
+      Tinos: !0
+    };
+    V.prototype.K = function(a, b) {
+      b(a.k.X);
+    };
+    V.prototype.load = function(a) {
+      var b = this.d;
+      "MSIE" == this.a.getName() && 1 != this.f.blocking ? ca(b, k(this.$, this, a)) : this.$(a);
+    };
+    V.prototype.$ = function(a) {
+      for (var b = this.d,
+          c = new na(this.f.api, u(b), this.f.text),
+          d = this.f.families,
+          e = d.length,
+          f = 0; f < e; f++) {
+        var g = d[f].split(":");
+        3 == g.length && c.V.push(g.pop());
+        var h = "";
+        2 == g.length && "" != g[1] && (h = ":");
+        c.q.push(g.join(h));
+      }
+      d = new pa(d);
+      d.parse();
+      v(b, c.e());
+      a(d.ca, d.L, ua);
+    };
+    function W(a, b) {
+      this.d = a;
+      this.f = b;
+      this.o = [];
+    }
+    W.prototype.H = function(a) {
+      var b = this.d;
+      return u(this.d) + (this.f.api || "//f.fontdeck.com/s/css/js/") + (b.t.location.hostname || b.J.location.hostname) + "/" + a + ".js";
+    };
+    W.prototype.K = function(a, b) {
+      var c = this.f.id,
+          d = this.d.t,
+          e = this;
+      c ? (d.__webfontfontdeckmodule__ || (d.__webfontfontdeckmodule__ = {}), d.__webfontfontdeckmodule__[c] = function(a, c) {
+        for (var d = 0,
+            m = c.fonts.length; d < m; ++d) {
+          var l = c.fonts[d];
+          e.o.push(new H(l.name, ga("font-weight:" + l.weight + ";font-style:" + l.style)));
+        }
+        b(a);
+      }, w(this.d, this.H(c), function(a) {
+        a && b(!1);
+      })) : b(!1);
+    };
+    W.prototype.load = function(a) {
+      a(this.o);
+    };
+    function X(a, b) {
+      this.d = a;
+      this.f = b;
+      this.o = [];
+    }
+    X.prototype.H = function(a) {
+      var b = u(this.d);
+      return (this.f.api || b + "//use.typekit.net") + "/" + a + ".js";
+    };
+    X.prototype.K = function(a, b) {
+      var c = this.f.id,
+          d = this.d.t,
+          e = this;
+      c ? w(this.d, this.H(c), function(a) {
+        if (a)
+          b(!1);
+        else {
+          if (d.Typekit && d.Typekit.config && d.Typekit.config.fn) {
+            a = d.Typekit.config.fn;
+            for (var c = 0; c < a.length; c += 2)
+              for (var h = a[c],
+                  m = a[c + 1],
+                  l = 0; l < m.length; l++)
+                e.o.push(new H(h, m[l]));
+            try {
+              d.Typekit.load({
+                events: !1,
+                classes: !1
+              });
+            } catch (p) {}
+          }
+          b(!0);
+        }
+      }, 2E3) : b(!1);
+    };
+    X.prototype.load = function(a) {
+      a(this.o);
+    };
+    function Y(a, b) {
+      this.d = a;
+      this.f = b;
+      this.o = [];
+    }
+    Y.prototype.K = function(a, b) {
+      var c = this,
+          d = c.f.projectId,
+          e = c.f.version;
+      if (d) {
+        var f = c.d.t;
+        w(this.d, c.H(d, e), function(e) {
+          if (e)
+            b(!1);
+          else {
+            if (f["__mti_fntLst" + d] && (e = f["__mti_fntLst" + d]()))
+              for (var h = 0; h < e.length; h++)
+                c.o.push(new H(e[h].fontfamily));
+            b(a.k.X);
+          }
+        }).id = "__MonotypeAPIScript__" + d;
+      } else
+        b(!1);
+    };
+    Y.prototype.H = function(a, b) {
+      var c = u(this.d),
+          d = (this.f.api || "fast.fonts.net/jsapi").replace(/^.*http(s?):(\/\/)?/, "");
+      return c + "//" + d + "/" + a + ".js" + (b ? "?v=" + b : "");
+    };
+    Y.prototype.load = function(a) {
+      a(this.o);
+    };
+    function Z(a, b) {
+      this.d = a;
+      this.f = b;
+    }
+    Z.prototype.load = function(a) {
+      var b,
+          c,
+          d = this.f.urls || [],
+          e = this.f.families || [],
+          f = this.f.testStrings || {};
+      b = 0;
+      for (c = d.length; b < c; b++)
+        v(this.d, d[b]);
+      d = [];
+      b = 0;
+      for (c = e.length; b < c; b++) {
+        var g = e[b].split(":");
+        if (g[1])
+          for (var h = g[1].split(","),
+              m = 0; m < h.length; m += 1)
+            d.push(new H(g[0], h[m]));
+        else
+          d.push(new H(g[0]));
+      }
+      a(d, f);
+    };
+    Z.prototype.K = function(a, b) {
+      return b(a.k.X);
+    };
+    var $ = new U(this);
+    $.v.w.custom = function(a, b) {
+      return new Z(b, a);
+    };
+    $.v.w.fontdeck = function(a, b) {
+      return new W(b, a);
+    };
+    $.v.w.monotype = function(a, b) {
+      return new Y(b, a);
+    };
+    $.v.w.typekit = function(a, b) {
+      return new X(b, a);
+    };
+    $.v.w.google = function(a, b) {
+      return new V(b, a);
+    };
+    this.WebFont || (this.WebFont = {}, this.WebFont.load = k($.load, $), this.WebFontConfig && $.load(this.WebFontConfig));
+  })(this, document);
   global.define = __define;
   return module.exports;
 });
@@ -9362,7 +11142,7 @@ System.register("npm:react@0.13.1/lib/ChangeEventPlugin", ["npm:react@0.13.1/lib
     var activeElementValue = null;
     var activeElementValueProp = null;
     function shouldUseChangeEvent(elem) {
-      return (linkElement.nodeName === 'SELECT' || (linkElement.nodeName === 'INPUT' && linkElement.type === 'file'));
+      return (elem.nodeName === 'SELECT' || (elem.nodeName === 'INPUT' && elem.type === 'file'));
     }
     var doesChangeEventBubble = false;
     if (ExecutionEnvironment.canUseDOM) {
@@ -9468,7 +11248,7 @@ System.register("npm:react@0.13.1/lib/ChangeEventPlugin", ["npm:react@0.13.1/lib
       }
     }
     function shouldUseClickEvent(elem) {
-      return (linkElement.nodeName === 'INPUT' && (linkElement.type === 'checkbox' || linkElement.type === 'radio'));
+      return (elem.nodeName === 'INPUT' && (elem.type === 'checkbox' || elem.type === 'radio'));
     }
     function getTargetIDForClickEvent(topLevelType, topLevelTarget, topLevelTargetID) {
       if (topLevelType === topLevelTypes.topClick) {
@@ -10122,6 +11902,48 @@ System.register("npm:react@0.13.1/lib/ReactServerRendering", ["npm:react@0.13.1/
   return module.exports;
 });
 
+System.register("npm:babel-runtime@4.7.16/helpers/get", ["npm:babel-runtime@4.7.16/core-js"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  var _core = require("npm:babel-runtime@4.7.16/core-js")["default"];
+  exports["default"] = function get(_x, _x2, _x3) {
+    var _again = true;
+    _function: while (_again) {
+      _again = false;
+      var object = _x,
+          property = _x2,
+          receiver = _x3;
+      desc = parent = getter = undefined;
+      var desc = _core.Object.getOwnPropertyDescriptor(object, property);
+      if (desc === undefined) {
+        var parent = _core.Object.getPrototypeOf(object);
+        if (parent === null) {
+          return undefined;
+        } else {
+          _x = parent;
+          _x2 = property;
+          _x3 = receiver;
+          _again = true;
+          continue _function;
+        }
+      } else if ("value" in desc && desc.writable) {
+        return desc.value;
+      } else {
+        var getter = desc.get;
+        if (getter === undefined) {
+          return undefined;
+        }
+        return getter.call(receiver);
+      }
+    }
+  };
+  exports.__esModule = true;
+  global.define = __define;
+  return module.exports;
+});
+
 System.register("npm:react@0.13.1/lib/LinkedStateMixin", ["npm:react@0.13.1/lib/ReactLink", "npm:react@0.13.1/lib/ReactStateSetters"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -10381,48 +12203,6 @@ System.register("npm:flux@2.0.1/lib/Dispatcher", ["npm:flux@2.0.1/lib/invariant"
     this.$Dispatcher_isDispatching = false;
   };
   module.exports = Dispatcher;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:babel-runtime@4.7.16/helpers/get", ["npm:babel-runtime@4.7.16/core-js"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  "use strict";
-  var _core = require("npm:babel-runtime@4.7.16/core-js")["default"];
-  exports["default"] = function get(_x, _x2, _x3) {
-    var _again = true;
-    _function: while (_again) {
-      _again = false;
-      var object = _x,
-          property = _x2,
-          receiver = _x3;
-      desc = parent = getter = undefined;
-      var desc = _core.Object.getOwnPropertyDescriptor(object, property);
-      if (desc === undefined) {
-        var parent = _core.Object.getPrototypeOf(object);
-        if (parent === null) {
-          return undefined;
-        } else {
-          _x = parent;
-          _x2 = property;
-          _x3 = receiver;
-          _again = true;
-          continue _function;
-        }
-      } else if ("value" in desc && desc.writable) {
-        return desc.value;
-      } else {
-        var getter = desc.get;
-        if (getter === undefined) {
-          return undefined;
-        }
-        return getter.call(receiver);
-      }
-    }
-  };
-  exports.__esModule = true;
   global.define = __define;
   return module.exports;
 });
@@ -10715,53 +12495,202 @@ System.register("npm:react-canvas@0.0.1/lib/layoutNode", ["npm:react-canvas@0.0.
   return module.exports;
 });
 
-System.register("npm:react-canvas@0.0.1/lib/Text", ["npm:react-canvas@0.0.1/lib/createComponent", "npm:react-canvas@0.0.1/lib/LayerMixin"], true, function(require, exports, module) {
+System.register("npm:react-canvas@0.0.1/lib/Layer", ["npm:react-canvas@0.0.1/lib/createComponent", "npm:react-canvas@0.0.1/lib/LayerMixin"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
   var createComponent = require("npm:react-canvas@0.0.1/lib/createComponent");
   var LayerMixin = require("npm:react-canvas@0.0.1/lib/LayerMixin");
-  var Text = createComponent('Text', LayerMixin, {
-    applyTextProps: function(prevProps, props) {
-      var style = (props && props.style) ? props.style : {};
-      var layer = this.node;
-      layer.type = 'text';
-      layer.text = childrenAsString(props.children);
-      layer.color = style.color;
-      layer.fontFace = style.fontFace;
-      layer.fontSize = style.fontSize;
-      layer.lineHeight = style.lineHeight;
-      layer.textAlign = style.textAlign;
-    },
+  var Layer = createComponent('Layer', LayerMixin, {
     mountComponent: function(rootID, transaction, context) {
       var props = this._currentElement.props;
       var layer = this.node;
       this.applyLayerProps({}, props);
-      this.applyTextProps({}, props);
       return layer;
     },
     receiveComponent: function(nextComponent, transaction, context) {
-      var props = nextComponent.props;
       var prevProps = this._currentElement.props;
+      var props = nextComponent.props;
       this.applyLayerProps(prevProps, props);
-      this.applyTextProps(prevProps, props);
       this._currentElement = nextComponent;
     }
   });
-  function childrenAsString(children) {
-    if (!children) {
-      return '';
+  module.exports = Layer;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:whatwg-fetch@0.7.0", ["npm:whatwg-fetch@0.7.0/fetch"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("npm:whatwg-fetch@0.7.0/fetch");
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/list/fold", ["npm:fkit@0.16.2/src/list/base", "npm:fkit@0.16.2/src/fn", "npm:fkit@0.16.2/src/math"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var base = require("npm:fkit@0.16.2/src/list/base"),
+      fn = require("npm:fkit@0.16.2/src/fn"),
+      math = require("npm:fkit@0.16.2/src/math");
+  var self;
+  self = module.exports = {
+    flattenStrings: function flattenStrings(as) {
+      if (base.isArrayOfStrings(as)) {
+        return self.concat(as);
+      } else {
+        if (Array.isArray(as)) {
+          return as.map(flattenStrings);
+        } else {
+          return as;
+        }
+      }
+    },
+    concatWith: fn.curry(function(s, as) {
+      return base.toArray(fn.flatten(as)).reduce(fn.flip(base.append), s);
+    }),
+    concat: fn.variadic(function(as) {
+      return self.concatWith(base.mempty(as), as);
+    }),
+    concatMap: fn.curry(function(f, as) {
+      var bs = base.toArray(as).map(fn.compose(self.flattenStrings, f)),
+          cs = bs.length > 0 ? bs : as;
+      return self.concatWith(base.mempty(cs), bs);
+    }),
+    fold: fn.curry(function(f, s, as) {
+      return base.toArray(as).reduce(f, s);
+    }),
+    foldRight: fn.curry(function(f, s, as) {
+      return base.toArray(as).reduceRight(fn.flip(f), s);
+    }),
+    scan: fn.curry(function(f, s, as) {
+      var r = [s];
+      self.fold(function(b, a) {
+        return fn.tap(r.push.bind(r), f(b, a));
+      }, s, as);
+      return r;
+    }),
+    scanRight: fn.curry(function(f, s, as) {
+      var r = [s];
+      self.foldRight(function(a, b) {
+        return fn.tap(r.unshift.bind(r), f(a, b));
+      }, s, as);
+      return r;
+    }),
+    maximum: function(as) {
+      return self.fold(math.max, as[0], as);
+    },
+    minimum: function(as) {
+      return self.fold(math.min, as[0], as);
+    },
+    maximumBy: fn.curry(function(c, as) {
+      return self.fold(function(a, b) {
+        return c(a, b) > 0 ? a : b;
+      }, as[0], as);
+    }),
+    minimumBy: fn.curry(function(c, as) {
+      return self.fold(function(a, b) {
+        return c(a, b) < 0 ? a : b;
+      }, as[0], as);
+    }),
+    sum: function(as) {
+      return self.fold(math.add, 0, as);
+    },
+    product: function(as) {
+      return self.fold(math.mul, 1, as);
     }
-    if (typeof children === 'string') {
-      return children;
-    }
-    if (children.length) {
-      return children.join('\n');
-    }
-    return '';
-  }
-  module.exports = Text;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/list/search", ["npm:fkit@0.16.2/src/list/base", "npm:fkit@0.16.2/src/fn", "npm:fkit@0.16.2/src/list/fold", "npm:fkit@0.16.2/src/logic", "npm:fkit@0.16.2/src/list/map"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var base = require("npm:fkit@0.16.2/src/list/base"),
+      fn = require("npm:fkit@0.16.2/src/fn"),
+      fold = require("npm:fkit@0.16.2/src/list/fold"),
+      logic = require("npm:fkit@0.16.2/src/logic"),
+      map = require("npm:fkit@0.16.2/src/list/map");
+  var self;
+  self = module.exports = {
+    elem: fn.curry(function(a, as) {
+      return as.indexOf(a) >= 0;
+    }),
+    elemIndex: fn.curry(function(a, as) {
+      var i = as.indexOf(a);
+      return (i >= 0) ? i : undefined;
+    }),
+    elemIndices: fn.curry(function(a, as) {
+      return self.findIndices(fn.equal(a), as);
+    }),
+    find: fn.curry(function(p, as) {
+      return base.head(self.filter(p, as));
+    }),
+    findIndex: fn.curry(function(p, as) {
+      var n = as.length;
+      for (var i = 0; i < n; i++) {
+        if (p(as[i])) {
+          return i;
+        }
+      }
+      return undefined;
+    }),
+    findIndices: fn.curry(function(p, as) {
+      var s = [],
+          n = as.length;
+      for (var i = 0; i < n; i++) {
+        if (p(as[i])) {
+          s.push(i);
+        }
+      }
+      return s;
+    }),
+    filter: fn.curry(function(p, as) {
+      var f = logic.branch(p, fn.id, fn.const(''));
+      return base.isString(as) ? fold.concatMap(f, as) : as.filter(p);
+    }),
+    partition: fn.curry(function(p, as) {
+      return [self.filter(p, as), self.filter(fn.compose(logic.not, p), as)];
+    }),
+    all: fn.curry(function(p, as) {
+      return self.filter(p, as).length === as.length;
+    }),
+    any: fn.curry(function(p, as) {
+      return self.filter(p, as).length > 0;
+    }),
+    isPrefixOf: fn.curry(function isPrefixOf(as, bs) {
+      if (base.empty(as)) {
+        return true;
+      } else if (base.empty(bs)) {
+        return false;
+      } else {
+        return base.head(as) === base.head(bs) && isPrefixOf(base.tail(as), base.tail(bs));
+      }
+    }),
+    isSuffixOf: fn.curry(function(as, bs) {
+      return self.isPrefixOf(map.reverse(as), map.reverse(bs));
+    }),
+    isInfixOf: fn.curry(function(as, bs) {
+      return self.any(self.isPrefixOf(as), base.tails(bs));
+    })
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:webfontloader@1.5.15", ["npm:webfontloader@1.5.15/webfontloader"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("npm:webfontloader@1.5.15/webfontloader");
   global.define = __define;
   return module.exports;
 });
@@ -11218,7 +13147,7 @@ System.register("npm:react@0.13.1/lib/createNodesFromMarkup", ["npm:react@0.13.1
       }
       var scripts = node.getElementsByTagName('script');
       if (scripts.length) {
-        ("production" !== process.env.NODE_ENV ? invariant(handleScript, 'createNodesFromMarkup(...): Unexpected <script> linkElement rendered.') : invariant(handleScript));
+        ("production" !== process.env.NODE_ENV ? invariant(handleScript, 'createNodesFromMarkup(...): Unexpected <script> element rendered.') : invariant(handleScript));
         createArrayFromMixed(scripts).forEach(handleScript);
       }
       var nodes = createArrayFromMixed(node.childNodes);
@@ -11911,7 +13840,7 @@ System.register("npm:react@0.13.1/lib/ReactInputSelection", ["npm:react@0.13.1/l
   }
   var ReactInputSelection = {
     hasSelectionCapabilities: function(elem) {
-      return linkElement && (((linkElement.nodeName === 'INPUT' && linkElement.type === 'text') || linkElement.nodeName === 'TEXTAREA' || linkElement.contentEditable === 'true'));
+      return elem && (((elem.nodeName === 'INPUT' && elem.type === 'text') || elem.nodeName === 'TEXTAREA' || elem.contentEditable === 'true'));
     },
     getSelectionInformation: function() {
       var focusedElem = getActiveElement();
@@ -12834,6 +14763,59 @@ System.register("github:jspm/nodelibs-events@0.1.0/index", ["npm:events-browseri
       __define = global.define;
   global.define = undefined;
   module.exports = System._nodeRequire ? System._nodeRequire('events') : require("npm:events-browserify@0.0.1");
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2/src/list/build", ["npm:fkit@0.16.2/src/list/base", "npm:fkit@0.16.2/src/fn", "npm:fkit@0.16.2/src/list/fold", "npm:fkit@0.16.2/src/math", "npm:fkit@0.16.2/src/list/sublist"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var base = require("npm:fkit@0.16.2/src/list/base"),
+      fn = require("npm:fkit@0.16.2/src/fn"),
+      fold = require("npm:fkit@0.16.2/src/list/fold"),
+      math = require("npm:fkit@0.16.2/src/math"),
+      sublist = require("npm:fkit@0.16.2/src/list/sublist");
+  var self;
+  self = module.exports = {
+    array: function(n) {
+      return Array.apply(null, Array(n));
+    },
+    string: function(n) {
+      return self.array(n + 1).join(' ');
+    },
+    pair: fn.curry(function(a, b) {
+      return [a, b];
+    }),
+    range: fn.curry(function(a, n) {
+      return self.array(n).map(function(_, i) {
+        return a + i;
+      });
+    }),
+    replicate: fn.curry(function(n, a) {
+      var as = base.isString(a) ? self.string(n) : self.array(n);
+      return fold.concatMap(function() {
+        return [a];
+      }, as);
+    }),
+    sample: fn.curry(function(n, as) {
+      return sublist.take(n, self.shuffle(as));
+    }),
+    shuffle: function(as) {
+      var i = -1,
+          r = self.array(as.length),
+          bs = fold.fold(f, r, as),
+          s = base.isString(as) ? '' : [];
+      return fold.concatWith(s, bs);
+      function f(b, a) {
+        var j = math.randomInt(0, ++i);
+        b[i] = b[j];
+        b[j] = a;
+        return b;
+      }
+    }
+  };
   global.define = __define;
   return module.exports;
 });
@@ -14293,6 +16275,17 @@ System.register("github:jspm/nodelibs-events@0.1.0", ["github:jspm/nodelibs-even
   return module.exports;
 });
 
+System.register("npm:fkit@0.16.2/src/list", ["npm:fkit@0.16.2/src/util", "npm:fkit@0.16.2/src/list/base", "npm:fkit@0.16.2/src/list/build", "npm:fkit@0.16.2/src/list/fold", "npm:fkit@0.16.2/src/list/map", "npm:fkit@0.16.2/src/list/search", "npm:fkit@0.16.2/src/list/set", "npm:fkit@0.16.2/src/list/sort", "npm:fkit@0.16.2/src/list/sublist", "npm:fkit@0.16.2/src/list/zip"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var util = require("npm:fkit@0.16.2/src/util");
+  module.exports = util.extend({}, [require("npm:fkit@0.16.2/src/list/base"), require("npm:fkit@0.16.2/src/list/build"), require("npm:fkit@0.16.2/src/list/fold"), require("npm:fkit@0.16.2/src/list/map"), require("npm:fkit@0.16.2/src/list/search"), require("npm:fkit@0.16.2/src/list/set"), require("npm:fkit@0.16.2/src/list/sort"), require("npm:fkit@0.16.2/src/list/sublist"), require("npm:fkit@0.16.2/src/list/zip")]);
+  global.define = __define;
+  return module.exports;
+});
+
 System.register("npm:react@0.13.1/lib/invariant", ["github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -15123,6 +17116,17 @@ System.register("npm:react-canvas@0.0.1/lib/ImageCache", ["github:jspm/nodelibs-
   return module.exports;
 });
 
+System.register("npm:fkit@0.16.2/src/fkit", ["npm:fkit@0.16.2/src/util", "npm:fkit@0.16.2/src/fn", "npm:fkit@0.16.2/src/list", "npm:fkit@0.16.2/src/logic", "npm:fkit@0.16.2/src/math", "npm:fkit@0.16.2/src/obj", "npm:fkit@0.16.2/src/string"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var util = require("npm:fkit@0.16.2/src/util");
+  module.exports = util.extend({}, [require("npm:fkit@0.16.2/src/fn"), require("npm:fkit@0.16.2/src/list"), require("npm:fkit@0.16.2/src/logic"), require("npm:fkit@0.16.2/src/math"), require("npm:fkit@0.16.2/src/obj"), require("npm:fkit@0.16.2/src/string")]);
+  global.define = __define;
+  return module.exports;
+});
+
 System.register("npm:react@0.13.1/lib/keyMirror", ["npm:react@0.13.1/lib/invariant", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -15783,6 +17787,15 @@ System.register("npm:react-canvas@0.0.1/lib/DrawingUtils", ["npm:react-canvas@0.
     layerContainsImage: layerContainsImage,
     layerContainsFontFace: layerContainsFontFace
   };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:fkit@0.16.2", ["npm:fkit@0.16.2/src/fkit"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("npm:fkit@0.16.2/src/fkit");
   global.define = __define;
   return module.exports;
 });
@@ -16565,6 +18578,60 @@ System.register("npm:react@0.13.1", ["npm:react@0.13.1/react"], true, function(r
   return module.exports;
 });
 
+System.register("lib/colors", [], function (_export) {
+  return {
+    setters: [],
+    execute: function () {
+      "use strict";
+
+      _export("default", [{
+        name: "Default",
+        foreground: "black",
+        background: "white"
+      }, {
+        name: "Inverse",
+        foreground: "white",
+        background: "black"
+      }, {
+        name: "Jaffa",
+        foreground: "hsl(0, 0%, 13%)",
+        background: "rgb(242,70,17)"
+      }, {
+        name: "Paper",
+        foreground: "hsl(0, 0%, 20%)",
+        background: "hsl(48, 63%, 97%)"
+      }, {
+        name: "Finch",
+        foreground: "rgb(202,58,53)",
+        background: "rgb(208,210,207)"
+      }, {
+        name: "Ocean",
+        foreground: "hsl(240, 5%, 92%)",
+        background: "hsl(232, 15%, 19%)"
+      }, {
+        name: "Sky",
+        foreground: "white",
+        background: "hsl(192, 92%, 50%)"
+      }, {
+        name: "Achtung",
+        foreground: "hsl(0, 0%, 4%)",
+        background: "hsl(0, 100%, 40%)"
+      }, {
+        name: "<a>",
+        foreground: "hsl(232, 77%, 39%)",
+        background: "hsl(40, 39%, 95%)"
+      }, {
+        name: "Scroll",
+        foreground: "hsl(0, 0%, 9%)",
+        background: "hsl(35, 46%, 87%)"
+      }, {
+        name: "Neo",
+        foreground: "rgb(32,255,30)",
+        background: "black"
+      }]);
+    }
+  };
+});
 System.register("lib/actions/message-actions", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:flummox@3.5.0"], function (_export) {
   var _classCallCheck, _inherits, _createClass, Actions, MessageActions;
 
@@ -16596,6 +18663,11 @@ System.register("lib/actions/message-actions", ["npm:babel-runtime@4.7.16/helper
           changeMessage: {
             value: function changeMessage(content) {
               return content; // automatically dispatched
+            }
+          },
+          imageRendered: {
+            value: function imageRendered(dataUrl) {
+              return dataUrl;
             }
           }
         });
@@ -16633,8 +18705,9 @@ System.register("lib/stores/message-store", ["npm:babel-runtime@4.7.16/helpers/c
 
           _get(_core.Object.getPrototypeOf(MessageStore.prototype), "constructor", this).call(this);
 
-          var messageActions = flux.getActions("messages");
+          var messageActions = flux.getActions("message");
           this.register(messageActions.changeMessage, this.handleChangedMessage);
+          this.register(messageActions.imageRendered, this.handleNewImage);
           this.state = {
             message: "",
             lines: []
@@ -16653,6 +18726,13 @@ System.register("lib/stores/message-store", ["npm:babel-runtime@4.7.16/helpers/c
                 })
               });
             }
+          },
+          handleNewImage: {
+            value: function handleNewImage(dataUrl) {
+              this.setState({
+                imageUrl: dataUrl
+              });
+            }
           }
         });
 
@@ -16663,8 +18743,277 @@ System.register("lib/stores/message-store", ["npm:babel-runtime@4.7.16/helpers/c
     }
   };
 });
-System.register("lib/components/controls/controls.jsx!github:floatdrop/plugin-jsx@1.1.0", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:react@0.13.1", "lib/components/controls/controls.scss!post-css"], function (_export) {
-  var _classCallCheck, _inherits, _createClass, React, Controls;
+System.register("lib/type-pairings", [], function (_export) {
+  return {
+    setters: [],
+    execute: function () {
+      "use strict";
+
+      _export("default", [{
+        main: {
+          local: ["Avenir Next", "Arial Black", "sans-serif"],
+          weight: 900,
+          caps: true,
+          lineHeightFactor: 1.05,
+          prePaddingFactor: 0
+        },
+        alt: {
+          local: ["Georgia", "Times New Roman", "serif"],
+          weight: 400,
+          italic: true,
+          lineHeightFactor: 1.45,
+          prePaddingFactor: 0.05
+        }
+      }, {
+        main: {
+          google: "Sigmar One",
+          weight: 400,
+          caps: true,
+          lineHeightFactor: 1.1,
+          prePaddingFactor: 0.02
+        },
+        alt: {
+          google: "Gentium Book Basic",
+          weight: 400,
+          italic: true,
+          lineHeightFactor: 1.32,
+          prePaddingFactor: 0.02
+        }
+      }, {
+        main: {
+          google: "Raleway",
+          weight: 900,
+          caps: true,
+          lineHeightFactor: 1.05,
+          prePaddingFactor: 0
+        },
+        alt: {
+          google: "Raleway",
+          weight: 200,
+          lineHeightFactor: 1.35,
+          prePaddingFactor: 0
+        }
+      }, {
+        main: {
+          google: "Alfa Slab One",
+          weight: 400,
+          caps: true,
+          lineHeightFactor: 1.15,
+          prePaddingFactor: 0.075
+        },
+        alt: {
+          google: "Raleway",
+          weight: 200,
+          lineHeightFactor: 1.3,
+          prePaddingFactor: 0
+        }
+      }, {
+        main: {
+          google: "Gentium Book Basic",
+          weight: 700,
+          italic: true,
+          caps: true,
+          lineHeightFactor: 1.1,
+          prePaddingFactor: -0.05
+        },
+        alt: {
+          google: "Open Sans",
+          weight: 300,
+          lineHeightFactor: 1.4,
+          prePaddingFactor: 0.05
+        }
+      }, {
+        main: {
+          google: "Playfair Display",
+          weight: 900,
+          caps: true,
+          italic: true,
+          lineHeightFactor: 1.35,
+          prePaddingFactor: 0.15
+        },
+        alt: {
+          google: "Lato",
+          weight: 100,
+          lineHeightFactor: 1.3,
+          prePaddingFactor: 0
+        }
+      }]);
+    }
+  };
+});
+System.register("lib/stores/fonts-store", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/get", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:babel-runtime@4.7.16/core-js", "npm:flummox@3.5.0"], function (_export) {
+  var _classCallCheck, _inherits, _get, _createClass, _core, Store, FontsStore;
+
+  return {
+    setters: [function (_babelRuntimeHelpersClassCallCheck) {
+      _classCallCheck = _babelRuntimeHelpersClassCallCheck["default"];
+    }, function (_babelRuntimeHelpersInherits) {
+      _inherits = _babelRuntimeHelpersInherits["default"];
+    }, function (_babelRuntimeHelpersGet) {
+      _get = _babelRuntimeHelpersGet["default"];
+    }, function (_babelRuntimeHelpersCreateClass) {
+      _createClass = _babelRuntimeHelpersCreateClass["default"];
+    }, function (_babelRuntimeCoreJs) {
+      _core = _babelRuntimeCoreJs["default"];
+    }, function (_npmFlummox350) {
+      Store = _npmFlummox350.Store;
+    }],
+    execute: function () {
+      "use strict";
+
+      FontsStore = (function (_Store) {
+        function FontsStore(flux) {
+          _classCallCheck(this, FontsStore);
+
+          _get(_core.Object.getPrototypeOf(FontsStore.prototype), "constructor", this).call(this);
+
+          var fontsActions = flux.getActions("fonts");
+          this.register(fontsActions.fontLoaded, this.handleFontLoaded);
+          this.register(fontsActions.chooseFont, this.handleChosenFont);
+          this.register(fontsActions.fontLoadingFinished, this.finishLoading);
+          this.state = {
+            loadedFonts: [],
+            stillLoading: true
+          };
+        }
+
+        _inherits(FontsStore, _Store);
+
+        _createClass(FontsStore, {
+          handleFontLoaded: {
+            value: function handleFontLoaded(font) {
+              this.setState({
+                loadedFonts: this.state.loadedFonts.concat([font]),
+                chosenFont: this.state.chosenFont || font
+              });
+            }
+          },
+          handleChosenFont: {
+            value: function handleChosenFont(font) {
+              this.setState({
+                chosenFont: font
+              });
+            }
+          },
+          finishLoading: {
+            value: function finishLoading() {
+              console.log("finished!");
+              this.setState({
+                stillLoading: false
+              });
+            }
+          }
+        });
+
+        return FontsStore;
+      })(Store);
+
+      _export("default", FontsStore);
+    }
+  };
+});
+System.register("lib/actions/colors-actions", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:flummox@3.5.0"], function (_export) {
+  var _classCallCheck, _inherits, _createClass, Actions, ColorsActions;
+
+  return {
+    setters: [function (_babelRuntimeHelpersClassCallCheck) {
+      _classCallCheck = _babelRuntimeHelpersClassCallCheck["default"];
+    }, function (_babelRuntimeHelpersInherits) {
+      _inherits = _babelRuntimeHelpersInherits["default"];
+    }, function (_babelRuntimeHelpersCreateClass) {
+      _createClass = _babelRuntimeHelpersCreateClass["default"];
+    }, function (_npmFlummox350) {
+      Actions = _npmFlummox350.Actions;
+    }],
+    execute: function () {
+      "use strict";
+
+      ColorsActions = (function (_Actions) {
+        function ColorsActions() {
+          _classCallCheck(this, ColorsActions);
+
+          if (_Actions != null) {
+            _Actions.apply(this, arguments);
+          }
+        }
+
+        _inherits(ColorsActions, _Actions);
+
+        _createClass(ColorsActions, {
+          chooseColor: {
+            value: function chooseColor(color) {
+              return color;
+            }
+          }
+        });
+
+        return ColorsActions;
+      })(Actions);
+
+      _export("default", ColorsActions);
+    }
+  };
+});
+System.register("lib/stores/colors-store", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/get", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:babel-runtime@4.7.16/core-js", "npm:flummox@3.5.0"], function (_export) {
+  var _classCallCheck, _inherits, _get, _createClass, _core, Store, ColorsStore;
+
+  return {
+    setters: [function (_babelRuntimeHelpersClassCallCheck) {
+      _classCallCheck = _babelRuntimeHelpersClassCallCheck["default"];
+    }, function (_babelRuntimeHelpersInherits) {
+      _inherits = _babelRuntimeHelpersInherits["default"];
+    }, function (_babelRuntimeHelpersGet) {
+      _get = _babelRuntimeHelpersGet["default"];
+    }, function (_babelRuntimeHelpersCreateClass) {
+      _createClass = _babelRuntimeHelpersCreateClass["default"];
+    }, function (_babelRuntimeCoreJs) {
+      _core = _babelRuntimeCoreJs["default"];
+    }, function (_npmFlummox350) {
+      Store = _npmFlummox350.Store;
+    }],
+    execute: function () {
+      "use strict";
+
+      ColorsStore = (function (_Store) {
+        function ColorsStore(flux) {
+          _classCallCheck(this, ColorsStore);
+
+          _get(_core.Object.getPrototypeOf(ColorsStore.prototype), "constructor", this).call(this);
+
+          var colorsActions = flux.getActions("colors");
+          this.register(colorsActions.chooseColor, this.handleChosenColor);
+        }
+
+        _inherits(ColorsStore, _Store);
+
+        _createClass(ColorsStore, {
+          handleChosenColor: {
+            value: function handleChosenColor(color) {
+              this.setState({
+                chosenColor: color
+              });
+            }
+          }
+        });
+
+        return ColorsStore;
+      })(Store);
+
+      _export("default", ColorsStore);
+    }
+  };
+});
+System.register("styles/index", ["styles/reset.scss!post-css", "styles/variables.scss!post-css", "styles/traits/colors.scss!post-css", "styles/traits/typography.scss!post-css", "styles/traits/layout.scss!post-css", "styles/traits/flex.scss!post-css", "styles/traits/link.scss!post-css", "styles/core.scss!post-css"], function (_export) {
+  return {
+    setters: [function (_stylesResetScssPostCss) {}, function (_stylesVariablesScssPostCss) {}, function (_stylesTraitsColorsScssPostCss) {}, function (_stylesTraitsTypographyScssPostCss) {}, function (_stylesTraitsLayoutScssPostCss) {}, function (_stylesTraitsFlexScssPostCss) {}, function (_stylesTraitsLinkScssPostCss) {}, function (_stylesCoreScssPostCss) {}],
+    execute: function () {
+      "use strict";
+    }
+  };
+});
+// Inject the styles (async obvs)
+System.register("lib/components/message-entry.jsx!jsx", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:react@0.13.1", "lib/components/message-entry.scss!post-css"], function (_export) {
+  var _classCallCheck, _inherits, _createClass, React, MessageEntry;
 
   return {
     setters: [function (_babelRuntimeHelpersClassCallCheck) {
@@ -16675,34 +19024,26 @@ System.register("lib/components/controls/controls.jsx!github:floatdrop/plugin-js
       _createClass = _babelRuntimeHelpersCreateClass["default"];
     }, function (_npmReact0131) {
       React = _npmReact0131["default"];
-    }, function (_libComponentsControlsControlsScssPostCss) {}],
+    }, function (_libComponentsMessageEntryScssPostCss) {}],
     execute: function () {
       "use strict";
 
-      Controls = (function (_React$Component) {
-        function Controls() {
-          _classCallCheck(this, Controls);
+      MessageEntry = (function (_React$Component) {
+        function MessageEntry() {
+          _classCallCheck(this, MessageEntry);
 
           if (_React$Component != null) {
             _React$Component.apply(this, arguments);
           }
         }
 
-        _inherits(Controls, _React$Component);
+        _inherits(MessageEntry, _React$Component);
 
-        _createClass(Controls, {
+        _createClass(MessageEntry, {
           componentWillMount: {
             value: function componentWillMount() {
-              var _this = this;
-
-              this.messageActions = this.context.flux.getActions("messages");
-              this.setValue("Something over\ntwo lines");
-              setTimeout(function (_) {
-                return _this.setValue("Something over\nthree\nwhole lines");
-              }, 2000);
-              setTimeout(function (_) {
-                return _this.setValue("Something over\n!three lines\nthis time with italics");
-              }, 4000);
+              this.messageActions = this.context.flux.getActions("message");
+              this.setValue("Whatever you write here\nwill be rendered as a slab-type\nposter!\nStart a line with an '!'\n!to use the alternate typeface\nnow go and write something\nprofound\nand share it with the world!");
             }
           },
           handleChange: {
@@ -16718,7 +19059,199 @@ System.register("lib/components/controls/controls.jsx!github:floatdrop/plugin-js
           },
           render: {
             value: function render() {
-              return React.createElement("div", { className: "Controls" }, React.createElement("h1", null, "Type here:"), React.createElement("textarea", { value: this.state.value, onChange: this.handleChange.bind(this) }));
+              return React.createElement("div", { className: "MessageEntry" }, React.createElement("textarea", { value: this.state.value, onChange: this.handleChange.bind(this) }));
+            }
+          }
+        });
+
+        return MessageEntry;
+      })(React.Component);
+
+      _export("default", MessageEntry);
+
+      MessageEntry.contextTypes = {
+        flux: React.PropTypes.object
+      };
+    }
+  };
+});
+System.register("lib/components/type-selector.jsx!jsx", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:react@0.13.1", "lib/components/type-selector.scss!post-css"], function (_export) {
+  var _classCallCheck, _inherits, _createClass, React, TypeSelector;
+
+  return {
+    setters: [function (_babelRuntimeHelpersClassCallCheck) {
+      _classCallCheck = _babelRuntimeHelpersClassCallCheck["default"];
+    }, function (_babelRuntimeHelpersInherits) {
+      _inherits = _babelRuntimeHelpersInherits["default"];
+    }, function (_babelRuntimeHelpersCreateClass) {
+      _createClass = _babelRuntimeHelpersCreateClass["default"];
+    }, function (_npmReact0131) {
+      React = _npmReact0131["default"];
+    }, function (_libComponentsTypeSelectorScssPostCss) {}],
+    execute: function () {
+      "use strict";
+
+      TypeSelector = (function (_React$Component) {
+        function TypeSelector() {
+          _classCallCheck(this, TypeSelector);
+
+          if (_React$Component != null) {
+            _React$Component.apply(this, arguments);
+          }
+        }
+
+        _inherits(TypeSelector, _React$Component);
+
+        _createClass(TypeSelector, {
+          componentWillMount: {
+            value: function componentWillMount() {
+              this.fontsActions = this.props.flux.getActions("fonts");
+              this.fontsActions.loadAllFonts();
+            }
+          },
+          chooseFont: {
+            value: function chooseFont(font) {
+              this.fontsActions.chooseFont(font);
+            }
+          },
+          render: {
+            value: function render() {
+              var _this = this;
+
+              return React.createElement("ul", { className: "TypeSelector" }, this.props.loadedFonts.map(function (f) {
+                return React.createElement("li", { onClick: _this.chooseFont.bind(_this, f) }, React.createElement("span", { style: _this.getTextStyle(f.main) }, f.main.name), React.createElement("span", { style: _this.getTextStyle(f.alt) }, f.alt.name));
+              }), this.props.stillLoading ? "Loading..." : "");
+            }
+          },
+          getTextStyle: {
+            value: function getTextStyle(font) {
+              return {
+                fontFamily: font.name,
+                textTransform: font.caps ? "uppercase" : "initial",
+                fontWeight: font.weight,
+                fontStyle: font.italic ? "italic" : "initial"
+              };
+            }
+          }
+        });
+
+        return TypeSelector;
+      })(React.Component);
+
+      _export("default", TypeSelector);
+    }
+  };
+});
+System.register("lib/components/color-selector.jsx!jsx", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:react@0.13.1", "lib/components/color-selector.scss!post-css", "lib/colors"], function (_export) {
+  var _classCallCheck, _inherits, _createClass, React, Colors, ColorSelector;
+
+  return {
+    setters: [function (_babelRuntimeHelpersClassCallCheck) {
+      _classCallCheck = _babelRuntimeHelpersClassCallCheck["default"];
+    }, function (_babelRuntimeHelpersInherits) {
+      _inherits = _babelRuntimeHelpersInherits["default"];
+    }, function (_babelRuntimeHelpersCreateClass) {
+      _createClass = _babelRuntimeHelpersCreateClass["default"];
+    }, function (_npmReact0131) {
+      React = _npmReact0131["default"];
+    }, function (_libComponentsColorSelectorScssPostCss) {}, function (_libColors) {
+      Colors = _libColors["default"];
+    }],
+    execute: function () {
+      "use strict";
+
+      ColorSelector = (function (_React$Component) {
+        function ColorSelector() {
+          _classCallCheck(this, ColorSelector);
+
+          this.state = {
+            options: Colors
+          };
+        }
+
+        _inherits(ColorSelector, _React$Component);
+
+        _createClass(ColorSelector, {
+          componentWillMount: {
+            value: function componentWillMount() {
+              this.colorsActions = this.context.flux.getActions("colors");
+              this.colorsActions.chooseColor(this.state.options[0]);
+            }
+          },
+          chooseColor: {
+            value: function chooseColor(color) {
+              this.colorsActions.chooseColor(color);
+            }
+          },
+          render: {
+            value: function render() {
+              var _this = this;
+
+              return React.createElement("ul", { className: "ColorSelector" }, this.state.options.map(function (o) {
+                return React.createElement("li", { style: _this.getStyle(o), onClick: _this.chooseColor.bind(_this, o) }, o.name);
+              }));
+            }
+          },
+          getStyle: {
+            value: function getStyle(option) {
+              return {
+                backgroundColor: option.background,
+                color: option.foreground
+              };
+            }
+          }
+        });
+
+        return ColorSelector;
+      })(React.Component);
+
+      _export("default", ColorSelector);
+
+      ColorSelector.contextTypes = {
+        flux: React.PropTypes.object
+      };
+    }
+  };
+});
+System.register("lib/components/controls.jsx!jsx", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:react@0.13.1", "lib/components/message-entry.jsx!jsx", "npm:flummox@3.5.0/component", "lib/components/type-selector.jsx!jsx", "lib/components/color-selector.jsx!jsx", "lib/components/controls.scss!post-css"], function (_export) {
+  var _classCallCheck, _inherits, _createClass, React, MessageEntry, FluxComponent, TypeSelector, ColorSelector, Controls;
+
+  return {
+    setters: [function (_babelRuntimeHelpersClassCallCheck) {
+      _classCallCheck = _babelRuntimeHelpersClassCallCheck["default"];
+    }, function (_babelRuntimeHelpersInherits) {
+      _inherits = _babelRuntimeHelpersInherits["default"];
+    }, function (_babelRuntimeHelpersCreateClass) {
+      _createClass = _babelRuntimeHelpersCreateClass["default"];
+    }, function (_npmReact0131) {
+      React = _npmReact0131["default"];
+    }, function (_libComponentsMessageEntryJsxJsx) {
+      MessageEntry = _libComponentsMessageEntryJsxJsx["default"];
+    }, function (_npmFlummox350Component) {
+      FluxComponent = _npmFlummox350Component["default"];
+    }, function (_libComponentsTypeSelectorJsxJsx) {
+      TypeSelector = _libComponentsTypeSelectorJsxJsx["default"];
+    }, function (_libComponentsColorSelectorJsxJsx) {
+      ColorSelector = _libComponentsColorSelectorJsxJsx["default"];
+    }, function (_libComponentsControlsScssPostCss) {}],
+    execute: function () {
+      "use strict";
+
+      Controls = (function (_React$Component) {
+        function Controls() {
+          _classCallCheck(this, Controls);
+
+          if (_React$Component != null) {
+            _React$Component.apply(this, arguments);
+          }
+        }
+
+        _inherits(Controls, _React$Component);
+
+        _createClass(Controls, {
+          render: {
+            value: function render() {
+              return React.createElement("div", { className: "Controls" }, React.createElement("h2", null, "Enter your message:"), React.createElement(MessageEntry, null), React.createElement("h2", null, "Pick your type pairing:"), React.createElement(FluxComponent, { connectToStores: "fonts" }, React.createElement(TypeSelector, null)), React.createElement("h2", null, "Choose a colour scheme:"), React.createElement(ColorSelector, null));
             }
           }
         });
@@ -16734,8 +19267,207 @@ System.register("lib/components/controls/controls.jsx!github:floatdrop/plugin-js
     }
   };
 });
-System.register("lib/flux", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/get", "npm:babel-runtime@4.7.16/core-js", "npm:flummox@3.5.0", "lib/actions/message-actions", "lib/stores/message-store"], function (_export) {
-  var _classCallCheck, _inherits, _get, _core, Flummox, MessageActions, MessageStore, Flux;
+System.register("lib/components/share.jsx!jsx", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:react@0.13.1", "lib/components/share.scss!post-css", "npm:whatwg-fetch@0.7.0"], function (_export) {
+  var _classCallCheck, _inherits, _createClass, React, Share;
+
+  return {
+    setters: [function (_babelRuntimeHelpersClassCallCheck) {
+      _classCallCheck = _babelRuntimeHelpersClassCallCheck["default"];
+    }, function (_babelRuntimeHelpersInherits) {
+      _inherits = _babelRuntimeHelpersInherits["default"];
+    }, function (_babelRuntimeHelpersCreateClass) {
+      _createClass = _babelRuntimeHelpersCreateClass["default"];
+    }, function (_npmReact0131) {
+      React = _npmReact0131["default"];
+    }, function (_libComponentsShareScssPostCss) {}, function (_npmWhatwgFetch070) {}],
+    execute: function () {
+      "use strict";
+
+      Share = (function (_React$Component) {
+        function Share() {
+          _classCallCheck(this, Share);
+
+          this.state = {};
+        }
+
+        _inherits(Share, _React$Component);
+
+        _createClass(Share, {
+          componentWillReceiveProps: {
+            value: function componentWillReceiveProps(newProps, oldProps) {
+              if (newProps.message != oldProps.message || newProps.color != oldProps.color || newProps.font != oldProps.font) {
+                this.setState({ link: undefined });
+              }
+            }
+          },
+          uploadToImgur: {
+            value: function uploadToImgur() {
+              var _this = this;
+
+              this.setState({ uploading: true });
+              var data = new FormData();
+              data.append("image", this.props.canvas.toDataURL().split(",")[1]);
+              data.append("type", "base64");
+              fetch("https://api.imgur.com/3/image", {
+                method: "post",
+                body: data,
+                headers: {
+                  Authorization: "Client-ID dc208153560e2ef"
+                }
+              }).then(function (response) {
+                return response.json();
+              }).then(function (json) {
+                _this.setState({ uploading: false });
+                if (json.success) {
+                  _this.setState({ link: json.data.link });
+                } else {
+                  var message = json.data.error.match(/anonymous uploading in your country has been disabled/) ? "Sorry, IMGUR has blocked anonymous uploads from your country" : json.data.error;
+                  _this.setState({ failed: true, failure: message });
+                }
+              });
+            }
+          },
+          saveLocally: {
+            value: function saveLocally(e) {
+              e.target.href = this.props.canvas.toDataURL();
+            }
+          },
+          render: {
+            value: function render() {
+              return React.createElement("ul", { className: "Share" }, this.state.failure ? React.createElement("p", null, this.state.failure) : "", this.state.uploading ? React.createElement("p", null, "Uploading...") : "", this.state.link ? React.createElement("p", null, "Uploaded to ", React.createElement("a", { href: this.state.link, target: "_blank" }, this.state.link)) : "", React.createElement("button", { disabled: this.state.link || this.state.uploading || this.state.failed, className: "ShareButton", onClick: this.uploadToImgur.bind(this) }, "Upload to IMGUR"), React.createElement("a", { href: true, className: "ShareButton", download: true, onClick: this.saveLocally.bind(this) }, "Save locally"));
+            }
+          }
+        });
+
+        return Share;
+      })(React.Component);
+
+      _export("default", Share);
+    }
+  };
+});
+System.register("lib/actions/fonts-actions", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:babel-runtime@4.7.16/core-js", "npm:flummox@3.5.0", "lib/type-pairings", "github:JenniferSimonds/FontDetect@master/lib/fontdetect", "npm:fkit@0.16.2", "npm:webfontloader@1.5.15"], function (_export) {
+  var _classCallCheck, _inherits, _createClass, _core, Actions, TypePairings, FontDetect, F, FontsActions;
+
+  return {
+    setters: [function (_babelRuntimeHelpersClassCallCheck) {
+      _classCallCheck = _babelRuntimeHelpersClassCallCheck["default"];
+    }, function (_babelRuntimeHelpersInherits) {
+      _inherits = _babelRuntimeHelpersInherits["default"];
+    }, function (_babelRuntimeHelpersCreateClass) {
+      _createClass = _babelRuntimeHelpersCreateClass["default"];
+    }, function (_babelRuntimeCoreJs) {
+      _core = _babelRuntimeCoreJs["default"];
+    }, function (_npmFlummox350) {
+      Actions = _npmFlummox350.Actions;
+    }, function (_libTypePairings) {
+      TypePairings = _libTypePairings["default"];
+    }, function (_githubJenniferSimondsFontDetectMasterLibFontdetect) {
+      FontDetect = _githubJenniferSimondsFontDetectMasterLibFontdetect["default"];
+    }, function (_npmFkit0162) {
+      F = _npmFkit0162["default"];
+    }, function (_npmWebfontloader1515) {}],
+    execute: function () {
+      "use strict";
+
+      FontsActions = (function (_Actions) {
+        function FontsActions() {
+          _classCallCheck(this, FontsActions);
+
+          if (_Actions != null) {
+            _Actions.apply(this, arguments);
+          }
+        }
+
+        _inherits(FontsActions, _Actions);
+
+        _createClass(FontsActions, {
+          loadAllFonts: {
+            value: function loadAllFonts() {
+              var _this = this;
+
+              _core.Promise.all([this.loadLocalFonts(), this.loadGoogleFonts()]).then(function (_) {
+                _this.fontLoadingFinished();
+              });
+            }
+          },
+          loadLocalFonts: {
+            value: function loadLocalFonts() {
+              var _this = this;
+
+              var isLocal = function (font) {
+                return font.main.local && font.alt.local;
+              };
+              F.filter(isLocal, TypePairings).forEach(function (font) {
+                var isLoaded = function (f) {
+                  return FontDetect.isFontLoaded(f);
+                };
+                font.main.name = F.find(isLoaded, font.main.local) || "sans-serif";
+                font.alt.name = F.find(isLoaded, font.alt.local) || "serif";
+                _this.fontLoaded(font);
+              });
+              return _core.Promise.resolve();
+            }
+          },
+          loadGoogleFonts: {
+            value: function loadGoogleFonts() {
+              var _this = this;
+
+              return new _core.Promise(function (resolve, reject) {
+                var isGoogle = function (font) {
+                  return font.main.google && font.alt.google;
+                },
+                    fonts = [],
+                    googleFonts = F.filter(isGoogle, TypePairings),
+                    toGoogleName = function (f) {
+                  return "" + f.google + ":" + f.weight + "" + (f.italic ? "italic" : "");
+                };
+                googleFonts.forEach(function (font) {
+                  return fonts.push(toGoogleName(font.main), toGoogleName(font.alt));
+                });
+                WebFont.load({
+                  classes: false,
+                  google: {
+                    families: F.nub(fonts)
+                  },
+                  active: function () {
+                    googleFonts.forEach(function (font) {
+                      font.main.name = font.main.google;
+                      font.alt.name = font.alt.google;
+                      _this.fontLoaded(font);
+                    });
+                    resolve();
+                  }
+                });
+              });
+            }
+          },
+          fontLoaded: {
+            value: function fontLoaded(font) {
+              return font;
+            }
+          },
+          chooseFont: {
+            value: function chooseFont(font) {
+              return font;
+            }
+          },
+          fontLoadingFinished: {
+            value: function fontLoadingFinished() {
+              return {};
+            }
+          }
+        });
+
+        return FontsActions;
+      })(Actions);
+
+      _export("default", FontsActions);
+    }
+  };
+});
+System.register("lib/flux", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/get", "npm:babel-runtime@4.7.16/core-js", "npm:flummox@3.5.0", "lib/actions/message-actions", "lib/stores/message-store", "lib/actions/fonts-actions", "lib/stores/fonts-store", "lib/actions/colors-actions", "lib/stores/colors-store"], function (_export) {
+  var _classCallCheck, _inherits, _get, _core, Flummox, MessageActions, MessageStore, FontsActions, FontsStore, ColorsActions, ColorsStore, Flux;
 
   return {
     setters: [function (_babelRuntimeHelpersClassCallCheck) {
@@ -16752,6 +19484,14 @@ System.register("lib/flux", ["npm:babel-runtime@4.7.16/helpers/class-call-check"
       MessageActions = _libActionsMessageActions["default"];
     }, function (_libStoresMessageStore) {
       MessageStore = _libStoresMessageStore["default"];
+    }, function (_libActionsFontsActions) {
+      FontsActions = _libActionsFontsActions["default"];
+    }, function (_libStoresFontsStore) {
+      FontsStore = _libStoresFontsStore["default"];
+    }, function (_libActionsColorsActions) {
+      ColorsActions = _libActionsColorsActions["default"];
+    }, function (_libStoresColorsStore) {
+      ColorsStore = _libStoresColorsStore["default"];
     }],
     execute: function () {
       "use strict";
@@ -16762,8 +19502,12 @@ System.register("lib/flux", ["npm:babel-runtime@4.7.16/helpers/class-call-check"
 
           _get(_core.Object.getPrototypeOf(Flux.prototype), "constructor", this).call(this);
 
-          this.createActions("messages", MessageActions);
-          this.createStore("messages", MessageStore, this);
+          this.createActions("message", MessageActions);
+          this.createStore("message", MessageStore, this);
+          this.createActions("fonts", FontsActions);
+          this.createStore("fonts", FontsStore, this);
+          this.createActions("colors", ColorsActions);
+          this.createStore("colors", ColorsStore, this);
         }
 
         _inherits(Flux, _Flummox);
@@ -16775,8 +19519,8 @@ System.register("lib/flux", ["npm:babel-runtime@4.7.16/helpers/class-call-check"
     }
   };
 });
-System.register("lib/components/output/output.jsx!github:floatdrop/plugin-jsx@1.1.0", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:babel-runtime@4.7.16/helpers/get", "npm:babel-runtime@4.7.16/core-js", "npm:react@0.13.1", "npm:react-canvas@0.0.1/lib/Surface", "npm:react-canvas@0.0.1/lib/Text", "npm:react-canvas@0.0.1/lib/FontFace", "npm:react-canvas@0.0.1/lib/measureText", "lib/components/output/output.scss!post-css"], function (_export) {
-  var _classCallCheck, _inherits, _createClass, _get, _core, React, Surface, Text, FontFace, measureText, Line, Output;
+System.register("lib/components/output.jsx!jsx", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:babel-runtime@4.7.16/helpers/get", "npm:babel-runtime@4.7.16/core-js", "npm:react@0.13.1", "npm:react-canvas@0.0.1/lib/Surface", "npm:react-canvas@0.0.1/lib/Layer", "npm:react-canvas@0.0.1/lib/Text", "npm:react-canvas@0.0.1/lib/FontFace", "lib/components/share.jsx!jsx", "npm:react-canvas@0.0.1/lib/measureText", "lib/components/output.scss!post-css"], function (_export) {
+  var _classCallCheck, _inherits, _createClass, _get, _core, React, Surface, Layer, Text, FontFace, Share, measureText, getFontFace, Line, Output;
 
   return {
     setters: [function (_babelRuntimeHelpersClassCallCheck) {
@@ -16793,15 +19537,25 @@ System.register("lib/components/output/output.jsx!github:floatdrop/plugin-jsx@1.
       React = _npmReact0131["default"];
     }, function (_npmReactCanvas001LibSurface) {
       Surface = _npmReactCanvas001LibSurface["default"];
+    }, function (_npmReactCanvas001LibLayer) {
+      Layer = _npmReactCanvas001LibLayer["default"];
     }, function (_npmReactCanvas001LibText) {
       Text = _npmReactCanvas001LibText["default"];
     }, function (_npmReactCanvas001LibFontFace) {
       FontFace = _npmReactCanvas001LibFontFace["default"];
+    }, function (_libComponentsShareJsxJsx) {
+      Share = _libComponentsShareJsxJsx["default"];
     }, function (_npmReactCanvas001LibMeasureText) {
       measureText = _npmReactCanvas001LibMeasureText["default"];
-    }, function (_libComponentsOutputOutputScssPostCss) {}],
+    }, function (_libComponentsOutputScssPostCss) {}],
     execute: function () {
       "use strict";
+
+      getFontFace = function (font) {
+        var options = { weight: font.weight };
+        if (font.italic) options.style = "italic";
+        return FontFace(font.name, null, options);
+      };
 
       Line = (function (_React$Component) {
         function Line() {
@@ -16833,8 +19587,6 @@ System.register("lib/components/output/output.jsx!github:floatdrop/plugin-jsx@1.
           _classCallCheck(this, Output);
 
           _get(_core.Object.getPrototypeOf(Output.prototype), "constructor", this).call(this);
-          this.font = FontFace("Avenir Next Condensed, Helvetica, sans-serif", null, { weight: 900 });
-          this.altFont = FontFace("Georgia, serif", null, { style: "italic", weight: 100 });
           this.state = {};
           this.spacing = 32;
         }
@@ -16844,49 +19596,98 @@ System.register("lib/components/output/output.jsx!github:floatdrop/plugin-jsx@1.
         _createClass(Output, {
           componentDidMount: {
             value: function componentDidMount() {
-              var ctx = this.refs.surface.getDOMNode().getContext("2d");
-              this.setState({ ctx: ctx });
+              this.setState({
+                canvas: this.refs.surface.getDOMNode()
+              });
             }
           },
           render: {
             value: function render() {
-              var _this = this;
-
-              var lines = this.layoutLines(this.props.lines);
-              return React.createElement("div", { className: "Output" }, React.createElement(Surface, { ref: "surface", width: this.props.width + this.spacing * 2, height: lines.totalHeight + this.spacing, top: 0, left: 0 }, lines.sizedLines.map(function (line) {
-                return React.createElement(Line, { line: line, ctx: _this.state.ctx });
-              })));
+              var lines = this.layoutLines(this.props.lines),
+                  text = "typeslab.com",
+                  canvasWidth = this.props.width + this.spacing * 2,
+                  canvasHeight = lines.totalHeight + this.spacing;
+              return React.createElement("div", { className: "Output", style: { backgroundColor: this.props.chosenColor.background, color: this.props.chosenColor.foreground } }, React.createElement(Surface, { ref: "surface", width: canvasWidth, height: canvasHeight, top: 0, left: 0 }, React.createElement(Layer, { style: { zIndex: 0, width: canvasWidth, height: canvasHeight, top: 0, left: 0, backgroundColor: this.props.chosenColor.background } }), React.createElement(Layer, { style: this.getBorderStyle(lines.totalHeight) }), lines.sizedLines.map(function (line) {
+                return React.createElement(Line, { line: line });
+              }), React.createElement(Text, { style: this.getByLineStyle(text, lines.totalHeight) }, text)), React.createElement(Share, { canvas: this.state.canvas, message: this.props.message, color: this.props.chosenColor, font: this.props.chosenFont }));
             }
           },
           layoutLines: {
             value: function layoutLines(lines) {
               var _this = this;
 
-              var ctx = this.state.ctx;
-              if (!ctx) {
-                return { totalHeight: 0, sizedLines: [] };
-              }var totalHeight = this.spacing,
-                  sizedLines = lines.map(function (line) {
-                var text = line,
-                    font = undefined,
-                    lineHeightFactor = undefined;
-                if (text.match(/^!/)) {
-                  text = text.replace(/^!/, "");
-                  font = _this.altFont;
-                  lineHeightFactor = 1.25;
-                } else {
-                  text = text.toUpperCase();
-                  font = _this.font;
-                  lineHeightFactor = 1.05;
-                }
-                var measurements = measureText(text, 9999, font, 12, 15),
-                    factor = _this.props.width / measurements.width,
-                    fontSize = Math.min(300, 12 * factor),
-                    style = { fontSize: fontSize, height: fontSize, lineHeight: fontSize, top: totalHeight, width: 500 + 2 * _this.spacing, fontFace: font, left: 0, textAlign: "center" };
-                totalHeight += fontSize * lineHeightFactor;
-                return { line: text, style: style };
-              });
+              var totalHeight = this.spacing,
+                  sizedLines = [];
+              if (this.props.chosenFont) {
+                sizedLines = lines.map(function (line) {
+                  var text = line,
+                      font = undefined,
+                      defaultLH = undefined,
+                      defaultPP = undefined;
+                  if (!text.match(/^!/)) {
+                    font = _this.props.chosenFont.main;
+                    defaultLH = 1.35;
+                    defaultPP = 0.15;
+                  } else {
+                    text = text.replace(/^!/, "");
+                    font = _this.props.chosenFont.alt;
+                    defaultLH = 1.5;
+                    defaultPP = 0.15;
+                  }
+                  text = font.caps ? text.toUpperCase() : text;
+                  var fontFace = getFontFace(font),
+                      measurements = measureText(text, 9999, fontFace, 12, 15),
+                      factor = _this.props.width / measurements.width,
+                      fontSize = Math.min(300, 12 * factor),
+                      lineHeight = fontSize * (typeof font.lineHeightFactor == "undefined" ? defaultLH : font.lineHeightFactor),
+                      style = {
+                    fontSize: fontSize,
+                    height: fontSize * 2,
+                    lineHeight: fontSize * 2,
+                    top: totalHeight + lineHeight * (typeof font.lineHeightFactor == "undefined" ? defaultPP : font.prePaddingFactor),
+                    width: 500 + 2 * _this.spacing,
+                    fontFace: fontFace,
+                    left: 0,
+                    textAlign: "center",
+                    color: _this.props.chosenColor.foreground,
+                    zIndex: 2
+                  };
+                  totalHeight += lineHeight;
+                  return { line: text, style: style };
+                });
+              }
               return { totalHeight: totalHeight, sizedLines: sizedLines };
+            }
+          },
+          getBorderStyle: {
+            value: function getBorderStyle(height) {
+              return {
+                borderColor: this.props.chosenColor.foreground,
+                top: this.spacing / 2,
+                width: this.props.width + this.spacing,
+                left: this.spacing / 2,
+                height: height,
+                zIndex: 1
+              };
+            }
+          },
+          getByLineStyle: {
+            value: function getByLineStyle(text, height) {
+              var font = FontFace("Avenir Next Condensed, Helvetica, sans-serif", null, { weight: 400 }),
+                  size = 8,
+                  width = measureText(text, 9999, font, size, 15).width;
+              return {
+                fontFace: font,
+                fontSize: size,
+                backgroundColor: this.props.chosenColor.background,
+                color: this.props.chosenColor.foreground,
+                textAlign: "center",
+                width: width + 6,
+                left: this.props.width / 2 + this.spacing / 4,
+                top: height + 11,
+                height: 16,
+                zIndex: 3
+              };
             }
           }
         });
@@ -16895,11 +19696,15 @@ System.register("lib/components/output/output.jsx!github:floatdrop/plugin-jsx@1.
       })(React.Component);
 
       _export("default", Output);
+
+      Output.contextTypes = {
+        flux: React.PropTypes.object
+      };
     }
   };
 });
-System.register("lib/app.jsx!github:floatdrop/plugin-jsx@1.1.0", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:react@0.13.1", "npm:flummox@3.5.0/component", "lib/components/controls/controls.jsx!github:floatdrop/plugin-jsx@1.1.0", "lib/components/output/output.jsx!github:floatdrop/plugin-jsx@1.1.0"], function (_export) {
-  var _classCallCheck, _inherits, _createClass, React, FluxComponent, Controls, Output, Main, App;
+System.register("lib/components/frame.jsx!jsx", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:react@0.13.1", "npm:flummox@3.5.0/component", "lib/components/frame.scss!post-css", "lib/components/controls.jsx!jsx", "lib/components/output.jsx!jsx"], function (_export) {
+  var _classCallCheck, _inherits, _createClass, React, FluxComponent, Controls, Output, Frame;
 
   return {
     setters: [function (_babelRuntimeHelpersClassCallCheck) {
@@ -16912,43 +19717,91 @@ System.register("lib/app.jsx!github:floatdrop/plugin-jsx@1.1.0", ["npm:babel-run
       React = _npmReact0131["default"];
     }, function (_npmFlummox350Component) {
       FluxComponent = _npmFlummox350Component["default"];
-    }, function (_libComponentsControlsControlsJsxGithubFloatdropPluginJsx110) {
-      Controls = _libComponentsControlsControlsJsxGithubFloatdropPluginJsx110["default"];
-    }, function (_libComponentsOutputOutputJsxGithubFloatdropPluginJsx110) {
-      Output = _libComponentsOutputOutputJsxGithubFloatdropPluginJsx110["default"];
+    }, function (_libComponentsFrameScssPostCss) {}, function (_libComponentsControlsJsxJsx) {
+      Controls = _libComponentsControlsJsxJsx["default"];
+    }, function (_libComponentsOutputJsxJsx) {
+      Output = _libComponentsOutputJsxJsx["default"];
     }],
     execute: function () {
       "use strict";
 
-      Main = (function (_React$Component) {
-        function Main() {
-          _classCallCheck(this, Main);
+      Frame = (function (_React$Component) {
+        function Frame() {
+          _classCallCheck(this, Frame);
 
           if (_React$Component != null) {
             _React$Component.apply(this, arguments);
           }
         }
 
-        _inherits(Main, _React$Component);
+        _inherits(Frame, _React$Component);
 
-        _createClass(Main, {
+        _createClass(Frame, {
           render: {
             value: function render() {
-              return React.createElement("div", { className: "flex wrap" }, React.createElement(Controls, { flux: this.props.flux }), React.createElement(FluxComponent, { connectToStores: "messages" }, React.createElement(Output, { width: 500 })));
+              return React.createElement("div", { className: "Frame" }, React.createElement("header", null, React.createElement("h1", { className: "Frame-Logo" }, React.createElement("span", null, "Type"), React.createElement("span", null, "Slab"))), React.createElement("main", null, React.createElement(Controls, null), React.createElement(FluxComponent, { connectToStores: ["message", "fonts", "colors"] }, React.createElement(Output, { width: 500 }))), React.createElement("footer", null, React.createElement("p", null, "Made with <3 by ", React.createElement("a", { href: "http://glenmaddern.com", target: "_blank" }, "Glen Maddern")), " ", React.createElement("p", null, "View source ", React.createElement("a", { target: "_blank", href: "https://github.com/geelen/typeslab" }, "on GitHub"))));
             }
           }
         });
 
-        return Main;
+        return Frame;
+      })(React.Component);
+
+      _export("default", Frame);
+    }
+  };
+});
+System.register("lib/app.jsx!jsx", ["npm:babel-runtime@4.7.16/helpers/class-call-check", "npm:babel-runtime@4.7.16/helpers/inherits", "npm:babel-runtime@4.7.16/helpers/create-class", "npm:babel-runtime@4.7.16/helpers/get", "npm:babel-runtime@4.7.16/core-js", "npm:react@0.13.1", "npm:flummox@3.5.0/component", "lib/components/frame.jsx!jsx"], function (_export) {
+  var _classCallCheck, _inherits, _createClass, _get, _core, React, FluxComponent, Frame, CanvasImage, App;
+
+  return {
+    setters: [function (_babelRuntimeHelpersClassCallCheck) {
+      _classCallCheck = _babelRuntimeHelpersClassCallCheck["default"];
+    }, function (_babelRuntimeHelpersInherits) {
+      _inherits = _babelRuntimeHelpersInherits["default"];
+    }, function (_babelRuntimeHelpersCreateClass) {
+      _createClass = _babelRuntimeHelpersCreateClass["default"];
+    }, function (_babelRuntimeHelpersGet) {
+      _get = _babelRuntimeHelpersGet["default"];
+    }, function (_babelRuntimeCoreJs) {
+      _core = _babelRuntimeCoreJs["default"];
+    }, function (_npmReact0131) {
+      React = _npmReact0131["default"];
+    }, function (_npmFlummox350Component) {
+      FluxComponent = _npmFlummox350Component["default"];
+    }, function (_libComponentsFrameJsxJsx) {
+      Frame = _libComponentsFrameJsxJsx["default"];
+    }],
+    execute: function () {
+      "use strict";
+
+      CanvasImage = (function (_React$Component) {
+        function CanvasImage() {
+          _classCallCheck(this, CanvasImage);
+
+          if (_React$Component != null) {
+            _React$Component.apply(this, arguments);
+          }
+        }
+
+        _inherits(CanvasImage, _React$Component);
+
+        _createClass(CanvasImage, {
+          render: {
+            value: function render() {
+              return React.createElement("img", { style: { backgroundColor: "white", padding: "1rem" }, width: 564, src: this.props.imageUrl });
+            }
+          }
+        });
+
+        return CanvasImage;
       })(React.Component);
 
       App = (function (_React$Component2) {
         function App() {
           _classCallCheck(this, App);
 
-          if (_React$Component2 != null) {
-            _React$Component2.apply(this, arguments);
-          }
+          _get(_core.Object.getPrototypeOf(App.prototype), "constructor", this).call(this);
         }
 
         _inherits(App, _React$Component2);
@@ -16956,7 +19809,7 @@ System.register("lib/app.jsx!github:floatdrop/plugin-jsx@1.1.0", ["npm:babel-run
         _createClass(App, {
           render: {
             value: function render() {
-              return React.createElement(FluxComponent, { flux: this.props.flux }, React.createElement(Main, null));
+              return React.createElement(FluxComponent, { flux: this.props.flux }, React.createElement(Frame, null));
             }
           }
         });
@@ -16968,13 +19821,13 @@ System.register("lib/app.jsx!github:floatdrop/plugin-jsx@1.1.0", ["npm:babel-run
     }
   };
 });
-System.register("lib/main", ["styles/core.scss!post-css", "npm:react@0.13.1", "lib/app.jsx!github:floatdrop/plugin-jsx@1.1.0", "lib/flux"], function (_export) {
+System.register("lib/main", ["styles/index", "npm:react@0.13.1", "lib/app.jsx!jsx", "lib/flux"], function (_export) {
   var React, App, Flux, flux;
   return {
-    setters: [function (_stylesCoreScssPostCss) {}, function (_npmReact0131) {
+    setters: [function (_stylesIndex) {}, function (_npmReact0131) {
       React = _npmReact0131["default"];
-    }, function (_libAppJsxGithubFloatdropPluginJsx110) {
-      App = _libAppJsxGithubFloatdropPluginJsx110["default"];
+    }, function (_libAppJsxJsx) {
+      App = _libAppJsxJsx["default"];
     }, function (_libFlux) {
       Flux = _libFlux["default"];
     }],
@@ -16987,5 +19840,21 @@ System.register("lib/main", ["styles/core.scss!post-css", "npm:react@0.13.1", "l
     }
   };
 });
-// Inject the styles (async obvs)
+System.register('styles/reset.scss!post-css', [], false, function() {});
+System.register('styles/variables.scss!post-css', [], false, function() {});
+System.register('styles/traits/colors.scss!post-css', [], false, function() {});
+System.register('styles/traits/typography.scss!post-css', [], false, function() {});
+System.register('styles/traits/layout.scss!post-css', [], false, function() {});
+System.register('styles/traits/flex.scss!post-css', [], false, function() {});
+System.register('styles/traits/link.scss!post-css', [], false, function() {});
+System.register('styles/core.scss!post-css', [], false, function() {});
+System.register('lib/components/frame.scss!post-css', [], false, function() {});
+System.register('lib/components/message-entry.scss!post-css', [], false, function() {});
+System.register('lib/components/type-selector.scss!post-css', [], false, function() {});
+System.register('lib/components/color-selector.scss!post-css', [], false, function() {});
+System.register('lib/components/controls.scss!post-css', [], false, function() {});
+System.register('lib/components/share.scss!post-css', [], false, function() {});
+System.register('lib/components/output.scss!post-css', [], false, function() {});
+(function(c){var d=document,a='appendChild',i='styleSheet',s=d.createElement('style');s.type='text/css';d.getElementsByTagName('head')[0][a](s);s[i]?s[i].cssText=c:s[a](d.createTextNode(c));})
+("/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\n\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n\tdisplay: block;\n}\nbody {\n\tline-height: 1;\n}\nol, ul {\n\tlist-style: none;\n}\nblockquote, q {\n\tquotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n\tcontent: '';\n\tcontent: none;\n}\ntable {\n\tborder-collapse: collapse;\n\tborder-spacing: 0;\n}\n\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  font-family: \"Avenir Next\", \"Arial Black\";\n  font-weight: 400;\n  background-color: white;\n  color: hsl(240,7%,29%);\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\nbutton {\n  background: initial;\n  border: initial;\n  font: inherit;\n}\n\n.Frame {\n  min-height: 100vh;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-direction: column;\n  -ms-flex-direction: column;\n  flex-direction: column\n}\n\n.Frame > header {\n\tbackground-color: hsl(240,7%,29%);\n\tcolor: hsl(240,7%,99%);\n\tfont-family: \"Avenir Next\", \"Arial Black\";\n\tfont-weight: 700;\n\tletter-spacing: 5px;\n\ttext-transform: uppercase;\n\tpadding: 1rem;\n}\n\n.Frame > footer {\n\tdisplay: -webkit-flex;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-flex-wrap: wrap;\n\t-ms-flex-wrap: wrap;\n\tflex-wrap: wrap;\n\t-webkit-justify-content: center;\n\t-ms-flex-pack: center;\n\tjustify-content: center;\n\tbackground-color: hsl(240,7%,29%);\n\tcolor: hsl(240,7%,99%);\n\tfont-family: \"Avenir Next\", \"Arial Black\";\n\tfont-weight: 700;\n\tfont-size: 0.8rem;\n\tletter-spacing: 2px;\n\ttext-transform: uppercase;\n\tline-height: 1.4;\n\tpadding: 1rem\n}\n\n.Frame > footer > p {\n\tpadding: 0.25rem;\n\tpadding-right: 1rem;\n\tpadding-left: 1rem;\n\ttext-align: center\n}\n\n.Frame > footer > p > a {\n\tcursor: pointer;\n\tcolor: inherit;\n\ttext-decoration: none;\n\ttext-decoration: underline;\n\topacity: 0.75;\n\twhite-space: nowrap;\n}\n\n.Frame > footer > p > a:hover, .Frame > footer > p > a:active {\n\ttext-decoration: initial;\n\tcolor: inherit;\n}\n\n.Frame > footer > p > a:visited {\n\tcolor: inherit;\n}\n\n.Frame > footer > p > a:hover, .Frame > footer > p > a:active {\n\ttext-decoration: underline;\n\topacity: 1;\n}\n\n.Frame > main {\n\tdisplay: -webkit-flex;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-flex-wrap: wrap;\n\t-ms-flex-wrap: wrap;\n\tflex-wrap: wrap;\n\t-webkit-flex-grow: 1;\n\t-ms-flex-positive: 1;\n\tflex-grow: 1;\n}\n\n.Frame-Logo {\n  text-align: center\n}\n\n.Frame-Logo > span {\n\tdisplay: inline-block\n}\n\n.Frame-Logo > span::first-letter {\n\tfont-size: 1.4em;\n\tvertical-align: text-top;\n}\n\n.MessageEntry > textarea {\n\tbackground-color: #eee;\n\tcolor: black;\n\tbox-shadow: inset 0 2px 4px rgba(0,0,0,0.1);\n\tpadding: 0.5rem;\n\tfont-size: 0.875rem;\n\theight: 10rem;\n\twidth: 100%;\n\tborder: none;\n\tresize: none;\n}\n\n.TypeSelector > li {\n\tmargin: 0.25rem;\n\tdisplay: -webkit-flex;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\tdisplay: -webkit-inline-flex;\n\tdisplay: -ms-inline-flexbox;\n\tdisplay: inline-flex;\n\t-webkit-align-items: baseline;\n\t-ms-flex-align: baseline;\n\talign-items: baseline;\n\tborder: solid 1px rgba(0, 0, 0, 0.1);\n\tborder-radius: 0.25rem\n}\n\n.TypeSelector > li > span {\n\tpadding: 0.5rem\n}\n\n.TypeSelector > li > span:first-child {\n\tborder-right: 1px solid rgba(0, 0, 0, 0.1);\n}\n\n.ColorSelector {\n  text-align: center\n}\n\n.ColorSelector > li {\n\tmargin: 0.25rem;\n\tfont-size: 0.875rem;\n\tfont-weight: 700;\n\ttext-transform: uppercase;\n\tdisplay: inline-block;\n\tpadding: 0.6rem 1.5rem 0.5rem;\n\tbox-shadow: 0 0 1px 0 rgba(0,0,0,0.4);\n\tborder-radius: 0.25rem;\n}\n\n.Controls {\n  padding: 1rem;\n  padding-bottom: 2rem;\n  padding-top: 2rem;\n  background-color: white;\n  color: hsl(240,7%,29%);\n  width: 320px\n}\n\n@media screen and (max-width: 600px) {\n\n\t.Controls {\n\t\twidth: 100%;\n\t}\n}\n\n@media screen and (min-width: 1200px) {\n\n\t.Controls {\n\t\twidth: 480px;\n\t}\n}\n\n.Controls > h2 {\n\tfont-size: 1.125rem;\n\tfont-weight: 500;\n\tmargin-top: 2rem;\n\tmargin-bottom: 1rem\n}\n\n.Controls > h2:first-child {\n\tmargin-top: 0;\n}\n\n.Share {\n  padding-top: 2rem;\n  padding-bottom: 2rem;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-justify-content: center;\n  -ms-flex-pack: center;\n  justify-content: center;\n  -webkit-flex-wrap: wrap;\n  -ms-flex-wrap: wrap;\n  flex-wrap: wrap;\n  -webkit-align-items: center;\n  -ms-flex-align: center;\n  align-items: center\n}\n\n.Share > p {\n\twidth: 100%;\n\tpadding-bottom: 0.5rem\n}\n\n.Share > p > a {\n\tcursor: pointer;\n\tcolor: inherit;\n\ttext-decoration: none;\n\ttext-decoration: underline;\n\topacity: 0.75;\n}\n\n.Share > p > a:hover, .Share > p > a:active {\n\ttext-decoration: initial;\n\tcolor: inherit;\n}\n\n.Share > p > a:visited {\n\tcolor: inherit;\n}\n\n.Share > p > a:hover, .Share > p > a:active {\n\ttext-decoration: underline;\n\topacity: 1;\n}\n\n.ShareButton {\n  padding: 0.5rem;\n  margin: 0.5rem;\n  cursor: pointer;\n  color: inherit;\n  text-decoration: none;\n  opacity: 0.75;\n  display: block;\n  border: 1px solid;\n  border-radius: 0.25rem;\n}\n\n.ShareButton:hover, .ShareButton:active {\n\ttext-decoration: initial;\n\tcolor: inherit;\n}\n\n.ShareButton:visited {\n\tcolor: inherit;\n}\n\n.ShareButton:hover, .ShareButton:active {\n\topacity: 1;\n}\n\n.ShareButton:disabled {\n\topacity: 0.25;\n\tcursor: initial;\n}\n\n.Output {\n  padding-top: 1rem;\n  -webkit-flex-grow: 1;\n  -ms-flex-positive: 1;\n  flex-grow: 1;\n  text-align: center;\n  overflow: hidden;\n  max-width: calc(100vw - 320px)\n}\n\n@media screen and (max-width: 600px) {\n\n\t.Output {\n\t\tmax-width: 100%;\n\t}\n}\n\n.Output canvas {\n\tmax-width: 100%;\n\theight: auto !important;\n\tdisplay: inline-block;\n}\n");
 //# sourceMappingURL=build.js.map

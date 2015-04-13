@@ -1,3 +1,5 @@
+const BUILD_MODE = typeof window === 'undefined'
+
 import reactTools from 'react-tools'
 import React from 'react'
 import ReactMount from 'react/lib/ReactMount'
@@ -19,8 +21,7 @@ let reexportHotVersionSnippet = (className) => `
 `
 
 export let translate = load => {
-  let className = classNameFromFilename(load.metadata.pluginArgument),
-    snippet = reexportHotVersionSnippet(className),
+  let snippet = BUILD_MODE ? '' : reexportHotVersionSnippet(classNameFromFilename(load.metadata.pluginArgument)),
     output = reactTools.transformWithDetails(load.source + snippet, {es6module: true})
   load.source = output.code;
   load.metadata.sourceMap = output.sourceMap;
