@@ -30,6 +30,7 @@ System.config({
     "pascal-case": "npm:pascal-case@1.1.0",
     "path": "github:jspm/nodelibs-path@0.1.0",
     "postcss": "npm:postcss@4.1.4",
+    "postcss-mixins": "npm:postcss-mixins@0.1.1",
     "postcss-nested": "npm:postcss-nested@0.2.2",
     "postcss-simple-extend": "npm:postcss-simple-extend@0.3.0",
     "postcss-simple-vars": "npm:postcss-simple-vars@0.2.4",
@@ -382,7 +383,7 @@ System.config({
       "node-fetch": "npm:node-fetch@1.0.6",
       "whatwg-fetch": "github:matthew-andrews/fetch@ie9"
     },
-    "npm:js-base64@2.1.7": {
+    "npm:js-base64@2.1.8": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:jsonfile@2.0.0": {
@@ -463,6 +464,12 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
+    "npm:postcss-mixins@0.1.1": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "postcss": "npm:postcss@4.1.4",
+      "postcss-simple-vars": "npm:postcss-simple-vars@0.2.4"
+    },
     "npm:postcss-nested@0.2.2": {
       "postcss": "npm:postcss@4.1.4",
       "process": "github:jspm/nodelibs-process@0.1.1"
@@ -473,7 +480,7 @@ System.config({
     },
     "npm:postcss@4.0.6": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "js-base64": "npm:js-base64@2.1.7",
+      "js-base64": "npm:js-base64@2.1.8",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "source-map": "npm:source-map@0.2.0"
@@ -481,7 +488,7 @@ System.config({
     "npm:postcss@4.1.4": {
       "es6-promise": "npm:es6-promise@2.0.1",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "js-base64": "npm:js-base64@2.1.7",
+      "js-base64": "npm:js-base64@2.1.8",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "source-map": "npm:source-map@0.4.2",
@@ -558,12 +565,6 @@ System.config({
     },
     "npm:sentence-case@1.1.2": {
       "lower-case": "npm:lower-case@1.1.2"
-    },
-    "npm:sha.js@2.3.6": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "inherits": "npm:inherits@2.0.1",
-      "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:sha.js@2.4.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

@@ -1,8 +1,10 @@
 .Share {
-  > a {
-    display: inline-block;
-    @trait(layout: p0.5 m0.5);
-    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 0.25rem;
-  }
+  @trait(layout: pt1);
+}
+
+.ShareButton {
+  @trait(layout: p0.5 m0.5, link: button);
+  display: inline-block;
+  box-shadow: 0 0 0 1px;
+  border-radius: 0.25rem;
 }

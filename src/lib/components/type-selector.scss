@@ -2,7 +2,7 @@
   text-align: center;
   > li {
     @trait (layout: m0.25 pl0.25 pr0.25, flex: inline align-baseline);
-    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.1);
+    border: solid 1px rgba(0, 0, 0, 0.1);
     border-radius: 0.25rem;
     > span {
       @trait (layout: p0.5);

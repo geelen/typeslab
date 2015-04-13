@@ -1,132 +1,132 @@
-@define-placeholder layout {
+@define-mixin layout {
 }
-@define-placeholder layout:p0.25 {
+@define-mixin layout:p0.25 {
   padding: 0.25rem;
 }
-@define-placeholder layout:p0.5 {
+@define-mixin layout:p0.5 {
   padding: 0.5rem;
 }
-@define-placeholder layout:p1 {
+@define-mixin layout:p1 {
   padding: 1rem;
 }
-@define-placeholder layout:p2 {
+@define-mixin layout:p2 {
   padding: 2rem;
 }
 
-@define-placeholder layout:pt0.25 {
+@define-mixin layout:pt0.25 {
   padding-top: 0.25rem;
 }
-@define-placeholder layout:pr0.25 {
+@define-mixin layout:pr0.25 {
   padding-right: 0.25rem;
 }
-@define-placeholder layout:pb0.25 {
+@define-mixin layout:pb0.25 {
   padding-bottom: 0.25rem;
 }
-@define-placeholder layout:pl0.25 {
+@define-mixin layout:pl0.25 {
   padding-left: 0.25rem;
 }
 
-@define-placeholder layout:pt0.5 {
+@define-mixin layout:pt0.5 {
   padding-top: 0.5rem;
 }
-@define-placeholder layout:pr0.5 {
+@define-mixin layout:pr0.5 {
   padding-right: 0.5rem;
 }
-@define-placeholder layout:pb0.5 {
+@define-mixin layout:pb0.5 {
   padding-bottom: 0.5rem;
 }
-@define-placeholder layout:pl0.5 {
+@define-mixin layout:pl0.5 {
   padding-left: 0.5rem;
 }
 
-@define-placeholder layout:pt1 {
+@define-mixin layout:pt1 {
   padding-top: 1rem;
 }
-@define-placeholder layout:pr1 {
+@define-mixin layout:pr1 {
   padding-right: 1rem;
 }
-@define-placeholder layout:pb1 {
+@define-mixin layout:pb1 {
   padding-bottom: 1rem;
 }
-@define-placeholder layout:pl1 {
+@define-mixin layout:pl1 {
   padding-left: 1rem;
 }
 
-@define-placeholder layout:pt2 {
+@define-mixin layout:pt2 {
   padding-top: 2rem;
 }
-@define-placeholder layout:pr2 {
+@define-mixin layout:pr2 {
   padding-right: 2rem;
 }
-@define-placeholder layout:pb2 {
+@define-mixin layout:pb2 {
   padding-bottom: 2rem;
 }
-@define-placeholder layout:pl2 {
+@define-mixin layout:pl2 {
   padding-left: 2rem;
 }
 
-@define-placeholder layout:m0.25 {
+@define-mixin layout:m0.25 {
   margin: 0.25rem;
 }
-@define-placeholder layout:m0.5 {
+@define-mixin layout:m0.5 {
   margin: 0.5rem;
 }
-@define-placeholder layout:m1 {
+@define-mixin layout:m1 {
   margin: 1rem;
 }
-@define-placeholder layout:m2 {
+@define-mixin layout:m2 {
   margin: 2rem;
 }
 
-@define-placeholder layout:mt0.25 {
+@define-mixin layout:mt0.25 {
   margin-top: 0.25rem;
 }
-@define-placeholder layout:mr0.25 {
+@define-mixin layout:mr0.25 {
   margin-right: 0.25rem;
 }
-@define-placeholder layout:mb0.25 {
+@define-mixin layout:mb0.25 {
   margin-bottom: 0.25rem;
 }
-@define-placeholder layout:ml0.25 {
+@define-mixin layout:ml0.25 {
   margin-left: 0.25rem;
 }
 
-@define-placeholder layout:mt0.5 {
+@define-mixin layout:mt0.5 {
   margin-top: 0.5rem;
 }
-@define-placeholder layout:mr0.5 {
+@define-mixin layout:mr0.5 {
   margin-right: 0.5rem;
 }
-@define-placeholder layout:mb0.5 {
+@define-mixin layout:mb0.5 {
   margin-bottom: 0.5rem;
 }
-@define-placeholder layout:ml0.5 {
+@define-mixin layout:ml0.5 {
   margin-left: 0.5rem;
 }
 
-@define-placeholder layout:mt1 {
+@define-mixin layout:mt1 {
   margin-top: 1rem;
 }
-@define-placeholder layout:mr1 {
+@define-mixin layout:mr1 {
   margin-right: 1rem;
 }
-@define-placeholder layout:mb1 {
+@define-mixin layout:mb1 {
   margin-bottom: 1rem;
 }
-@define-placeholder layout:ml1 {
+@define-mixin layout:ml1 {
   margin-left: 1rem;
 }
 
-@define-placeholder layout:mt2 {
+@define-mixin layout:mt2 {
   margin-top: 2rem;
 }
-@define-placeholder layout:mr2 {
+@define-mixin layout:mr2 {
   margin-right: 2rem;
 }
-@define-placeholder layout:mb2 {
+@define-mixin layout:mb2 {
   margin-bottom: 2rem;
 }
-@define-placeholder layout:ml2 {
+@define-mixin layout:ml2 {
   margin-left: 2rem;
 }
 

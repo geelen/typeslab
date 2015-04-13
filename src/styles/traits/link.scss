@@ -1,0 +1,14 @@
+@define-mixin link {
+  color: inherit;
+  &:hover, &:active, &:visited {
+    text-decoration: none;
+    color: initial;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@define-mixin link:button {
+
+}

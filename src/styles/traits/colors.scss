@@ -1,15 +1,15 @@
-@define-placeholder color {
+@define-mixin color {
 }
-@define-placeholder color:default {
+@define-mixin color:default {
   background-color: $light-text;
   color: $dark-background;
 }
-@define-placeholder color:inverted {
+@define-mixin color:inverted {
   background-color: $dark-background;
   color: $light-text;
 }
 
-@define-placeholder color:recessed {
+@define-mixin color:recessed {
   background-color: #eee;
   color: black;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);

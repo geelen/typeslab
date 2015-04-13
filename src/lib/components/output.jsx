@@ -42,7 +42,7 @@ export default class Output extends React.Component {
       canvasHeight = lines.totalHeight + this.spacing
     return <div className='Output' style={{backgroundColor: this.props.chosenColor.background, color: this.props.chosenColor.foreground}}>
       <Surface ref="surface" width={canvasWidth} height={canvasHeight} top={0} left={0}>
-        <Layer style={{width: canvasWidth, height: canvasHeight, top: 0, left: 0, backgroundColor: this.props.chosenColor.background}}/>
+        <Layer style={{zIndex: 0, width: canvasWidth, height: canvasHeight, top: 0, left: 0, backgroundColor: this.props.chosenColor.background}}/>
         <Layer style={this.getBorderStyle(lines.totalHeight)}/>
         {lines.sizedLines.map((line) => {
           return <Line line={line}/>
@@ -77,14 +77,15 @@ export default class Output extends React.Component {
           lineHeight = fontSize * (typeof font.lineHeightFactor == "undefined" ? defaultLH : font.lineHeightFactor),
           style = {
             fontSize,
-            height: fontSize,
-            lineHeight: fontSize,
+            height: fontSize * 2,
+            lineHeight: fontSize * 2,
             top: totalHeight + lineHeight * (typeof font.lineHeightFactor == "undefined" ? defaultPP : font.prePaddingFactor),
             width: 500 + 2 * this.spacing,
             fontFace,
             left: 0,
             textAlign: 'center',
-            color: this.props.chosenColor.foreground
+            color: this.props.chosenColor.foreground,
+            zIndex: 2
           }
         totalHeight += lineHeight
         return {line: text, style}
@@ -99,7 +100,8 @@ export default class Output extends React.Component {
       top: this.spacing / 2,
       width: this.props.width + this.spacing,
       left: this.spacing / 2,
-      height: height
+      height: height,
+      zIndex: 1
     }
   }
 
@@ -116,7 +118,8 @@ export default class Output extends React.Component {
       width: width + 6,
       left: this.props.width / 2 + this.spacing / 4,
       top: height + 11,
-      height: 16
+      height: 16,
+      zIndex: 3
     }
   }
 }
