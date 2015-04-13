@@ -1,12 +1,32 @@
 @define-mixin link {
-  &, &:hover, &:active, &:visited {
-    text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+  &:hover, &:active {
+    text-decoration: initial;
+    color: inherit;
+  }
+  &:visited {
     color: inherit;
   }
 }
 
 @define-mixin link:button {
+  opacity: 0.75;
+  &:hover, &:active {
+    opacity: 1;
+  }
   &:disabled {
-    opacity: 0.1;
+    opacity: 0.25;
+    cursor: initial;
+  }
+}
+
+@define-mixin link:inline {
+  text-decoration: underline;
+  opacity: 0.75;
+  &:hover, &:active {
+    text-decoration: underline;
+    opacity: 1;
   }
 }

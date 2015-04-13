@@ -7,6 +7,12 @@ export default class Share extends React.Component {
     this.state = {}
   }
 
+  componentWillReceiveProps(newProps, oldProps) {
+    if (newProps.message != oldProps.message || newProps.color != oldProps.color || newProps.font != oldProps.font) {
+      this.setState({link: undefined})
+    }
+  }
+
   uploadToImgur() {
     this.setState({uploading: true})
     let data = new FormData()
@@ -22,7 +28,7 @@ export default class Share extends React.Component {
       .then(json => {
         this.setState({uploading: false})
         if (json.success) {
-          console.log(json.data)
+          this.setState({link: json.data.link})
         } else {
           let message = json.data.error.match(/anonymous uploading in your country has been disabled/) ? "Sorry, IMGUR has blocked anonymous uploads from your country" : json.data.error
           this.setState({failed: true, failure: message})
@@ -31,7 +37,6 @@ export default class Share extends React.Component {
   }
 
   saveLocally(e) {
-    console.log(e.target)
     e.target.href = this.props.canvas.toDataURL()
   }
 
@@ -39,7 +44,8 @@ export default class Share extends React.Component {
     return <ul className="Share">
       { this.state.failure ? <p>{this.state.failure}</p> : '' }
       { this.state.uploading ? <p>Uploading...</p> : '' }
-      <button disabled={this.state.uploading || this.state.failed} className="ShareButton" onClick={this.uploadToImgur.bind(this)}>Upload to IMGUR</button>
+      { this.state.link ? <p>Uploaded to <a href={this.state.link} target="_blank">{this.state.link}</a></p> : '' }
+      <button disabled={this.state.link || this.state.uploading || this.state.failed} className="ShareButton" onClick={this.uploadToImgur.bind(this)}>Upload to IMGUR</button>
       <a href className="ShareButton" download onClick={this.saveLocally.bind(this)}>Save locally</a>
     </ul>
   }

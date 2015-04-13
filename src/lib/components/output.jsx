@@ -49,7 +49,7 @@ export default class Output extends React.Component {
         })}
         <Text style={this.getByLineStyle(text, lines.totalHeight)}>{text}</Text>
       </Surface>
-      <Share canvas={this.state.canvas}/>
+      <Share canvas={this.state.canvas} message={this.props.message} color={this.props.chosenColor} font={this.props.chosenFont}/>
     </div>
   }
 

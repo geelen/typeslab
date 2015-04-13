@@ -2,12 +2,15 @@
   @trait(layout: pt1, flex: center wrap align-center);
   > p {
     width: 100%;
+    > a {
+      @trait(link: inline);
+    }
   }
 }
 
 .ShareButton {
   @trait(layout: p0.5 m0.5, link: button);
   display: block;
-  box-shadow: 0 0 0 1px;
+  border: 1px solid;
   border-radius: 0.25rem;
 }
