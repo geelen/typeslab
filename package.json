@@ -38,6 +38,11 @@
   },
   "devDependencies": {
     "live-server": "~0.7.1",
-    "http-server": "~0.8.0"
+    "http-server": "~0.8.0",
+    "gulp-html-replace": "~1.4.5",
+    "gulp-load-plugins": "~0.10.0",
+    "gulp-shell": "~0.4.0",
+    "gulp": "~3.8.11",
+    "gulp-uglify": "~1.2.0"
   }
 }

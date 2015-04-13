@@ -33,6 +33,9 @@
 @define-mixin flex:align-baseline {
   align-items: baseline;
 }
+@define-mixin flex:align-stretch {
+  align-items: stretch;
+}
 
 @define-mixin flex-child {
 }

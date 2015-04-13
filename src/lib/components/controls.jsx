@@ -15,7 +15,9 @@ export default class Controls extends React.Component {
         <TypeSelector />
       </FluxComponent>
       <h2>Choose a colour scheme:</h2>
-      <ColorSelector />
+      <FluxComponent connectToStores='colors'>
+        <ColorSelector />
+      </FluxComponent>
     </div>
   }
 }
