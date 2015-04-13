@@ -22,4 +22,9 @@ gulp.task('html', function () {
     .pipe(gulp.dest('dist/'))
 })
 
-gulp.task('build', ['bundle', 'html'])
+gulp.task('misc', function () {
+  return gulp.src('src/favicon.ico')
+    .pipe(gulp.dest('dist/'))
+})
+
+gulp.task('build', ['bundle', 'html', 'misc'])
