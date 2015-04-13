@@ -37,9 +37,12 @@ export default class Output extends React.Component {
 
   render() {
     let lines = this.layoutLines(this.props.lines),
-      text = 'typeslab.com'
-    return <div className='Output' style={{backgroundColor: this.props.chosenColor.background}}>
-      <Surface ref="surface" width={this.props.width + this.spacing * 2} height={lines.totalHeight + this.spacing} top={0} left={0} style={{backgroundColor: this.props.chosenColor.background}}>
+      text = 'typeslab.com',
+      canvasWidth = this.props.width + this.spacing * 2,
+      canvasHeight = lines.totalHeight + this.spacing
+    return <div className='Output' style={{backgroundColor: this.props.chosenColor.background, color: this.props.chosenColor.foreground}}>
+      <Surface ref="surface" width={canvasWidth} height={canvasHeight} top={0} left={0}>
+        <Layer style={{width: canvasWidth, height: canvasHeight, top: 0, left: 0, backgroundColor: this.props.chosenColor.background}}/>
         <Layer style={this.getBorderStyle(lines.totalHeight)}/>
         {lines.sizedLines.map((line) => {
           return <Line line={line}/>

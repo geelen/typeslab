@@ -15,7 +15,7 @@ export default [{
   foreground: 'hsl(0, 0%, 20%)',
   background: 'hsl(48, 63%, 97%)'
 }, {
-  name: "Albatross",
+  name: "Finch",
   foreground: 'rgb(202,58,53)',
   background: 'rgb(208,210,207)'
 }, {

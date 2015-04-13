@@ -4,23 +4,27 @@ import 'whatwg-fetch'
 
 export default class Share extends React.Component {
   uploadToImgur() {
-    console.log()
     let dataUrl = this.props.canvas.toDataURL(),
       data = new FormData()
-    data.append("image",this.props.canvas.toDataURL().split(',')[1],"typeslab.png")
+    data.append("image",this.props.canvas.toDataURL().split(',')[1])
     data.append("type", "base64")
     fetch('https://api.imgur.com/3/image', {
       method: 'post',
-      body: JSON.stringify({
-        type: 'base64',
-        image: this.props.canvas.toDataURL(),
-        key: "dc208153560e2ef"
-      })
-    })
+      body: data,
+      headers: {
+        "Authorization": "Client-ID dc208153560e2ef"
+      }
+    }).then(response => response.json())
+    .then(json => console.log(json))
+  }
+  saveLocally(e) {
+    console.log(e.target)
+    e.target.href = this.props.canvas.toDataURL()
   }
   render() {
-    return <ul>
-      <li onClick={this.uploadToImgur.bind(this)}>Save to IMGUR</li>
+    return <ul className="Share">
+      <a onClick={this.uploadToImgur.bind(this)}>Upload to IMGUR</a>
+      <a download href='http://glenmaddern.com' onClick={this.saveLocally.bind(this)}>Download to computer</a>
     </ul>
   }
 }
