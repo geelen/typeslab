@@ -19,6 +19,9 @@ export default class Frame extends React.Component {
           <Output width={500} />
         </FluxComponent>
       </main>
+      <footer>
+        <p>Made with &lt;3 by <a href="http://glenmaddern.com" target="_blank">Glen Maddern</a></p>
+      </footer>
     </div>
   }
 }

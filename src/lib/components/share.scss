@@ -1,7 +1,8 @@
 .Share {
-  @trait(layout: pt1, flex: center wrap align-center);
+  @trait(layout: pt2, flex: center wrap align-center);
   > p {
     width: 100%;
+    @trait(layout: pb0.5);
     > a {
       @trait(link: inline);
     }

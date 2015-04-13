@@ -5,6 +5,15 @@
   > header {
     @trait(color: inverted, type: logo, layout: p1);
   }
+  > footer {
+    @trait(color: inverted, type: footer, layout: p1);
+    > p {
+      text-align: center;
+      > a {
+        @trait(link: inline);
+      }
+    }
+  }
   > main {
     @trait(flex: wrap, flex-child: grow);
   }

@@ -1,4 +1,5 @@
 .Output {
+  padding-top: 1rem;
   @trait (flex-child: grow);
   text-align: center;
   overflow: hidden;

@@ -46,3 +46,11 @@
   font-weight: 400;
   font-size: 1.2rem;
 }
+
+@define-mixin type:footer {
+  font-family: "Avenir Next", "Arial Black";
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
