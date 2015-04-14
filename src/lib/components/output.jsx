@@ -40,7 +40,9 @@ export default class Output extends React.Component {
       text = 'typeslab.com',
       canvasWidth = this.props.width + this.spacing * 2,
       canvasHeight = lines.totalHeight + this.spacing
+    requestAnimationFrame(_ => requestAnimationFrame(this.calculateBottomPixels.bind(this, canvasHeight)))
     return <div className='Output' style={{backgroundColor: this.props.chosenColor.background, color: this.props.chosenColor.foreground}}>
+      <canvas id="debug"></canvas>
       <Surface ref="surface" width={canvasWidth} height={canvasHeight} top={0} left={0}>
         <Layer style={{zIndex: 0, width: canvasWidth, height: canvasHeight, top: 0, left: 0, backgroundColor: this.props.chosenColor.background}}/>
         <Layer style={this.getBorderStyle(lines.totalHeight)}/>
@@ -121,6 +123,36 @@ export default class Output extends React.Component {
       height: 16,
       zIndex: 3
     }
+  }
+
+  calculateBottomPixels(height) {
+    let c = document.querySelector('canvas#debug')
+    let ctx = c.getContext("2d"),
+      typeCtx = this.state.canvas.getContext("2d"),
+      scale = window.devicePixelRatio,
+      topLeft = scale * (this.spacing / 2 + 2),
+      w = scale * (this.props.width + this.spacing - 4),
+      h = scale * (height - this.spacing - 10)
+    c.width = this.state.canvas.width
+    c.height = this.state.canvas.height
+
+    ctx.fillStyle = "rgba(255,0,0,0.1)"
+    let pxData = typeCtx.getImageData(topLeft, topLeft, w, h)
+    console.log(pxData.length)
+    let thirtyTwo = new Uint32Array(pxData.data.buffer)
+    console.log(thirtyTwo.length)
+    let backgroundRgb = getComputedStyle(this.state.canvas.parentNode).backgroundColor,
+      [_, r,g,b] = backgroundRgb.split(/[^\d\.]+/).map(x => parseInt(x)),
+      tmpBuffer = new ArrayBuffer(4),
+      tmpView = new Uint8ClampedArray(tmpBuffer)
+    tmpView[0] = r
+    tmpView[1] = g
+    tmpView[2] = b
+    tmpView[3] = 255
+    let bgInt = new Uint32Array(tmpBuffer)[0]
+
+    ctx.putImageData(pxData, topLeft, topLeft)
+    ctx.fillRect(topLeft, topLeft, w, h)
   }
 }
 
