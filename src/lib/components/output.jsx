@@ -131,16 +131,16 @@ export default class Output extends React.Component {
       typeCtx = this.state.canvas.getContext("2d"),
       scale = window.devicePixelRatio,
       topLeft = scale * (this.spacing / 2 + 2),
-      w = scale * (this.props.width + this.spacing - 4),
-      h = scale * (height - this.spacing - 10)
+      w = Math.floor(scale * (this.props.width + this.spacing - 4)),
+      h = Math.floor(scale * (height - this.spacing - 10))
+    console.log(h)
     c.width = this.state.canvas.width
     c.height = this.state.canvas.height
 
-    ctx.fillStyle = "rgba(255,0,0,0.1)"
     let pxData = typeCtx.getImageData(topLeft, topLeft, w, h)
-    console.log(pxData.length)
+    ctx.putImageData(pxData, 0, 0)
+
     let thirtyTwo = new Uint32Array(pxData.data.buffer)
-    console.log(thirtyTwo.length)
     let backgroundRgb = getComputedStyle(this.state.canvas.parentNode).backgroundColor,
       [_, r,g,b] = backgroundRgb.split(/[^\d\.]+/).map(x => parseInt(x)),
       tmpBuffer = new ArrayBuffer(4),
@@ -149,10 +149,32 @@ export default class Output extends React.Component {
     tmpView[1] = g
     tmpView[2] = b
     tmpView[3] = 255
-    let bgInt = new Uint32Array(tmpBuffer)[0]
+    let bgInt = new Uint32Array(tmpBuffer)[0],
+      count = 0,
+      l = thirtyTwo.length,
+      depthBuffer = new ArrayBuffer(4 * w),
+      depth = new Uint32Array(depthBuffer)
 
-    ctx.putImageData(pxData, topLeft, topLeft)
-    ctx.fillRect(topLeft, topLeft, w, h)
+    for (var line = 0; line < h; line++) {
+      for (var col = 0; col < w; col++) {
+        if (depth[col]) continue
+
+        var i = (h - line - 1) * w + col
+        if (thirtyTwo[i] === bgInt) {
+          count++
+        } else {
+          depth[col] = line
+        }
+      }
+    }
+    console.log(`${count} of ${l} pixels are bg (${Math.round(100 * count / l)}%)`)
+    ctx.fillStyle = "rgba(255,0,0,1.0)"
+    for (let x of depth.entries()) {
+      if (x[1]) {
+        ctx.fillRect(x[0], h - x[1], 1, 1)
+      }
+    }
+
   }
 }
 
