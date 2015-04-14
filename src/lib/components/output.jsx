@@ -86,7 +86,6 @@ class LineMetrics {
 
 class Typesetter {
   constructor(typePair, width, spacing) {
-    console.log("new typesetter")
     this.typePair = typePair
     this.width = width
     this.spacing = spacing
@@ -104,7 +103,6 @@ class Typesetter {
 
   getMetrics(line) {
     if (!this.metricsCache.has(line)) {
-      console.log("Recalculating " + line)
       let font = this.typePair.main, text = line;
       if (line.match(/^!/)) {
         font = this.typePair.alt;
@@ -126,7 +124,9 @@ class Typesetter {
         totalHeight += line.height / 2 - line.getLeadingFromTop()
       } else {
         let prev = linesWithMetrics[i-1]
-        totalHeight += (prev.height + line.height) / 2 - line.getLeading(prev)
+        //totalHeight += prev.height / 2 - prev.getLeadingFromBottom()
+        //totalHeight += line.height / 2 - line.getLeadingFromTop()
+        totalHeight += this.spacing / 4 + (prev.height + line.height) / 2 - line.getLeading(prev)
       }
       let style = {
           fontSize: line.fontSize,
@@ -164,7 +164,7 @@ export default class Output extends React.Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps.chosenFont) {
-      if (newProps.chosenFont != this.props.chosenFont) {
+      if (!this.typesetter || newProps.chosenFont != this.props.chosenFont) {
         this.typesetter = new Typesetter(newProps.chosenFont, newProps.width, this.spacing)
       }
       let result = this.typesetter.setLines(newProps.lines, newProps.chosenColor)
