@@ -23,14 +23,14 @@ class LineMetrics {
   constructor(ctx, width, font, text) {
     this.text = text
     this.width = width
-    let fontFace = getFontFace(font),
-      fontExpr = size => fontFace.attributes.style + ' normal ' + fontFace.attributes.weight + ' ' + size + 'pt ' + fontFace.family
+    this.fontFace = getFontFace(font)
+    let fontExpr = size => this.fontFace.attributes.style + ' normal ' + this.fontFace.attributes.weight + ' ' + size + 'pt ' + this.fontFace.family
     ctx.font = fontExpr(18)
-    let naturalWidth = ctx.measureText(text).width,
-      fontSize = Math.min(300, 18 * width / naturalWidth)
-    this.height = fontSize * 3
+    let naturalWidth = ctx.measureText(text).width
+    this.fontSize = Math.min(300, 18 * width / naturalWidth)
+    this.height = this.fontSize * 3
 
-    ctx.font = fontExpr(fontSize)
+    ctx.font = fontExpr(this.fontSize)
     ctx.clearRect(0, 0, this.width, this.height)
     ctx.fillStyle = "black"
     ctx.textAlign = 'center'
@@ -45,7 +45,7 @@ class LineMetrics {
       this.topDepth = new Uint32Array(topBuffer)
       this.bottomDepth = new Uint32Array(bottomBuffer)
 
-    for (var line = 0; line < this.height; line++) {
+    for (var line = 0; line < this.height / 2; line++) {
       for (var col = 0; col < this.width; col++) {
         if (!this.topDepth[col]) {
           var topCellIdx = line * this.width + col
@@ -59,6 +59,10 @@ class LineMetrics {
         }
       }
     }
+
+    console.log(this.height)
+    console.log(this.topDepth)
+
   }
 
   getMinDepth(depth) {
@@ -76,7 +80,7 @@ class LineMetrics {
     return this.getMinDepth(this.bottomDepth)
   }
 
-  getMinLeading(prevMetrics) {
+  getLeading(prevMetrics) {
     let min = this.height / 2 + prevMetrics.height / 2
     for (var i = 0; i < this.topDepth.length; i++) {
       var d1 = this.topDepth[i], d2 = prevMetrics.bottomDepth[i]
@@ -98,8 +102,9 @@ class Typesetter {
 
   setupCanvas() {
     this.canvas = document.querySelector('body > canvas') || document.querySelector("body").appendChild(document.createElement("canvas"))
+    this.canvas.style.backgroundColor = "palegoldenrod"
     this.canvas.width = this.width
-    this.canvas.height = 600
+    this.canvas.height = 900
     this.ctx = this.canvas.getContext("2d")
   }
 
@@ -118,44 +123,41 @@ class Typesetter {
 
   setLines(lines, chosenColor) {
     let linesWithMetrics = lines.map(line => this.getMetrics(line))
-    console.log(linesWithMetrics)
-    console.log(linesWithMetrics[0].getLeadingFromTop())
-    console.log(linesWithMetrics[1].getMinLeading(linesWithMetrics[0]))
-    console.log(linesWithMetrics[1].getLeadingFromBottom())
+    console.log("OK")
     let totalHeight = this.spacing
-    let sizedLines = lines.map(line => {
-      let text = line, font, defaultLH, defaultPP
-      if (!text.match(/^!/)) {
-        font = this.typePair.main
-        defaultLH = 1.35
-        defaultPP = 0.15
+    let sizedLines = []
+    for (var i = 0; i < linesWithMetrics.length; i++) {
+      let line = linesWithMetrics[i], text = line.text
+      console.log(totalHeight)
+      if (i == 0) {
+        console.log(line.height / 2)
+        console.log(line.fontSize)
+        console.log(line.getLeadingFromTop())
+        totalHeight += line.height / 2 - line.getLeadingFromTop()
       } else {
-        text = text.replace(/^!/, '')
-        font = this.typePair.alt
-        defaultLH = 1.5
-        defaultPP = 0.15
+        let prev = linesWithMetrics[i-1]
+        console.log(line.getLeading(prev))
+        totalHeight += line.height / 2 - line.getLeading(prev)
       }
-      text = font.caps ? text.toUpperCase() : text
-      let fontFace = getFontFace(font),
-        measurements = measureText(text, 9999, fontFace, 12, 15),
-        factor = this.width / measurements.width,
-        fontSize = Math.min(300, 12 * factor),
-        lineHeight = fontSize * (typeof font.lineHeightFactor == "undefined" ? defaultLH : font.lineHeightFactor),
-        style = {
-          fontSize,
-          height: fontSize * 2,
-          lineHeight: fontSize * 2,
-          top: totalHeight + lineHeight * (typeof font.lineHeightFactor == "undefined" ? defaultPP : font.prePaddingFactor),
+      let style = {
+          fontSize: line.fontSize,
+          height: line.height,
+          lineHeight: 0,
+          top: totalHeight - line.fontSize,
           width: this.width + this.spacing * 2,
-          fontFace,
+          fontFace: line.fontFace,
           left: 0,
           textAlign: 'center',
           color: chosenColor.foreground,
           zIndex: 2
         }
-      totalHeight += lineHeight
-      return {line: text, style}
-    })
+      if (i == linesWithMetrics.length - 1) {
+        console.log(line.getLeadingFromBottom())
+        totalHeight += line.height / 2 - line.getLeadingFromBottom()
+      }
+      console.log(totalHeight)
+      sizedLines.push({line: text, style})
+    }
     return {totalHeight, sizedLines}
   }
 }
