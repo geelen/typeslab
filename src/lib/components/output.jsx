@@ -19,28 +19,33 @@ class Line extends React.Component {
   }
 }
 
+
 class Typesetter {
-  constructor() {
+  constructor(font, width, spacing) {
+    this.font = font
+    this.width = width
+    this.spacing = spacing
+    this.metricsCache = new Map()
   }
 
-  setLines(lines, chosenFont, canvasWidth, chosenColor, spacing) {
-    let totalHeight = spacing
+  setLines(lines, chosenColor) {
+    let totalHeight = this.spacing
     let sizedLines = lines.map(line => {
       let text = line, font, defaultLH, defaultPP
       if (!text.match(/^!/)) {
-        font = chosenFont.main
+        font = this.font.main
         defaultLH = 1.35
         defaultPP = 0.15
       } else {
         text = text.replace(/^!/, '')
-        font = chosenFont.alt
+        font = this.font.alt
         defaultLH = 1.5
         defaultPP = 0.15
       }
       text = font.caps ? text.toUpperCase() : text
       let fontFace = getFontFace(font),
         measurements = measureText(text, 9999, fontFace, 12, 15),
-        factor = canvasWidth / measurements.width,
+        factor = this.width / measurements.width,
         fontSize = Math.min(300, 12 * factor),
         lineHeight = fontSize * (typeof font.lineHeightFactor == "undefined" ? defaultLH : font.lineHeightFactor),
         style = {
@@ -48,7 +53,7 @@ class Typesetter {
           height: fontSize * 2,
           lineHeight: fontSize * 2,
           top: totalHeight + lineHeight * (typeof font.lineHeightFactor == "undefined" ? defaultPP : font.prePaddingFactor),
-          width: canvasWidth + spacing * 2,
+          width: this.width + this.spacing * 2,
           fontFace,
           left: 0,
           textAlign: 'center',
@@ -67,7 +72,6 @@ export default class Output extends React.Component {
     super()
     this.spacing = 32
     this.state = {lines: [], height: this.spacing}
-    this.typesetter = new Typesetter()
   }
 
   componentDidMount() {
@@ -76,10 +80,12 @@ export default class Output extends React.Component {
     })
   }
 
-  componentWillReceiveProps(newProps) {
-    this.typesetter = new Typesetter() // remove after devving for caching power
+  componentWillReceiveProps(newProps, oldProps) {
     if (newProps.chosenFont) {
-      let result = this.typesetter.setLines(newProps.lines, newProps.chosenFont, newProps.width, newProps.chosenColor, this.spacing)
+      if (newProps.chosenFont != oldProps.chosenFont) {
+        this.typesetter = new Typesetter(newProps.chosenFont, newProps.width, this.spacing)
+      }
+      let result = this.typesetter.setLines(newProps.lines, newProps.chosenColor)
       this.setState({
         lines: result.sizedLines,
         height: result.totalHeight
