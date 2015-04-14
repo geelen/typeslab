@@ -6,6 +6,7 @@ import FontFace from 'react-canvas/lib/FontFace'
 import Share from './share.jsx!'
 import measureText from 'react-canvas/lib/measureText'
 import './output.scss!post-css'
+import F from 'fkit'
 
 class Line extends React.Component {
   render() {
@@ -40,34 +41,48 @@ class LineMetrics {
   calculateDepthMap(imageData) {
     let pixels = new Uint32Array(imageData.data.buffer),
       topBuffer = new ArrayBuffer(this.width * 4),
-      topDepth = new Uint32Array(topBuffer),
-      bottomBuffer = new ArrayBuffer(this.width * 4),
-      bottomDepth = new Uint32Array(bottomBuffer)
-    console.log(pixels)
+      bottomBuffer = new ArrayBuffer(this.width * 4)
+      this.topDepth = new Uint32Array(topBuffer)
+      this.bottomDepth = new Uint32Array(bottomBuffer)
 
     for (var line = 0; line < this.height; line++) {
       for (var col = 0; col < this.width; col++) {
-        if (!topDepth[col]) {
+        if (!this.topDepth[col]) {
           var topCellIdx = line * this.width + col
-          if (pixels[topCellIdx] !== 0) topDepth[col] = line
+          if (pixels[topCellIdx] !== 0) this.topDepth[col] = line
         }
-        if (!bottomDepth[col]) {
+        if (!this.bottomDepth[col]) {
           var bottomCellIdx = (this.height - line - 1) * this.width + col
           //console.log([this.height, this.width, line, col])
           //console.log(bottomCellIdx)
-          if (pixels[bottomCellIdx] !== 0) bottomDepth[col] = line
+          if (pixels[bottomCellIdx] !== 0) this.bottomDepth[col] = line
         }
       }
     }
-    //
-    console.log("top")
-    for (let x of topDepth.entries()) {
-      console.log(x[1])
+  }
+
+  getMinDepth(depth) {
+    let min = this.height / 2
+    for (var i = 0; i < depth.length; i++) {
+      var d = depth[i]
+      if (d > 0 && d < min) min = d
     }
-    console.log("bottom")
-    for (let x of bottomDepth.entries()) {
-      console.log(x[1])
+    return min
+  }
+  getLeadingFromTop() {
+    return this.getMinDepth(this.topDepth)
+  }
+  getLeadingFromBottom() {
+    return this.getMinDepth(this.bottomDepth)
+  }
+
+  getMinLeading(prevMetrics) {
+    let min = this.height / 2 + prevMetrics.height / 2
+    for (var i = 0; i < this.topDepth.length; i++) {
+      var d1 = this.topDepth[i], d2 = prevMetrics.bottomDepth[i]
+      if (d1 > 0 && d2 > 0 && (d1 + d2) < min) min = d1 + d2
     }
+    return min
   }
 }
 
@@ -104,6 +119,9 @@ class Typesetter {
   setLines(lines, chosenColor) {
     let linesWithMetrics = lines.map(line => this.getMetrics(line))
     console.log(linesWithMetrics)
+    console.log(linesWithMetrics[0].getLeadingFromTop())
+    console.log(linesWithMetrics[1].getMinLeading(linesWithMetrics[0]))
+    console.log(linesWithMetrics[1].getLeadingFromBottom())
     let totalHeight = this.spacing
     let sizedLines = lines.map(line => {
       let text = line, font, defaultLH, defaultPP

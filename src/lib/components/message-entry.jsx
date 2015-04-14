@@ -5,7 +5,7 @@ export default class MessageEntry extends React.Component {
   componentWillMount() {
     this.messageActions = this.context.flux.getActions('message')
     //this.setValue("Whatever you write here\nwill be rendered as a slab-type\nposter!\nStart a line with an '!'\n!to use the alternate typeface\nnow go and write something\nprofound\nand share it with the world!")
-    this.setValue("A")
+    this.setValue("Ab\n!c")
   }
   handleChange(event) {
     this.setValue(event.target.value)
