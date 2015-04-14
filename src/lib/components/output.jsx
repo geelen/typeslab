@@ -13,22 +13,20 @@ class Line extends React.Component {
   }
 }
 
-
 let getFontFace = (font) => {
   let options = {weight: font.weight}
   if (font.italic) options.style = 'italic'
   return FontFace(font.name, null, options)
 }
 class LineMetrics {
-  constructor(ctx, font, line) {
-    this.line = line
+  constructor(ctx, width, font, text) {
+    this.text = text
     let fontFace = getFontFace(font)
-    ctx.font = fontFace.attributes.style + ' normal ' + fontFace.attributes.weight + ' ' + 16 + 'pt ' + fontFace.family;
-    console.log(ctx.measureText(line))
+    ctx.font = fontFace.attributes.style + ' normal ' + fontFace.attributes.weight + ' ' + 18 + 'pt ' + fontFace.family
+    console.log(ctx.measureText(text))
+    console.log(measureText(text, 9999, fontFace, 18, 999))
   }
-
 }
-
 
 class Typesetter {
   constructor(typePair, width, spacing) {
@@ -47,18 +45,20 @@ class Typesetter {
 
   getMetrics(line) {
     if (!this.metricsCache.has(line)) {
-      let font = this.typePair.main;
+      let font = this.typePair.main, text = line;
       if (line.match(/^!/)) {
-        this.metricsCache.set(line, new LineMetrics(this.ctx, this.typePair.alt, line.replace(/^!/, '')))
-      } else {
-        this.metricsCache.set(line, new LineMetrics(this.ctx, this.typePair.main, line))
+        font = this.typePair.alt;
+        text = text.replace(/^!/, '');
       }
+      text = font.caps ? text.toUpperCase() : text
+      this.metricsCache.set(line, new LineMetrics(this.ctx, this.width, font, text))
     }
     return this.metricsCache.get(line)
   }
 
   setLines(lines, chosenColor) {
     let linesWithMetrics = lines.map(line => this.getMetrics(line))
+    console.log(linesWithMetrics)
     let totalHeight = this.spacing
     let sizedLines = lines.map(line => {
       let text = line, font, defaultLH, defaultPP
