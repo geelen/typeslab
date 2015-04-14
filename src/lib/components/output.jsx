@@ -28,7 +28,7 @@ class LineMetrics {
     ctx.font = fontExpr(18)
     let naturalWidth = ctx.measureText(text).width
     this.fontSize = Math.min(300, 18 * width / naturalWidth)
-    this.height = this.fontSize * 3
+    this.height = Math.floor(this.fontSize * 3)
 
     ctx.font = fontExpr(this.fontSize)
     ctx.clearRect(0, 0, this.width, this.height)
@@ -60,9 +60,9 @@ class LineMetrics {
       }
     }
 
-    console.log(this.height)
-    console.log(this.topDepth)
-
+    let arr = []
+    for (let x of this.bottomDepth.values()) arr.push(x)
+    console.log(arr.join("-"))
   }
 
   getMinDepth(depth) {
@@ -93,7 +93,6 @@ class LineMetrics {
 class Typesetter {
   constructor(typePair, width, spacing) {
     this.typePair = typePair
-    console.log(this.font)
     this.width = width
     this.spacing = spacing
     this.metricsCache = new Map()
@@ -123,20 +122,19 @@ class Typesetter {
 
   setLines(lines, chosenColor) {
     let linesWithMetrics = lines.map(line => this.getMetrics(line))
-    console.log("OK")
     let totalHeight = this.spacing
     let sizedLines = []
     for (var i = 0; i < linesWithMetrics.length; i++) {
       let line = linesWithMetrics[i], text = line.text
-      console.log(totalHeight)
+      console.log("totalHeight at start " + totalHeight)
+      console.log("line height / 2 " + line.height / 2)
+      console.log("font size " + line.fontSize)
       if (i == 0) {
-        console.log(line.height / 2)
-        console.log(line.fontSize)
-        console.log(line.getLeadingFromTop())
+        console.log("Leading from top: " + line.getLeadingFromTop())
         totalHeight += line.height / 2 - line.getLeadingFromTop()
       } else {
         let prev = linesWithMetrics[i-1]
-        console.log(line.getLeading(prev))
+        console.log("Leading from prev: " + line.getLeading(prev))
         totalHeight += line.height / 2 - line.getLeading(prev)
       }
       let style = {
@@ -152,10 +150,10 @@ class Typesetter {
           zIndex: 2
         }
       if (i == linesWithMetrics.length - 1) {
-        console.log(line.getLeadingFromBottom())
+        console.log("Leading from bottom " + line.getLeadingFromBottom())
         totalHeight += line.height / 2 - line.getLeadingFromBottom()
       }
-      console.log(totalHeight)
+      console.log("Total height at end " + totalHeight)
       sizedLines.push({line: text, style})
     }
     return {totalHeight, sizedLines}
@@ -243,7 +241,6 @@ export default class Output extends React.Component {
       topLeft = scale * (this.spacing / 2 + 2),
       w = Math.floor(scale * (this.props.width + this.spacing - 4)),
       h = Math.floor(scale * (height - this.spacing - 10))
-    console.log(h)
     c.width = this.state.canvas.width
     c.height = this.state.canvas.height
 
