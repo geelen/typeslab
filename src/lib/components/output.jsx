@@ -45,7 +45,7 @@ class LineMetrics {
       this.topDepth = new Uint32Array(topBuffer)
       this.bottomDepth = new Uint32Array(bottomBuffer)
 
-    for (var line = 0; line < this.height / 2; line++) {
+    for (var line = 0; line < this.height; line++) {
       for (var col = 0; col < this.width; col++) {
         if (!this.topDepth[col]) {
           var topCellIdx = line * this.width + col
@@ -60,7 +60,13 @@ class LineMetrics {
       }
     }
 
+    console.log("TOP DEPTH OF " + this.text)
     let arr = []
+    for (let x of this.topDepth.values()) arr.push(x)
+    console.log(arr.join("-"))
+
+    console.log("BOTTOM DEPTH OF " + this.text)
+    arr = []
     for (let x of this.bottomDepth.values()) arr.push(x)
     console.log(arr.join("-"))
   }
@@ -135,7 +141,7 @@ class Typesetter {
       } else {
         let prev = linesWithMetrics[i-1]
         console.log("Leading from prev: " + line.getLeading(prev))
-        totalHeight += line.height / 2 - line.getLeading(prev)
+        totalHeight += (prev.height + line.height) / 2 - line.getLeading(prev)
       }
       let style = {
           fontSize: line.fontSize,
