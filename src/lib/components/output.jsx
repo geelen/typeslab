@@ -7,12 +7,6 @@ import Share from './share.jsx!'
 import measureText from 'react-canvas/lib/measureText'
 import './output.scss!post-css'
 
-let getFontFace = (font) => {
-  let options = {weight: font.weight}
-  if (font.italic) options.style = 'italic'
-  return FontFace(font.name, null, options)
-}
-
 class Line extends React.Component {
   render() {
     return <Text style={this.props.line.style}>{this.props.line.line}</Text>
@@ -20,25 +14,61 @@ class Line extends React.Component {
 }
 
 
+let getFontFace = (font) => {
+  let options = {weight: font.weight}
+  if (font.italic) options.style = 'italic'
+  return FontFace(font.name, null, options)
+}
+class LineMetrics {
+  constructor(ctx, font, line) {
+    this.line = line
+    let fontFace = getFontFace(font)
+    ctx.font = fontFace.attributes.style + ' normal ' + fontFace.attributes.weight + ' ' + 16 + 'pt ' + fontFace.family;
+    console.log(ctx.measureText(line))
+  }
+
+}
+
+
 class Typesetter {
-  constructor(font, width, spacing) {
-    this.font = font
+  constructor(typePair, width, spacing) {
+    this.typePair = typePair
+    console.log(this.font)
     this.width = width
     this.spacing = spacing
     this.metricsCache = new Map()
+    this.setupCanvas()
+  }
+
+  setupCanvas() {
+    this.canvas = document.createElement("canvas")
+    this.ctx = this.canvas.getContext("2d")
+  }
+
+  getMetrics(line) {
+    if (!this.metricsCache.has(line)) {
+      let font = this.typePair.main;
+      if (line.match(/^!/)) {
+        this.metricsCache.set(line, new LineMetrics(this.ctx, this.typePair.alt, line.replace(/^!/, '')))
+      } else {
+        this.metricsCache.set(line, new LineMetrics(this.ctx, this.typePair.main, line))
+      }
+    }
+    return this.metricsCache.get(line)
   }
 
   setLines(lines, chosenColor) {
+    let linesWithMetrics = lines.map(line => this.getMetrics(line))
     let totalHeight = this.spacing
     let sizedLines = lines.map(line => {
       let text = line, font, defaultLH, defaultPP
       if (!text.match(/^!/)) {
-        font = this.font.main
+        font = this.typePair.main
         defaultLH = 1.35
         defaultPP = 0.15
       } else {
         text = text.replace(/^!/, '')
-        font = this.font.alt
+        font = this.typePair.alt
         defaultLH = 1.5
         defaultPP = 0.15
       }
