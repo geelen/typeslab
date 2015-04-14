@@ -19,12 +19,19 @@ let getFontFace = (font) => {
   return FontFace(font.name, null, options)
 }
 class LineMetrics {
-  constructor(ctx, width, font, text) {
+  constructor(ctx, canvasWidth, font, text) {
     this.text = text
-    let fontFace = getFontFace(font)
-    ctx.font = fontFace.attributes.style + ' normal ' + fontFace.attributes.weight + ' ' + 18 + 'pt ' + fontFace.family
-    console.log(ctx.measureText(text))
-    console.log(measureText(text, 9999, fontFace, 18, 999))
+    let fontFace = getFontFace(font),
+      fontExpr = size => fontFace.attributes.style + ' normal ' + fontFace.attributes.weight + ' ' + size + 'pt ' + fontFace.family
+    ctx.font = fontExpr(18)
+    let width = ctx.measureText(text).width,
+      fontSize = Math.min(300, 18 * canvasWidth / width)
+    ctx.font = fontExpr(fontSize)
+    ctx.fillStyle = "black"
+    ctx.fillRect(0, 0, canvasWidth, fontSize * 3)
+    ctx.fillStyle = "white"
+    ctx.textAlign = 'center'
+    ctx.fillText(text, canvasWidth / 2, fontSize * 1.5, canvasWidth)
   }
 }
 
@@ -39,7 +46,9 @@ class Typesetter {
   }
 
   setupCanvas() {
-    this.canvas = document.createElement("canvas")
+    this.canvas = document.querySelector('body > canvas') || document.querySelector("body").appendChild(document.createElement("canvas"))
+    this.canvas.width = this.width
+    this.canvas.height = 600
     this.ctx = this.canvas.getContext("2d")
   }
 
