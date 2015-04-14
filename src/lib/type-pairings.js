@@ -3,62 +3,46 @@ export default [
     main: {
       local: ['Avenir Next', 'Arial Black', 'sans-serif'],
       weight: 900,
-      caps: true,
-      lineHeightFactor: 1.05,
-      prePaddingFactor: 0
+      caps: true
     },
     alt: {
-      local: ['Georgia', 'Times New Roman', 'serif'],
-      weight: 400,
-      italic: true,
-      lineHeightFactor: 1.45,
-      prePaddingFactor: 0.05
+      local: ['Gill Sans', 'Georgia', 'Times New Roman', 'serif'],
+      weight: 300,
+      italic: true
     }
   },
   {
     main: {
       google: 'Sigmar One',
       weight: 400,
-      caps: true,
-      lineHeightFactor: 1.1,
-      prePaddingFactor: 0.02
+      caps: true
     },
     alt: {
       google: 'Gentium Book Basic',
       weight: 400,
-      italic: true,
-      lineHeightFactor: 1.32,
-      prePaddingFactor: 0.02
+      italic: true
     }
   },
   {
     main: {
       google: 'Raleway',
       weight: 900,
-      caps: true,
-      lineHeightFactor: 1.05,
-      prePaddingFactor: 0
+      caps: true
     },
     alt: {
       google: 'Raleway',
-      weight: 200,
-      lineHeightFactor: 1.35,
-      prePaddingFactor: 0.0
+      weight: 200
     }
   },
   {
     main: {
       google: 'Alfa Slab One',
       weight: 400,
-      caps: true,
-      lineHeightFactor: 1.15,
-      prePaddingFactor: 0.075
+      caps: true
     },
     alt: {
       google: 'Raleway',
-      weight: 200,
-      lineHeightFactor: 1.3,
-      prePaddingFactor: 0.0
+      weight: 200
     }
   },
   {
@@ -66,15 +50,11 @@ export default [
       google: 'Gentium Book Basic',
       weight: 700,
       italic: true,
-      caps: true,
-      lineHeightFactor: 1.1,
-      prePaddingFactor: -0.05
+      caps: true
     },
     alt: {
       google: 'Open Sans',
-      weight: 300,
-      lineHeightFactor: 1.4,
-      prePaddingFactor: 0.05
+      weight: 300
     }
   },
   {
@@ -82,15 +62,11 @@ export default [
       google: 'Playfair Display',
       weight: 900,
       caps: true,
-      italic: true,
-      lineHeightFactor: 1.35,
-      prePaddingFactor: 0.15
+      italic: true
     },
     alt: {
       google: 'Lato',
-      weight: 100,
-      lineHeightFactor: 1.3,
-      prePaddingFactor: 0.0
+      weight: 100
     }
   }
 ]
