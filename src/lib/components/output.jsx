@@ -53,22 +53,10 @@ class LineMetrics {
         }
         if (!this.bottomDepth[col]) {
           var bottomCellIdx = (this.height - line - 1) * this.width + col
-          //console.log([this.height, this.width, line, col])
-          //console.log(bottomCellIdx)
           if (pixels[bottomCellIdx] !== 0) this.bottomDepth[col] = line
         }
       }
     }
-
-    console.log("TOP DEPTH OF " + this.text)
-    let arr = []
-    for (let x of this.topDepth.values()) arr.push(x)
-    console.log(arr.join("-"))
-
-    console.log("BOTTOM DEPTH OF " + this.text)
-    arr = []
-    for (let x of this.bottomDepth.values()) arr.push(x)
-    console.log(arr.join("-"))
   }
 
   getMinDepth(depth) {
@@ -98,6 +86,7 @@ class LineMetrics {
 
 class Typesetter {
   constructor(typePair, width, spacing) {
+    console.log("new typesetter")
     this.typePair = typePair
     this.width = width
     this.spacing = spacing
@@ -115,6 +104,7 @@ class Typesetter {
 
   getMetrics(line) {
     if (!this.metricsCache.has(line)) {
+      console.log("Recalculating " + line)
       let font = this.typePair.main, text = line;
       if (line.match(/^!/)) {
         font = this.typePair.alt;
@@ -132,15 +122,10 @@ class Typesetter {
     let sizedLines = []
     for (var i = 0; i < linesWithMetrics.length; i++) {
       let line = linesWithMetrics[i], text = line.text
-      console.log("totalHeight at start " + totalHeight)
-      console.log("line height / 2 " + line.height / 2)
-      console.log("font size " + line.fontSize)
       if (i == 0) {
-        console.log("Leading from top: " + line.getLeadingFromTop())
         totalHeight += line.height / 2 - line.getLeadingFromTop()
       } else {
         let prev = linesWithMetrics[i-1]
-        console.log("Leading from prev: " + line.getLeading(prev))
         totalHeight += (prev.height + line.height) / 2 - line.getLeading(prev)
       }
       let style = {
@@ -156,10 +141,8 @@ class Typesetter {
           zIndex: 2
         }
       if (i == linesWithMetrics.length - 1) {
-        console.log("Leading from bottom " + line.getLeadingFromBottom())
         totalHeight += line.height / 2 - line.getLeadingFromBottom()
       }
-      console.log("Total height at end " + totalHeight)
       sizedLines.push({line: text, style})
     }
     return {totalHeight, sizedLines}
@@ -179,9 +162,9 @@ export default class Output extends React.Component {
     })
   }
 
-  componentWillReceiveProps(newProps, oldProps) {
+  componentWillReceiveProps(newProps) {
     if (newProps.chosenFont) {
-      if (newProps.chosenFont != oldProps.chosenFont) {
+      if (newProps.chosenFont != this.props.chosenFont) {
         this.typesetter = new Typesetter(newProps.chosenFont, newProps.width, this.spacing)
       }
       let result = this.typesetter.setLines(newProps.lines, newProps.chosenColor)
@@ -237,57 +220,6 @@ export default class Output extends React.Component {
       height: 16,
       zIndex: 3
     }
-  }
-
-  calculateBottomPixels(height) {
-    let c = document.querySelector('canvas#debug')
-    let ctx = c.getContext("2d"),
-      typeCtx = this.state.canvas.getContext("2d"),
-      scale = window.devicePixelRatio,
-      topLeft = scale * (this.spacing / 2 + 2),
-      w = Math.floor(scale * (this.props.width + this.spacing - 4)),
-      h = Math.floor(scale * (height - this.spacing - 10))
-    c.width = this.state.canvas.width
-    c.height = this.state.canvas.height
-
-    let pxData = typeCtx.getImageData(topLeft, topLeft, w, h)
-    ctx.putImageData(pxData, 0, 0)
-
-    let thirtyTwo = new Uint32Array(pxData.data.buffer)
-    let backgroundRgb = getComputedStyle(this.state.canvas.parentNode).backgroundColor,
-      [_, r,g,b] = backgroundRgb.split(/[^\d\.]+/).map(x => parseInt(x)),
-      tmpBuffer = new ArrayBuffer(4),
-      tmpView = new Uint8ClampedArray(tmpBuffer)
-    tmpView[0] = r
-    tmpView[1] = g
-    tmpView[2] = b
-    tmpView[3] = 255
-    let bgInt = new Uint32Array(tmpBuffer)[0],
-      count = 0,
-      l = thirtyTwo.length,
-      depthBuffer = new ArrayBuffer(4 * w),
-      depth = new Uint32Array(depthBuffer)
-
-    for (var line = 0; line < h; line++) {
-      for (var col = 0; col < w; col++) {
-        if (depth[col]) continue
-
-        var i = (h - line - 1) * w + col
-        if (thirtyTwo[i] === bgInt) {
-          count++
-        } else {
-          depth[col] = line
-        }
-      }
-    }
-    console.log(`${count} of ${l} pixels are bg (${Math.round(100 * count / l)}%)`)
-    ctx.fillStyle = "rgba(255,0,0,1.0)"
-    for (let x of depth.entries()) {
-      if (x[1]) {
-        ctx.fillRect(x[0], h - x[1], 1, 1)
-      }
-    }
-
   }
 }
 

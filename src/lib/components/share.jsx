@@ -7,8 +7,8 @@ export default class Share extends React.Component {
     this.state = {}
   }
 
-  componentWillReceiveProps(newProps, oldProps) {
-    if (newProps.message != oldProps.message || newProps.color != oldProps.color || newProps.font != oldProps.font) {
+  componentWillReceiveProps(newProps) {
+    if (newProps.message != this.props.message || newProps.color != this.props.color || newProps.font != this.props.font) {
       this.setState({link: undefined})
     }
   }
