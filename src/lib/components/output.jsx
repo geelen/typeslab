@@ -14,19 +14,60 @@ let getFontFace = (font) => {
 }
 
 class Line extends React.Component {
-  componentDidMount() {
-  }
-
   render() {
     return <Text style={this.props.line.style}>{this.props.line.line}</Text>
+  }
+}
+
+class Typesetter {
+  constructor() {
+  }
+
+  setLines(lines, chosenFont, canvasWidth, chosenColor, spacing) {
+    let totalHeight = spacing
+    let sizedLines = lines.map(line => {
+      let text = line, font, defaultLH, defaultPP
+      if (!text.match(/^!/)) {
+        font = chosenFont.main
+        defaultLH = 1.35
+        defaultPP = 0.15
+      } else {
+        text = text.replace(/^!/, '')
+        font = chosenFont.alt
+        defaultLH = 1.5
+        defaultPP = 0.15
+      }
+      text = font.caps ? text.toUpperCase() : text
+      let fontFace = getFontFace(font),
+        measurements = measureText(text, 9999, fontFace, 12, 15),
+        factor = canvasWidth / measurements.width,
+        fontSize = Math.min(300, 12 * factor),
+        lineHeight = fontSize * (typeof font.lineHeightFactor == "undefined" ? defaultLH : font.lineHeightFactor),
+        style = {
+          fontSize,
+          height: fontSize * 2,
+          lineHeight: fontSize * 2,
+          top: totalHeight + lineHeight * (typeof font.lineHeightFactor == "undefined" ? defaultPP : font.prePaddingFactor),
+          width: canvasWidth + spacing * 2,
+          fontFace,
+          left: 0,
+          textAlign: 'center',
+          color: chosenColor.foreground,
+          zIndex: 2
+        }
+      totalHeight += lineHeight
+      return {line: text, style}
+    })
+    return {totalHeight, sizedLines}
   }
 }
 
 export default class Output extends React.Component {
   constructor() {
     super()
-    this.state = {}
     this.spacing = 32
+    this.state = {lines: [], height: this.spacing}
+    this.typesetter = new Typesetter()
   }
 
   componentDidMount() {
@@ -35,65 +76,33 @@ export default class Output extends React.Component {
     })
   }
 
+  componentWillReceiveProps(newProps) {
+    this.typesetter = new Typesetter() // remove after devving for caching power
+    if (newProps.chosenFont) {
+      let result = this.typesetter.setLines(newProps.lines, newProps.chosenFont, newProps.width, newProps.chosenColor, this.spacing)
+      this.setState({
+        lines: result.sizedLines,
+        height: result.totalHeight
+      })
+    }
+  }
+
   render() {
-    let lines = this.layoutLines(this.props.lines),
-      text = 'typeslab.com',
+    let text = 'typeslab.com',
       canvasWidth = this.props.width + this.spacing * 2,
-      canvasHeight = lines.totalHeight + this.spacing
-    requestAnimationFrame(_ => requestAnimationFrame(this.calculateBottomPixels.bind(this, canvasHeight)))
+      canvasHeight = this.state.height + this.spacing
+    //requestAnimationFrame(_ => requestAnimationFrame(this.calculateBottomPixels.bind(this, canvasHeight)))
+    //      <canvas id="debug"></canvas>
+
     return <div className='Output' style={{backgroundColor: this.props.chosenColor.background, color: this.props.chosenColor.foreground}}>
-      <canvas id="debug"></canvas>
       <Surface ref="surface" width={canvasWidth} height={canvasHeight} top={0} left={0}>
         <Layer style={{zIndex: 0, width: canvasWidth, height: canvasHeight, top: 0, left: 0, backgroundColor: this.props.chosenColor.background}}/>
-        <Layer style={this.getBorderStyle(lines.totalHeight)}/>
-        {lines.sizedLines.map((line) => {
-          return <Line line={line}/>
-        })}
-        <Text style={this.getByLineStyle(text, lines.totalHeight)}>{text}</Text>
+        <Layer style={this.getBorderStyle(this.state.height)}/>
+        {this.state.lines.map((line) => <Line line={line}/>)}
+        <Text style={this.getByLineStyle(text, this.state.height)}>{text}</Text>
       </Surface>
       <Share canvas={this.state.canvas} message={this.props.message} color={this.props.chosenColor} font={this.props.chosenFont}/>
     </div>
-  }
-
-  layoutLines(lines) {
-    let totalHeight = this.spacing,
-      sizedLines = []
-    if (this.props.chosenFont) {
-      sizedLines = lines.map(line => {
-        let text = line, font, defaultLH, defaultPP
-        if (!text.match(/^!/)) {
-          font = this.props.chosenFont.main
-          defaultLH = 1.35
-          defaultPP = 0.15
-        } else {
-          text = text.replace(/^!/, '')
-          font = this.props.chosenFont.alt
-          defaultLH = 1.5
-          defaultPP = 0.15
-        }
-        text = font.caps ? text.toUpperCase() : text
-        let fontFace = getFontFace(font),
-          measurements = measureText(text, 9999, fontFace, 12, 15),
-          factor = this.props.width / measurements.width,
-          fontSize = Math.min(300, 12 * factor),
-          lineHeight = fontSize * (typeof font.lineHeightFactor == "undefined" ? defaultLH : font.lineHeightFactor),
-          style = {
-            fontSize,
-            height: fontSize * 2,
-            lineHeight: fontSize * 2,
-            top: totalHeight + lineHeight * (typeof font.lineHeightFactor == "undefined" ? defaultPP : font.prePaddingFactor),
-            width: 500 + 2 * this.spacing,
-            fontFace,
-            left: 0,
-            textAlign: 'center',
-            color: this.props.chosenColor.foreground,
-            zIndex: 2
-          }
-        totalHeight += lineHeight
-        return {line: text, style}
-      })
-    }
-    return {totalHeight, sizedLines}
   }
 
   getBorderStyle(height) {
