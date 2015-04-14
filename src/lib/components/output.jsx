@@ -19,19 +19,55 @@ let getFontFace = (font) => {
   return FontFace(font.name, null, options)
 }
 class LineMetrics {
-  constructor(ctx, canvasWidth, font, text) {
+  constructor(ctx, width, font, text) {
     this.text = text
+    this.width = width
     let fontFace = getFontFace(font),
       fontExpr = size => fontFace.attributes.style + ' normal ' + fontFace.attributes.weight + ' ' + size + 'pt ' + fontFace.family
     ctx.font = fontExpr(18)
-    let width = ctx.measureText(text).width,
-      fontSize = Math.min(300, 18 * canvasWidth / width)
+    let naturalWidth = ctx.measureText(text).width,
+      fontSize = Math.min(300, 18 * width / naturalWidth)
+    this.height = fontSize * 3
+
     ctx.font = fontExpr(fontSize)
+    ctx.clearRect(0, 0, this.width, this.height)
     ctx.fillStyle = "black"
-    ctx.fillRect(0, 0, canvasWidth, fontSize * 3)
-    ctx.fillStyle = "white"
     ctx.textAlign = 'center'
-    ctx.fillText(text, canvasWidth / 2, fontSize * 1.5, canvasWidth)
+    ctx.fillText(text, this.width / 2, this.height / 2, this.width)
+    this.calculateDepthMap(ctx.getImageData(0, 0, this.width, this.height))
+  }
+
+  calculateDepthMap(imageData) {
+    let pixels = new Uint32Array(imageData.data.buffer),
+      topBuffer = new ArrayBuffer(this.width * 4),
+      topDepth = new Uint32Array(topBuffer),
+      bottomBuffer = new ArrayBuffer(this.width * 4),
+      bottomDepth = new Uint32Array(bottomBuffer)
+    console.log(pixels)
+
+    for (var line = 0; line < this.height; line++) {
+      for (var col = 0; col < this.width; col++) {
+        if (!topDepth[col]) {
+          var topCellIdx = line * this.width + col
+          if (pixels[topCellIdx] !== 0) topDepth[col] = line
+        }
+        if (!bottomDepth[col]) {
+          var bottomCellIdx = (this.height - line - 1) * this.width + col
+          //console.log([this.height, this.width, line, col])
+          //console.log(bottomCellIdx)
+          if (pixels[bottomCellIdx] !== 0) bottomDepth[col] = line
+        }
+      }
+    }
+    //
+    console.log("top")
+    for (let x of topDepth.entries()) {
+      console.log(x[1])
+    }
+    console.log("bottom")
+    for (let x of bottomDepth.entries()) {
+      console.log(x[1])
+    }
   }
 }
 
