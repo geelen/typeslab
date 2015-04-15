@@ -4,6 +4,7 @@ import 'whatwg-fetch'
 
 export default class Share extends React.Component {
   constructor() {
+    super()
     this.state = {}
   }
 

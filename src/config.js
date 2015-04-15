@@ -18,10 +18,11 @@ System.config({
     "FontDetect": "github:JenniferSimonds/FontDetect@master",
     "autoprefixer": "npm:autoprefixer@5.1.0",
     "autoprefixer-core": "npm:autoprefixer-core@5.1.8",
-    "babel": "npm:babel@4.7.16",
-    "babel-runtime": "npm:babel-runtime@4.7.16",
+    "babel": "npm:babel-core@5.1.9",
+    "babel-runtime": "npm:babel-runtime@5.1.9",
     "blueimp-canvas-to-blob": "npm:blueimp-canvas-to-blob@2.1.1",
     "caniuse-db": "npm:caniuse-db@1.0.30000111",
+    "core-js": "npm:core-js@0.8.3",
     "fkit": "npm:fkit@0.16.2",
     "flummox": "npm:flummox@3.5.0",
     "insert-css": "npm:insert-css@0.2.0",
@@ -220,6 +221,9 @@ System.config({
     },
     "npm:constants-browserify@0.0.1": {
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
+    "npm:core-js@0.8.3": {
+      "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:core-util-is@1.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
