@@ -42,7 +42,7 @@ export default class Typesetter {
         let prev = linesWithMetrics[i-1]
         //totalHeight += prev.height / 2 - prev.getLeadingFromBottom()
         //totalHeight += line.height / 2 - line.getLeadingFromTop()
-        totalHeight += 4 + (prev.height + line.height) / 2 - line.getLeading(prev)
+        totalHeight += 4 + Math.max(line.height / 6, (prev.height + line.height) / 2 - line.getLeading(prev))
       }
       let style = {
           fontSize: line.fontSize,
