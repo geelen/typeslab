@@ -31,12 +31,13 @@ System.config({
     "json": "github:systemjs/plugin-json@0.1.0",
     "pascal-case": "npm:pascal-case@1.1.0",
     "path": "github:jspm/nodelibs-path@0.1.0",
-    "postcss": "npm:postcss@4.1.5",
     "plugin-postcss": "jspm:plugin-postcss@0.1.0",
+    "postcss": "npm:postcss@4.1.5",
     "postcss-mixins": "npm:postcss-mixins@0.1.1",
     "postcss-nested": "npm:postcss-nested@0.2.2",
     "postcss-simple-extend": "npm:postcss-simple-extend@0.3.0",
     "postcss-simple-vars": "npm:postcss-simple-vars@0.2.4",
+    "postcss-traits": "npm:postcss-traits@0.1.0",
     "react": "npm:react@0.13.1",
     "react-canvas": "npm:react-canvas@0.0.1",
     "react-hot-api": "github:gaearon/react-hot-api@0.4.3",
@@ -483,6 +484,9 @@ System.config({
     "npm:postcss-simple-extend@0.3.0": {
       "postcss": "npm:postcss@4.1.5",
       "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:postcss-traits@0.1.0": {
+      "postcss": "npm:postcss@4.1.5"
     },
     "npm:postcss@4.0.6": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
