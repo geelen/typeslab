@@ -9,7 +9,8 @@ System.config({
   "paths": {
     "*": "*.js",
     "github:*": "jspm_packages/github/*.js",
-    "npm:*": "jspm_packages/npm/*.js"
+    "npm:*": "jspm_packages/npm/*.js",
+    "jspm:*": "jspm_packages/jspm/*.js"
   }
 });
 
@@ -30,7 +31,8 @@ System.config({
     "json": "github:systemjs/plugin-json@0.1.0",
     "pascal-case": "npm:pascal-case@1.1.0",
     "path": "github:jspm/nodelibs-path@0.1.0",
-    "postcss": "npm:postcss@4.1.4",
+    "postcss": "npm:postcss@4.1.5",
+    "plugin-postcss": "jspm:plugin-postcss@0.1.0",
     "postcss-mixins": "npm:postcss-mixins@0.1.1",
     "postcss-nested": "npm:postcss-nested@0.2.2",
     "postcss-simple-extend": "npm:postcss-simple-extend@0.3.0",
@@ -93,6 +95,9 @@ System.config({
     "github:jspm/nodelibs-zlib@0.1.0": {
       "browserify-zlib": "npm:browserify-zlib@0.1.4"
     },
+    "jspm:plugin-postcss@0.1.0": {
+      "postcss": "npm:postcss@4.1.5"
+    },
     "npm:amdefine@0.1.0": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "module": "github:jspm/nodelibs-module@0.1.0",
@@ -131,9 +136,6 @@ System.config({
       "postcss": "npm:postcss@4.0.6",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
-    },
-    "npm:babel-runtime@4.7.16": {
-      "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:brace-expansion@1.1.0": {
       "balanced-match": "npm:balanced-match@0.2.0",
@@ -471,15 +473,15 @@ System.config({
     "npm:postcss-mixins@0.1.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
-      "postcss": "npm:postcss@4.1.4",
+      "postcss": "npm:postcss@4.1.5",
       "postcss-simple-vars": "npm:postcss-simple-vars@0.2.4"
     },
     "npm:postcss-nested@0.2.2": {
-      "postcss": "npm:postcss@4.1.4",
+      "postcss": "npm:postcss@4.1.5",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:postcss-simple-extend@0.3.0": {
-      "postcss": "npm:postcss@4.1.4",
+      "postcss": "npm:postcss@4.1.5",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:postcss@4.0.6": {
@@ -489,7 +491,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1",
       "source-map": "npm:source-map@0.2.0"
     },
-    "npm:postcss@4.1.4": {
+    "npm:postcss@4.1.5": {
       "es6-promise": "npm:es6-promise@2.0.1",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "js-base64": "npm:js-base64@2.1.8",
