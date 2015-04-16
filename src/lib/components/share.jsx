@@ -1,5 +1,5 @@
 import React from 'react'
-import './share.scss!post-css'
+import './share.amcss!'
 import 'whatwg-fetch'
 
 export default class Share extends React.Component {

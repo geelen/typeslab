@@ -3,7 +3,7 @@ import MessageEntry from './message-entry.jsx!'
 import FluxComponent from 'flummox/component'
 import TypeSelector from './type-selector.jsx!'
 import ColorSelector from './color-selector.jsx!'
-import './controls.scss!post-css'
+import './controls.amcss!'
 
 export default class Controls extends React.Component {
   render() {

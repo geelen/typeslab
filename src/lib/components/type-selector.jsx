@@ -1,5 +1,5 @@
 import React from 'react'
-import './type-selector.scss!post-css'
+import './type-selector.amcss!'
 
 export default class TypeSelector extends React.Component {
   componentWillMount() {

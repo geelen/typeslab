@@ -6,7 +6,7 @@ import FontFace from 'react-canvas/lib/FontFace'
 import Share from './share.jsx!'
 import measureText from 'react-canvas/lib/measureText'
 import Typesetter from '../models/typesetter'
-import './output.scss!post-css'
+import './output.amcss!'
 
 class Line extends React.Component {
   render() {

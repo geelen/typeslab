@@ -1,5 +1,5 @@
 import React from 'react'
-import './message-entry.scss!post-css'
+import './message-entry.amcss!'
 
 export default class MessageEntry extends React.Component {
   componentWillMount() {

@@ -1,5 +1,5 @@
 import React from 'react'
-import './color-selector.scss!post-css'
+import './color-selector.amcss!'
 import Colors from '../colors'
 
 export default class ColorSelector extends React.Component {
