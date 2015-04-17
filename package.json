@@ -14,7 +14,6 @@
       "insert-css": "npm:insert-css@^0.2.0",
       "isomorphic-fetch": "npm:isomorphic-fetch@^2.0.0",
       "json": "github:systemjs/plugin-json@^0.1.0",
-      "jsx": "github:floatdrop/plugin-jsx@^1.1.0",
       "pascal-case": "npm:pascal-case@^1.1.0",
       "path": "github:jspm/nodelibs-path@^0.1.0",
       "postcss": "npm:postcss@^4.0.6",
