@@ -20,6 +20,7 @@
       "postcss-nested": "npm:postcss-nested@^0.2.2",
       "postcss-simple-extend": "npm:postcss-simple-extend@^0.3.0",
       "postcss-simple-vars": "npm:postcss-simple-vars@^0.2.4",
+      "postcss-traits": "npm:postcss-traits@^0.1.0",
       "react": "npm:react@^0.13.1",
       "react-canvas": "npm:react-canvas@^0.0.1",
       "react-hot-api": "github:gaearon/react-hot-api@^0.4.3",

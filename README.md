@@ -17,13 +17,11 @@ Then http://localhost:8080 should open and you should have a live-reloading hot-
 
 **Note: only `.amcss` and `.jsx` files are hot-loaded, the rest requires a full browser reload. With JSPM that can take several seconds.**
 
+Also, you don't actually need to `npm install` to dev on this project. JSPM is all you need. Neato!
+
 ## Building
 
-To build a minified, bundled version of the project, do:
-
-```
-npm install
-gulp build
+To build a minified, bundled version of the project, you will need to `npm install`, and then run `gulp build`. In your `dist` directory you have a static build. You can host that somewhere
 
 # License
 
