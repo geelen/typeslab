@@ -17,8 +17,7 @@ System.config({
 System.config({
   "map": {
     "FontDetect": "github:JenniferSimonds/FontDetect@master",
-    "autoprefixer": "npm:autoprefixer@5.1.0",
-    "autoprefixer-core": "npm:autoprefixer-core@5.1.8",
+    //"autoprefixer-core": "npm:autoprefixer-core@5.1.8",
     "babel": "npm:babel-core@5.1.9",
     "babel-runtime": "npm:babel-runtime@5.1.9",
     "blueimp-canvas-to-blob": "npm:blueimp-canvas-to-blob@2.1.1",
