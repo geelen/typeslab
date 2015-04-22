@@ -1,6 +1,6 @@
 import React from 'react'
 import FluxComponent from 'flummox/component'
-import './frame.scss!post-css'
+import './frame.amcss!'
 
 import Controls from './controls.jsx!'
 import Output from './output.jsx!'
