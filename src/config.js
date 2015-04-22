@@ -29,7 +29,7 @@ System.config({
     "json": "github:systemjs/plugin-json@0.1.0",
     "pascal-case": "npm:pascal-case@1.1.0",
     "path": "github:jspm/nodelibs-path@0.1.0",
-    "plugin-postcss": "jspm:plugin-postcss@0.1.0",
+    "plugin-postcss": "github:geelen/plugin-postcss@master",
     "postcss": "npm:postcss@4.1.5",
     "postcss-mixins": "npm:postcss-mixins@0.1.1",
     "postcss-nested": "npm:postcss-nested@0.2.2",
@@ -44,11 +44,14 @@ System.config({
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.87",
     "webfontloader": "npm:webfontloader@1.5.15",
     "whatwg-fetch": "npm:whatwg-fetch@0.7.0",
+    "github:geelen/plugin-postcss@master": {
+      "postcss": "npm:postcss@4.1.5"
+    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.1.2"
+      "buffer": "npm:buffer@3.2.0"
     },
     "github:jspm/nodelibs-constants@0.1.0": {
       "constants-browserify": "npm:constants-browserify@0.0.1"
@@ -93,9 +96,6 @@ System.config({
     },
     "github:jspm/nodelibs-zlib@0.1.0": {
       "browserify-zlib": "npm:browserify-zlib@0.1.4"
-    },
-    "jspm:plugin-postcss@0.1.0": {
-      "postcss": "npm:postcss@4.1.5"
     },
     "npm:amdefine@0.1.0": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -162,6 +162,11 @@ System.config({
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:buffer@3.1.2": {
+      "base64-js": "npm:base64-js@0.0.8",
+      "ieee754": "npm:ieee754@1.1.4",
+      "is-array": "npm:is-array@1.0.1"
+    },
+    "npm:buffer@3.2.0": {
       "base64-js": "npm:base64-js@0.0.8",
       "ieee754": "npm:ieee754@1.1.4",
       "is-array": "npm:is-array@1.0.1"

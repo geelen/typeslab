@@ -14,6 +14,7 @@
       "json": "github:systemjs/plugin-json@^0.1.0",
       "pascal-case": "npm:pascal-case@^1.1.0",
       "path": "github:jspm/nodelibs-path@^0.1.0",
+      "plugin-postcss": "github:geelen/plugin-postcss@master",
       "postcss": "npm:postcss@^4.0.6",
       "postcss-mixins": "npm:postcss-mixins@^0.1.1",
       "postcss-nested": "npm:postcss-nested@^0.2.2",
