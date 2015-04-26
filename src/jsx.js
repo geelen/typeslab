@@ -1,7 +1,6 @@
 const BUILD_MODE = typeof window === 'undefined'
 
 import reactTools from 'react-tools'
-import React from 'react'
 import ReactMount from 'react/lib/ReactMount'
 import reactHotApi from 'react-hot-api'
 import path from 'path'

@@ -50,9 +50,9 @@ export default class Output extends React.Component {
     return <div className='Output' style={{backgroundColor: this.props.chosenColor.background, color: this.props.chosenColor.foreground}}>
       <Surface ref="surface" width={canvasWidth} height={canvasHeight} top={0} left={0}>
         <Layer style={{zIndex: 0, width: canvasWidth, height: canvasHeight, top: 0, left: 0, backgroundColor: this.props.chosenColor.background}}/>
-        <Layer style={this.getBorderStyle(this.state.height)}/>
+        {this.props.noBorder ? null : <Layer style={this.getBorderStyle(this.state.height)}/>}
         {this.state.lines.map((line) => <Line line={line}/>)}
-        <Text style={this.getByLineStyle(text, this.state.height)}>{text}</Text>
+        {this.props.noBorder ? null : <Text style={this.getByLineStyle(text, this.state.height)}>{text}</Text>}
       </Surface>
       <Share canvas={this.state.canvas} message={this.props.message} color={this.props.chosenColor} font={this.props.chosenFont}/>
     </div>
