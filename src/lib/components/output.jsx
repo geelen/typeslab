@@ -25,6 +25,7 @@ export default class Output extends React.Component {
     this.setState({
       canvas: this.refs.surface.getDOMNode()
     })
+    this.componentWillReceiveProps(this.props)
   }
 
   componentWillReceiveProps(newProps) {
