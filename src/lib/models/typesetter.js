@@ -1,12 +1,23 @@
 import LineMetrics from './line-metrics'
+import DepthMapper from './depth-mapper'
+import FontFace from 'react-canvas/lib/FontFace'
 
+let getFontFace = (font) => {
+  let options = {weight: font.weight}
+  if (font.italic) options.style = 'italic'
+  return FontFace(font.name, null, options)
+}
+
+const JUSTIFIED = Symbol()
+const UNIFORM = Symbol()
 export default class Typesetter {
-  constructor(typePair, width, spacing) {
+  constructor(typePair, width, spacing, mode) {
     this.typePair = typePair
     this.width = width
     this.spacing = spacing
     this.metricsCache = new Map()
     this.setupCanvas()
+    this.mode = (mode === "uniform") ? UNIFORM : JUSTIFIED
   }
 
   setupCanvas() {
@@ -25,7 +36,10 @@ export default class Typesetter {
         text = text.replace(/^!/, '');
       }
       text = font.caps ? text.toUpperCase() : text
-      this.metricsCache.set(line, new LineMetrics(this.ctx, this.width, font, text))
+      var fontFace = getFontFace(font);
+      let metrics = new LineMetrics(this.ctx, this.width, fontFace, text)
+      let depth = new DepthMapper(this.ctx, this.width, fontFace, text, metrics.fontSize)
+      this.metricsCache.set(line, depth)
     }
     return this.metricsCache.get(line)
   }
