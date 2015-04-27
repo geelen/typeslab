@@ -5,8 +5,7 @@ export default class DepthMapper {
     this.fontSize = fontSize
     this.text = text
     this.height = Math.floor(this.fontSize * 3)
-    let fontExpr = size => this.fontFace.attributes.style + ' normal ' + this.fontFace.attributes.weight + ' ' + size + 'pt ' + this.fontFace.family
-    ctx.font = fontExpr(fontSize)
+    ctx.font = `${this.fontFace.attributes.style} normal ${this.fontFace.attributes.weight} ${this.fontSize}pt ${this.fontFace.family}`
     ctx.clearRect(0, 0, this.width, this.height)
     ctx.fillStyle = "black"
     ctx.textAlign = 'center'
