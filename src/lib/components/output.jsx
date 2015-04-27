@@ -30,8 +30,8 @@ export default class Output extends React.Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps.chosenFont) {
-      if (!this.typesetter || newProps.chosenFont != this.props.chosenFont) {
-        this.typesetter = new Typesetter(newProps.chosenFont, newProps.width, this.spacing, this.props.mode || "justified")
+      if (!this.typesetter || newProps.chosenFont != this.props.chosenFont || newProps.mode != this.props.mode) {
+        this.typesetter = new Typesetter(newProps.chosenFont, newProps.width, this.spacing, newProps.mode || "justified")
       }
       let result = this.typesetter.setLines(newProps.lines, newProps.chosenColor)
       this.setState({
