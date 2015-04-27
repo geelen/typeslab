@@ -52,10 +52,10 @@ export default class Typesetter {
       minFontSize = this.getMinFontSize(lineMetrics)
     return lineMetrics.map(metrics => {
       let fontSize = this.mode === JUSTIFIED ? metrics.fontSize : minFontSize,
-        key = `${fontSize} ${metrics.fontExpr} ${metrics.text}`
-      console.log(fontSize)
+        key = `${fontSize} ${metrics.fontExpr} ${metrics.text}`,
+        alignment = this.mode === JUSTIFIED ? 'center' : 'left'
       if (!this.depthCache.has(key)) {
-        let depth = new DepthMapper(this.ctx, this.width, metrics.fontFace, metrics.text, fontSize)
+        let depth = new DepthMapper(this.ctx, this.width, metrics.fontFace, metrics.text, fontSize, alignment)
         this.depthCache.set(key, depth)
       }
       return this.depthCache.get(key)
@@ -76,18 +76,24 @@ export default class Typesetter {
         //totalHeight += line.height / 2 - line.getLeadingFromTop()
         totalHeight += 4 + Math.max(line.height / 6, (prev.height + line.height) / 2 - line.getLeading(prev))
       }
-      let style = {
+      let modeStyles = (this.mode === JUSTIFIED) ? {
+        width: this.width + this.spacing * 2,
+        left: 0,
+        textAlign: 'center'
+      } : {
+        width: this.width + this.spacing,
+        left: this.spacing,
+        textAlign: 'left'
+      }
+      let style = Object.assign({
         fontSize: line.fontSize,
         height: line.height,
         lineHeight: 0,
         top: totalHeight - line.fontSize,
-        width: this.width + this.spacing * 2,
         fontFace: line.fontFace,
-        left: 0,
-        textAlign: 'center',
         color: chosenColor.foreground,
         zIndex: 2
-      }
+      },modeStyles)
       if (i == lineDepths.length - 1) {
         totalHeight += line.height / 2 - line.getLeadingFromBottom()
       }

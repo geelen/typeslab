@@ -1,5 +1,5 @@
 export default class DepthMapper {
-  constructor(ctx, width, fontFace, text, fontSize) {
+  constructor(ctx, width, fontFace, text, fontSize, alignment) {
     this.width = width
     this.fontFace = fontFace
     this.fontSize = fontSize
@@ -8,8 +8,9 @@ export default class DepthMapper {
     ctx.font = `${this.fontFace.attributes.style} normal ${this.fontFace.attributes.weight} ${this.fontSize}pt ${this.fontFace.family}`
     ctx.clearRect(0, 0, this.width, this.height)
     ctx.fillStyle = "black"
-    ctx.textAlign = 'center'
-    ctx.fillText(text, this.width / 2, this.height / 2, this.width)
+    ctx.textAlign = alignment
+    let anchor = (alignment === "center") ? this.width / 2 : 0
+    ctx.fillText(text, anchor, this.height / 2, this.width)
     this.calculateDepthMap(ctx.getImageData(0, 0, this.width, this.height))
   }
 
