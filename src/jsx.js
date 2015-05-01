@@ -5,6 +5,7 @@ import ReactMount from 'react/lib/ReactMount'
 import reactHotApi from 'react-hot-api'
 import path from 'path'
 import pascalCase from 'pascal-case'
+import babel from 'babel'
 
 let classNameFromFilename = (filename) => {
   return pascalCase(path.basename(filename,path.extname(filename)))
@@ -21,9 +22,12 @@ let reexportHotVersionSnippet = (className) => `
 
 export let translate = load => {
   let snippet = BUILD_MODE ? '' : reexportHotVersionSnippet(classNameFromFilename(load.metadata.pluginArgument)),
-    output = reactTools.transformWithDetails(load.source + snippet, {es6module: true})
-  load.source = output.code;
-  load.metadata.sourceMap = output.sourceMap;
+    output = babel.transform(load.source).code
+    //output = reactTools.transformWithDetails(load.source + snippet, {es6module: true})
+  console.log(output)
+  //load.metadata.format = 'cjs'
+  load.source = output
+  //load.metadata.sourceMap = output.sourceMap;
 }
 
 export let hotReload = module => {

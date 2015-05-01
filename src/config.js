@@ -17,7 +17,8 @@ System.config({
 System.config({
   "map": {
     "FontDetect": "github:JenniferSimonds/FontDetect@master",
-    "babel": "npm:babel-core@5.1.9",
+    "babel": "npm:babel-core@5.2.6",
+    "babel-plugin-react-hotify": "npm:babel-plugin-react-hotify@0.1.1",
     "babel-runtime": "npm:babel-runtime@5.1.9",
     "blueimp-canvas-to-blob": "npm:blueimp-canvas-to-blob@2.1.1",
     "caniuse-db": "npm:caniuse-db@1.0.30000111",
@@ -36,7 +37,7 @@ System.config({
     "postcss-simple-extend": "npm:postcss-simple-extend@0.3.0",
     "postcss-simple-vars": "npm:postcss-simple-vars@0.2.4",
     "postcss-traits": "npm:postcss-traits@0.1.0",
-    "react": "npm:react@0.13.1",
+    "react": "npm:react@0.13.2",
     "react-canvas": "npm:react-canvas@0.0.1",
     "react-hot-api": "github:gaearon/react-hot-api@0.4.3",
     "react-tools": "npm:react-tools@0.13.1",
@@ -51,7 +52,7 @@ System.config({
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.2.0"
+      "buffer": "npm:buffer@3.2.1"
     },
     "github:jspm/nodelibs-constants@0.1.0": {
       "constants-browserify": "npm:constants-browserify@0.0.1"
@@ -121,6 +122,10 @@ System.config({
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
+    "npm:babel-plugin-react-hotify@0.1.1": {
+      "babel-core": "npm:babel-core@5.2.6",
+      "react-hotify": "npm:react-hotify@0.1.1"
+    },
     "npm:browserify-aes@1.0.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "create-hash": "npm:create-hash@1.1.1",
@@ -161,12 +166,7 @@ System.config({
       "readable-stream": "npm:readable-stream@1.1.13",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
-    "npm:buffer@3.1.2": {
-      "base64-js": "npm:base64-js@0.0.8",
-      "ieee754": "npm:ieee754@1.1.4",
-      "is-array": "npm:is-array@1.0.1"
-    },
-    "npm:buffer@3.2.0": {
+    "npm:buffer@3.2.1": {
       "base64-js": "npm:base64-js@0.0.8",
       "ieee754": "npm:ieee754@1.1.4",
       "is-array": "npm:is-array@1.0.1"
@@ -267,7 +267,7 @@ System.config({
     "npm:envify@3.4.0": {
       "jstransform": "npm:jstransform@10.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
-      "through": "npm:through@2.3.6"
+      "through": "npm:through@2.3.7"
     },
     "npm:es6-promise@2.0.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -359,6 +359,9 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "source-map": "npm:source-map@0.1.31"
+    },
+    "npm:lodash@3.8.0": {
+      "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:miller-rabin@1.1.5": {
       "bn.js": "npm:bn.js@1.3.0",
@@ -472,8 +475,13 @@ System.config({
     "npm:react-canvas@0.0.1": {
       "events": "github:jspm/nodelibs-events@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
-      "react": "npm:react@0.13.1",
+      "react": "npm:react@0.13.2",
       "scroller": "github:mjohnston/scroller@1.2.2"
+    },
+    "npm:react-hotify@0.1.1": {
+      "lodash": "npm:lodash@3.8.0",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "react": "npm:react@0.13.2"
     },
     "npm:react-tools@0.13.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -481,7 +489,7 @@ System.config({
       "jstransform": "npm:jstransform@10.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
-    "npm:react@0.13.1": {
+    "npm:react@0.13.2": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "envify": "npm:envify@3.4.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
@@ -550,7 +558,7 @@ System.config({
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
-    "npm:through@2.3.6": {
+    "npm:through@2.3.7": {
       "process": "github:jspm/nodelibs-process@0.1.1",
       "stream": "github:jspm/nodelibs-stream@0.1.0"
     },
