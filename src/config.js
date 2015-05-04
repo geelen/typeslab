@@ -17,7 +17,7 @@ System.config({
 System.config({
   "map": {
     "FontDetect": "github:JenniferSimonds/FontDetect@master",
-    "babel": "npm:babel-core@5.1.9",
+    "babel": "npm:babel-core@5.2.6",
     "babel-runtime": "npm:babel-runtime@5.1.9",
     "blueimp-canvas-to-blob": "npm:blueimp-canvas-to-blob@2.1.1",
     "caniuse-db": "npm:caniuse-db@1.0.30000111",
@@ -36,7 +36,7 @@ System.config({
     "postcss-simple-extend": "npm:postcss-simple-extend@0.3.0",
     "postcss-simple-vars": "npm:postcss-simple-vars@0.2.4",
     "postcss-traits": "npm:postcss-traits@0.1.0",
-    "react": "npm:react@0.13.1",
+    "react": "npm:react@0.13.2",
     "react-canvas": "npm:react-canvas@0.0.1",
     "react-hot-api": "github:gaearon/react-hot-api@0.4.3",
     "react-tools": "npm:react-tools@0.13.1",
@@ -51,7 +51,7 @@ System.config({
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.2.0"
+      "buffer": "npm:buffer@3.2.1"
     },
     "github:jspm/nodelibs-constants@0.1.0": {
       "constants-browserify": "npm:constants-browserify@0.0.1"
