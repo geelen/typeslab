@@ -13,5 +13,18 @@ export default {
         "Authorization": "Client-ID dc208153560e2ef"
       }
     }).then(response => response.json())
+  },
+
+  createAlbum(imageIds, title) {
+    let data = new FormData()
+    data.append("ids", imageIds.join(','))
+    data.append("title", title)
+    return fetch('https://api.imgur.com/3/album', {
+      method: 'post',
+      body: data,
+      headers: {
+        "Authorization": "Client-ID dc208153560e2ef"
+      }
+    }).then(response => response.json())
   }
 }
