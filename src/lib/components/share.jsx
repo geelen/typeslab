@@ -1,6 +1,6 @@
 import React from 'react'
 import './share.amcss!'
-import 'whatwg-fetch'
+import ImgurUpload from './imgur-upload'
 
 export default class Share extends React.Component {
   constructor() {
@@ -16,17 +16,7 @@ export default class Share extends React.Component {
 
   uploadToImgur() {
     this.setState({uploading: true})
-    let data = new FormData()
-    data.append("image", this.props.canvas.toDataURL().split(',')[1])
-    data.append("type", "base64")
-    data.append("description", "Made with http://typeslab.com")
-    fetch('https://api.imgur.com/3/image', {
-      method: 'post',
-      body: data,
-      headers: {
-        "Authorization": "Client-ID dc208153560e2ef"
-      }
-    }).then(response => response.json())
+    ImgurUpload.uploadSingleImage(this.props.canvas)
       .then(json => {
         this.setState({uploading: false})
         if (json.success) {

@@ -1,7 +1,7 @@
 @define-mixin color {
 }
 @define-mixin color:default {
-  background-color: white;
+  background-color: $light-background;
   color: $dark-background;
 }
 @define-mixin color:inverted {
