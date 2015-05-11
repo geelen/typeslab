@@ -16,7 +16,7 @@ export default class Share extends React.Component {
 
   uploadToImgur() {
     this.setState({uploading: true})
-    ImgurUpload.uploadSingleImage(this.props.canvas)
+    ImgurUpload.uploadSingleImage(this.props.canvas, "Made with http://typeslab.com")
       .then(json => {
         this.setState({uploading: false})
         if (json.success) {

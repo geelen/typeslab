@@ -1,0 +1,44 @@
+:frame {
+  min-height: 100vh;
+  flex: vertical;
+}
+
+:header {
+  colors: inverted;
+  type: logo;
+  layout: p1;
+}
+
+:footer {
+  flex: wrap center;
+  colors: inverted;
+  type: footer;
+  layout: p1;
+}
+
+:main {
+  flex: wrap;
+  flex-child: grow;
+}
+
+:p {
+  layout: p0 .25 pr1 pl1;
+  type: centered;
+}
+
+:a {
+  link: inline;
+  type: unbroken;
+}
+
+:logo {
+  type: centered;
+
+  > span {
+    display: inline-block;
+    &::first-letter {
+      font-size: 1.4em;
+      vertical-align: text-top;
+    }
+  }
+}

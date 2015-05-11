@@ -1,11 +1,11 @@
 import 'whatwg-fetch'
 
 export default {
-  uploadSingleImage(canvas) {
+  uploadSingleImage(canvas, description) {
     let data = new FormData()
     data.append("image", canvas.toDataURL().split(',')[1])
     data.append("type", "base64")
-    data.append("description", "Made with http://typeslab.com")
+    if (description) data.append("description", description)
     return fetch('https://api.imgur.com/3/image', {
       method: 'post',
       body: data,

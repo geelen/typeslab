@@ -14,3 +14,36 @@
   color: black;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
 }
+
+/***
+@define-trait color {
+  default {
+    background-color: $light-background;
+    color: $dark-background;
+  }
+
+  inverted {
+    background-color: $dark-background;
+    color: $light-text;
+  }
+
+  recessed {
+    background-color: #eee;
+    color: black;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+}
+***/
+
+.t-color {
+}
+
+.t-color\:default {
+  background-color: $light-background;
+  color: $dark-background;
+}
+
+.t-color\:inverted {
+  background-color: $dark-background;
+  color: $light-text;
+}
