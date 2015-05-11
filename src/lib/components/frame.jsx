@@ -1,12 +1,13 @@
 import React from 'react'
 import FluxComponent from 'flummox/component'
-import './frame.amcss!'
+import T from './frame.tcss!'
 
 import Controls from './controls.jsx!'
 import Output from './output.jsx!'
 
 export default class Frame extends React.Component {
   render() {
+    console.log(T)
     let traits = obj => {
       return Object.keys(obj).map(k => {
         return [`t-${k}`].concat(obj[k].split(" ")).map(v => `t-${k}:${v}`).join(" ")
