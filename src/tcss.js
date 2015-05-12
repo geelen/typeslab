@@ -3,9 +3,8 @@
 - Generate the trait classes themselves
   I like a standalone DSL, which can generate classes or attribute
   module format. Needs to export the permitted values.
-- If a placeholder only has traits, dont generate/export a class
 - Trigger live-reloading when editing traits by reexporting the class names
-
+- Allow variables in the traits as well
  */
 
 import pluginPostcss from 'plugin-postcss'
@@ -19,13 +18,7 @@ import pluginPostcss from 'plugin-postcss'
 //import traits from 'postcss-traits'
 import TCSS from './tcss-plugin'
 
-let traits = {
-  flex: ["vertical", "inline"],
-  colors: ["inverted"],
-  type: ["logo"],
-  layout: ["p1"]
-}
-let tcss = new TCSS(traits)
+let tcss = new TCSS()
 let plugins = [tcss.getPlugin()],
   { fetch: __fetch, hotReload, bundle } = pluginPostcss(plugins)
 

@@ -1,8 +1,8 @@
 import postcss from 'postcss'
 
 export default class TCSS {
-  constructor(traits) {
-    this.traits = traits
+  constructor() {
+    this.traits = {}
     this.scopes = new Map()
   }
 
@@ -80,13 +80,14 @@ export default class TCSS {
   }
 
   defineTrait(rule) {
+    this.traits[rule.params] = []
     rule.selector = `.t-${rule.params}`
     rule.eachRule(child => {
       if (!child.nodes) return;
+      this.traits[rule.params].push(child.selector)
       child.selector = `.t-${rule.params}\\:${child.selector}`
       rule.remove(child)
       rule.parent.insertAfter(rule, child)
     })
-    console.log(rule)
   }
 }

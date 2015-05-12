@@ -1,0 +1,17 @@
+@define-trait colors {
+  default {
+    background-color: white;
+    color: hsl(240,7%,29%);
+  }
+
+  inverted {
+    background-color: hsl(240,7%,29%);
+    color: hsl(240,7%,99%);
+  }
+
+  recessed {
+    background-color: #eee;
+    color: black;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+}
