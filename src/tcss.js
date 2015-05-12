@@ -20,7 +20,7 @@ import pluginPostcss from 'plugin-postcss'
 import TCSS from './tcss-plugin'
 
 let traits = {
-  flex: ["vertical"],
+  flex: ["vertical", "inline"],
   colors: ["inverted"],
   type: ["logo"],
   layout: ["p1"]

@@ -8,7 +8,7 @@
 
 :frame {
   min-height: 100vh;
-  flex: vertical;
+  flex: vertical inline;
 }
 
 :header {

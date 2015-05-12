@@ -80,6 +80,13 @@ export default class TCSS {
   }
 
   defineTrait(rule) {
+    rule.selector = `.t-${rule.params}`
+    rule.eachRule(child => {
+      if (!child.nodes) return;
+      child.selector = `.t-${rule.params}\\:${child.selector}`
+      rule.remove(child)
+      rule.parent.insertAfter(rule, child)
+    })
     console.log(rule)
   }
 }
