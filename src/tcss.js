@@ -19,7 +19,7 @@ let traits = {
     }
   }
 }
-let tcss = new TCSS()
+let tcss = new TCSS(traits)
 let plugins = [tcss.getPlugin()],
   { fetch: __fetch, hotReload, bundle } = pluginPostcss(plugins)
 
