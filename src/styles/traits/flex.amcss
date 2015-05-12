@@ -1,22 +1,13 @@
 @define-mixin flex {
   display: flex;
 }
-.t-flex {
-  @mixin flex;
-}
 
 @define-mixin flex:inline {
   display: inline-flex;
 }
-.t-flex\:inline {
-  @mixin flex:inline;
-}
 
 @define-mixin flex:vertical {
   flex-direction: column;
-}
-.t-flex\:vertical {
-  @mixin flex:vertical;
 }
 
 @define-mixin flex:wrap {
@@ -54,53 +45,3 @@
 @define-mixin flex-child:grow {
   flex-grow: 1;
 }
-
-/***
-@define-trait flex {
-  display: flex;
-
-  inline {
-    display: inline-flex;
-  }
-
-  vertical {
-    flex-direction: column;
-  }
-
-  wrap {
-    flex-wrap: wrap;
-  }
-
-  start {
-    justify-content: start;
-  }
-  center {
-    justify-content: center;
-  }
-  space-around {
-    justify-content: space-around;
-  }
-
-  align-start {
-    align-items: flex-start;
-  }
-  align-center {
-    align-items: center;
-  }
-  align-baseline {
-    align-items: baseline;
-  }
-  align-stretch {
-    align-items: stretch;
-  }
-}
-
-@define-trait flex-child {
-  no-shrink {
-    flex-shrink: 0;
-  }
-  grow {
-    flex-grow: 1;
-  }
-}
-***/

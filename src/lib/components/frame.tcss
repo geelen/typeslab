@@ -1,14 +1,6 @@
-@define-trait flex {
-  display: flex;
-
-  inline {
-    display: inline-flex;
-  }
-}
-
 :frame {
   min-height: 100vh;
-  flex: vertical inline;
+  flex: vertical;
 }
 
 :header {
