@@ -45,9 +45,13 @@ export default class TCSS {
           this.handleTrait(child, this.traits[child.prop])
         }
       })
-      let className = toClassName([this.currentFile, rule.selector].join())
-      this.addClass(className)
-      rule.selector = "." + className
+      if (rule.nodes.length > 0) {
+        let className = toClassName([this.currentFile, rule.selector].join())
+        this.addClass(className)
+        rule.selector = "." + className
+      } else {
+        rule.removeSelf()
+      }
     } else {
       console.error(`Missing SOURCE to export scoped rule ${rule.selector}`)
     }
