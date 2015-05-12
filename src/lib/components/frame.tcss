@@ -4,11 +4,12 @@
   font-family: Fira Mono;
 }
 
-/*:header {*/
-  /*colors: inverted;*/
-  /*type: logo;*/
-  /*layout: p1;*/
-/*}*/
+:header {
+  colors: inverted;
+  type: logo;
+  layout: p1;
+  flex:;
+}
 
 /*:footer {*/
   /*flex: wrap center;*/

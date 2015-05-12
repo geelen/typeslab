@@ -17,6 +17,21 @@ let traits = {
     vertical: {
       "flex-direction": "vertical"
     }
+  },
+  colors: {
+    inverted: {
+      "color": "red"
+    }
+  },
+  type: {
+    logo: {
+      "color": "red"
+    }
+  },
+  layout: {
+    p1: {
+
+    }
   }
 }
 let tcss = new TCSS(traits)

@@ -37,16 +37,34 @@ export default class TCSS {
     let toClassName = (f) => `${f.replace(/\W/g, '_')}`
     if (this.currentFile) {
       if (!this.scopes.get(this.currentFile)) this.scopes.set(this.currentFile, {})
+      this.key = rule.selector.replace(/^:/, '')
       let className = toClassName([this.currentFile, rule.selector].join())
-      this.scopes.get(this.currentFile)[rule.selector.replace(/^:/, '')] = className
+      this.addClass(className)
       rule.selector = "." + className
-      console.log(this.scopes)
     } else {
       console.error(`Missing SOURCE to export scoped rule ${rule.selector}`)
     }
   }
 
   handleTrait(rule, trait) {
-    console.log(rule, trait)
+    if (this.key) {
+      let traitName = rule.prop;
+      this.addClass(`t-${ traitName}`)
+      if (rule.value) rule.value.split(" ").forEach(v => {
+        if (trait[v]) {
+          this.addClass(`t-${traitName}:${v}`)
+        } else {
+          console.error(`Trait ${traitName} doesn't define variant ${v}!`)
+        }
+      })
+      rule.removeSelf()
+    } else {
+      console.error(`Traits can only be included within placeholders!`)
+    }
+  }
+
+  addClass(newClass) {
+    let scope = this.scopes.get(this.currentFile)
+    scope[this.key] = scope[this.key] ? `${scope[this.key]} ${newClass}` : newClass
   }
 }

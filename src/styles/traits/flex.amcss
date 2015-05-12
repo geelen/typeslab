@@ -1,13 +1,22 @@
 @define-mixin flex {
   display: flex;
 }
+.t-flex {
+  @mixin flex;
+}
 
 @define-mixin flex:inline {
   display: inline-flex;
 }
+.t-flex\:inline {
+  @mixin flex:inline;
+}
 
 @define-mixin flex:vertical {
   flex-direction: column;
+}
+.t-flex\:vertical {
+  @mixin flex:vertical;
 }
 
 @define-mixin flex:wrap {

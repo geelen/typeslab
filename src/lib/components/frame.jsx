@@ -14,7 +14,7 @@ export default class Frame extends React.Component {
       })
     }
     return <div className={T.frame}>
-      <header className={traits({color: "inverted"})}>
+      <header className={T.header}>
         <h1 className="Frame-Logo">
           <span>Type</span><span>Slab</span>
         </h1>
