@@ -13,7 +13,7 @@ export default class Frame extends React.Component {
         return [`t-${k}`].concat(obj[k].split(" ")).map(v => `t-${k}:${v}`).join(" ")
       })
     }
-    return <div className="Frame">
+    return <div className={T.frame}>
       <header className={traits({color: "inverted"})}>
         <h1 className="Frame-Logo">
           <span>Type</span><span>Slab</span>
