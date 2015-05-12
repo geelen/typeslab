@@ -17,13 +17,15 @@ export default class TCSS {
 
   plugin(css, result) {
     this.currentFile = null
-    css.eachInside(rule => {
+    css.each(rule => {
       if (rule.type == "comment" && rule.text.startsWith("SOURCE")) {
         this.handleSourceComment(rule)
       } else if (rule.type == "rule" && rule.selector.startsWith(":")) {
         this.handlePlaceholder(rule)
-      } else if (rule.type == "decl" && this.traits[rule.prop]) {
-        this.handleTrait(rule, this.traits[rule.prop])
+      } else if (rule.type == "atrule" && rule.name == "define-trait") {
+        this.defineTrait(rule)
+      } else {
+        console.log(rule)
       }
     })
   }
@@ -38,6 +40,11 @@ export default class TCSS {
     if (this.currentFile) {
       if (!this.scopes.get(this.currentFile)) this.scopes.set(this.currentFile, {})
       this.key = rule.selector.replace(/^:/, '')
+      rule.eachInside(child => {
+        if (child.type == "decl" && this.traits[child.prop]) {
+          this.handleTrait(child, this.traits[child.prop])
+        }
+      })
       let className = toClassName([this.currentFile, rule.selector].join())
       this.addClass(className)
       rule.selector = "." + className
@@ -66,5 +73,9 @@ export default class TCSS {
   addClass(newClass) {
     let scope = this.scopes.get(this.currentFile)
     scope[this.key] = scope[this.key] ? `${scope[this.key]} ${newClass}` : newClass
+  }
+
+  defineTrait(rule) {
+    console.log(rule)
   }
 }
