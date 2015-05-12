@@ -1,3 +1,13 @@
+/* BURNDOWN TICKETS
+
+- Generate the trait classes themselves
+  I like a standalone DSL, which can generate classes or attribute
+  module format. Needs to export the permitted values.
+- If a placeholder only has traits, dont generate/export a class
+- Trigger live-reloading when editing traits by reexporting the class names
+
+ */
+
 import pluginPostcss from 'plugin-postcss'
 //import Autoprefixer from 'autoprefixer-core'
 //awaiting a fix for https://github.com/jspm/npm/issues/52
@@ -10,29 +20,10 @@ import pluginPostcss from 'plugin-postcss'
 import TCSS from './tcss-plugin'
 
 let traits = {
-  flex: {
-    default: {
-      "display": "flex"
-    },
-    vertical: {
-      "flex-direction": "vertical"
-    }
-  },
-  colors: {
-    inverted: {
-      "color": "red"
-    }
-  },
-  type: {
-    logo: {
-      "color": "red"
-    }
-  },
-  layout: {
-    p1: {
-
-    }
-  }
+  flex: ["vertical"],
+  colors: ["inverted"],
+  type: ["logo"],
+  layout: ["p1"]
 }
 let tcss = new TCSS(traits)
 let plugins = [tcss.getPlugin()],

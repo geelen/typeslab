@@ -51,7 +51,7 @@ export default class TCSS {
       let traitName = rule.prop;
       this.addClass(`t-${ traitName}`)
       if (rule.value) rule.value.split(" ").forEach(v => {
-        if (trait[v]) {
+        if (trait.some(tv => tv === v)) {
           this.addClass(`t-${traitName}:${v}`)
         } else {
           console.error(`Trait ${traitName} doesn't define variant ${v}!`)

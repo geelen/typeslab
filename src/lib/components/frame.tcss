@@ -1,7 +1,6 @@
 :frame {
   min-height: 100vh;
   flex: vertical;
-  font-family: Fira Mono;
 }
 
 :header {
