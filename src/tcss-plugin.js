@@ -1,4 +1,5 @@
 import postcss from 'postcss'
+import Rule from 'postcss/lib/rule'
 
 export default class TCSS {
   constructor() {
@@ -81,13 +82,14 @@ export default class TCSS {
 
   defineTrait(rule) {
     this.traits[rule.params] = []
-    rule.selector = `.t-${rule.params}`
+    rule.parent.insertBefore(rule, new Rule({selector: `.t-${rule.params}`, nodes: rule.nodes}))
     rule.eachRule(child => {
       if (!child.nodes) return;
       this.traits[rule.params].push(child.selector)
       child.selector = `.t-${rule.params}\\:${child.selector}`
       rule.remove(child)
-      rule.parent.insertAfter(rule, child)
+      rule.parent.insertBefore(rule, child)
     })
+    rule.removeSelf()
   }
 }
