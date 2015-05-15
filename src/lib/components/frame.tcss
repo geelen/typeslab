@@ -1,34 +1,46 @@
 :header {
-  colors: inverted;
-  type: logo;
-  layout: p1;
-  flex:;
+  traits {
+    colors: inverted;
+    type: logo;
+    layout: p1;
+    flex:;
+  }
 }
 
 :footer {
-  flex: wrap center;
-  colors: inverted;
-  type: footer;
-  layout: p1;
+  traits {
+    flex: wrap center;
+    colors: inverted;
+    type: footer;
+    layout: p1;
+  }
 }
 
 :main {
-  flex: wrap;
-  flex-child: grow;
+  traits {
+    flex: wrap;
+    flex-child: grow;
+  }
 }
 
 :p {
-  layout: p0 .25 pr1 pl1;
-  type: centered;
+  traits {
+    layout: p0 .25 pr1 pl1;
+    type: centered;
+  }
 }
 
 :a {
-  link: inline;
-  type: unbroken;
+  traits {
+    link: inline;
+    type: unbroken;
+  }
 }
 
 :logo {
-  type: centered;
+  traits {
+    type: centered;
+  }
 
   > span {
     display: inline-block;

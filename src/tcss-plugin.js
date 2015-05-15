@@ -42,8 +42,8 @@ export default class TCSS {
       if (!this.scopes.get(this.currentFile)) this.scopes.set(this.currentFile, {})
       this.key = rule.selector.replace(/^:/, '')
       rule.eachInside(child => {
-        if (child.type == "decl" && this.traits[child.prop]) {
-          this.handleTrait(child, this.traits[child.prop])
+        if (child.type == "rule" && child.selector == "traits") {
+          this.handleTraits(child)
         }
       })
       if (rule.nodes.length > 0) {
@@ -58,18 +58,17 @@ export default class TCSS {
     }
   }
 
-  handleTrait(rule, trait) {
+  handleTraits(traitNode) {
+    console.log(traitNode)
     if (this.key) {
-      let traitName = rule.prop;
-      this.addClass(`t-${ traitName}`)
-      if (rule.value) rule.value.split(" ").forEach(v => {
-        if (trait.some(tv => tv === v)) {
+      traitNode.each(rule => {
+        let traitName = rule.prop;
+        this.addClass(`t-${ traitName}`)
+        if (rule.value) rule.value.split(" ").forEach(v => {
           this.addClass(`t-${traitName}:${v}`)
-        } else {
-          console.error(`Trait ${traitName} doesn't define variant ${v}!`)
-        }
+        })
       })
-      rule.removeSelf()
+      traitNode.removeSelf()
     } else {
       console.error(`Traits can only be included within placeholders!`)
     }
