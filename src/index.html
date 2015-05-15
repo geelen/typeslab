@@ -17,7 +17,9 @@
     <script src="jspm_packages/system.src.js"></script>
     <script src="config.js"></script>
     <script>
-      System.import('lib/main')
+      System.import('lib/main').then(function () {
+        console.log("### DONE IN " + Math.round(performance.now()) / 1000 + " SECONDS")
+      })
     </script>
     <!-- endbuild -->
     <script>
