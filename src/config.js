@@ -30,7 +30,7 @@ System.config({
     "pascal-case": "npm:pascal-case@1.1.0",
     "path": "github:jspm/nodelibs-path@0.1.0",
     "plugin-postcss": "github:geelen/plugin-postcss@master",
-    "postcss": "npm:postcss@4.1.5",
+    "postcss": "npm:postcss@4.1.10",
     "postcss-mixins": "npm:postcss-mixins@0.1.1",
     "postcss-nested": "npm:postcss-nested@0.2.2",
     "postcss-simple-extend": "npm:postcss-simple-extend@0.3.0",
@@ -45,7 +45,7 @@ System.config({
     "webfontloader": "npm:webfontloader@1.5.15",
     "whatwg-fetch": "npm:whatwg-fetch@0.7.0",
     "github:geelen/plugin-postcss@master": {
-      "postcss": "npm:postcss@4.1.5"
+      "postcss": "npm:postcss@4.1.10"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -264,11 +264,10 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1",
       "through": "npm:through@2.3.7"
     },
-    "npm:es6-promise@2.0.1": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "path": "github:jspm/nodelibs-path@0.1.0",
+    "npm:es6-promise@2.1.1": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
-      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+      "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:esprima-fb@10001.1.0-dev-harmony-fb": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -421,22 +420,22 @@ System.config({
     "npm:postcss-mixins@0.1.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
-      "postcss": "npm:postcss@4.1.5",
+      "postcss": "npm:postcss@4.1.10",
       "postcss-simple-vars": "npm:postcss-simple-vars@0.2.4"
     },
     "npm:postcss-nested@0.2.2": {
-      "postcss": "npm:postcss@4.1.5",
+      "postcss": "npm:postcss@4.1.10",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:postcss-simple-extend@0.3.0": {
-      "postcss": "npm:postcss@4.1.5",
+      "postcss": "npm:postcss@4.1.10",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:postcss-traits@0.1.0": {
-      "postcss": "npm:postcss@4.1.5"
+      "postcss": "npm:postcss@4.1.10"
     },
-    "npm:postcss@4.1.5": {
-      "es6-promise": "npm:es6-promise@2.0.1",
+    "npm:postcss@4.1.10": {
+      "es6-promise": "npm:es6-promise@2.1.1",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "js-base64": "npm:js-base64@2.1.8",
       "path": "github:jspm/nodelibs-path@0.1.0",
